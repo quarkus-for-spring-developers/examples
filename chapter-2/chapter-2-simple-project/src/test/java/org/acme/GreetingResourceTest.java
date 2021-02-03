@@ -6,6 +6,7 @@ import static org.hamcrest.CoreMatchers.is;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import io.quarkus.test.junit.DisabledOnNativeImage;
 import io.quarkus.test.junit.QuarkusTest;
 import io.quarkus.test.junit.mockito.InjectMock;
 
@@ -15,6 +16,7 @@ public class GreetingResourceTest {
 	GreetingService greetingService;
 
 	@Test
+	@DisabledOnNativeImage
 	public void testHelloEndpoint() {
 		Mockito.when(this.greetingService.getGreeting()).thenReturn("Hello Quarkus");
 
