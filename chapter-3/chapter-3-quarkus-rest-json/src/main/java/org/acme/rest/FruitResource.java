@@ -16,10 +16,9 @@ import javax.ws.rs.core.Response.Status;
 
 import org.acme.service.FruitService;
 
-import io.smallrye.common.annotation.Blocking;
+import io.smallrye.mutiny.Uni;
 
 @Path("/fruits")
-@Blocking
 public class FruitResource {
 	private final FruitService fruitService;
 
@@ -36,10 +35,10 @@ public class FruitResource {
 	@GET
 	@Path("/{name}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getFruit(@PathParam("name") String name) {
+	public Uni<Response> getFruit(@PathParam("name") String name) {
 		return this.fruitService.getFruit(name)
-			.map(fruit -> Response.ok(fruit).build())
-			.orElseGet(() -> Response.status(Status.NOT_FOUND).build());
+			.onItem().ifNotNull().transform(fruit -> Response.ok(fruit).build())
+			.onItem().ifNull().continueWith(Response.status(Status.NOT_FOUND).build());
 	}
 
 	@POST
@@ -50,8 +49,8 @@ public class FruitResource {
 	}
 
 	@DELETE
-	@Consumes(MediaType.APPLICATION_JSON)
-	public void delete(@Valid Fruit fruit) {
-		this.fruitService.deleteFruit(fruit.getName());
+	@Path("/{name}")
+	public void deleteFruit(@PathParam("name") String name) {
+		this.fruitService.deleteFruit(name);
 	}
 }

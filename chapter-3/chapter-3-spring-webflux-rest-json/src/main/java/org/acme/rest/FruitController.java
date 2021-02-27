@@ -1,7 +1,5 @@
 package org.acme.rest;
 
-import java.util.Collection;
-
 import javax.validation.Valid;
 
 import org.acme.service.FruitService;
@@ -18,6 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+
 @RestController
 @RequestMapping("/fruits")
 public class FruitController {
@@ -28,25 +29,25 @@ public class FruitController {
 	}
 
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	public Collection<Fruit> list() {
+	public Flux<Fruit> list() {
 		return this.fruitService.getFruits();
 	}
 
 	@GetMapping(path = "/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Fruit> getFruit(@PathVariable("name") String name) {
+	public Mono<ResponseEntity<Fruit>> getFruit(@PathVariable("name") String name) {
 		return this.fruitService.getFruit(name)
 			.map(ResponseEntity::ok)
-			.orElseGet(() -> ResponseEntity.notFound().build());
+			.defaultIfEmpty(ResponseEntity.notFound().build());
 	}
 
 	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public Collection<Fruit> add(@Valid @RequestBody Fruit fruit) {
+	public Flux<Fruit> add(@Valid @RequestBody Fruit fruit) {
 		return this.fruitService.addFruit(fruit);
 	}
 
 	@DeleteMapping("/{name}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void deleteFruit(@PathVariable String name) {
-		this.fruitService.deleteFruit(name);
+	public Mono<Void> deleteFruit(@PathVariable String name) {
+		return this.fruitService.deleteFruit(name);
 	}
 }

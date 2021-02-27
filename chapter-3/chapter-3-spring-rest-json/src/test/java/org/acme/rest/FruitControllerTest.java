@@ -1,6 +1,5 @@
 package org.acme.rest;
 
-import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -16,7 +15,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 @WebMvcTest(FruitController.class)
 class FruitControllerTest {
@@ -34,7 +32,7 @@ class FruitControllerTest {
 		this.mockMvc.perform(get("/fruits"))
 			.andExpect(status().isOk())
 			.andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-			.andExpect(jsonPath("$", hasSize(1)))
+			.andExpect(jsonPath("$.size()").value(1))
 			.andExpect(jsonPath("[0].name").value("Apple"))
 			.andExpect(jsonPath("[0].description").value("Winter fruit"));
 
@@ -82,7 +80,7 @@ class FruitControllerTest {
 		)
 			.andExpect(status().isOk())
 			.andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-			.andExpect(jsonPath("$", hasSize(1)))
+			.andExpect(jsonPath("$.size()").value(1))
 			.andExpect(jsonPath("[0].name").value("Pear"))
 			.andExpect(jsonPath("[0].description").value("Refreshing fruit"));
 
@@ -103,27 +101,11 @@ class FruitControllerTest {
 	}
 
 	@Test
-	public void delete() throws Exception {
-		this.mockMvc.perform(
-			MockMvcRequestBuilders.delete("/fruits")
-				.contentType(MediaType.APPLICATION_JSON)
-				.content("{\"name\":\"Apple\",\"description\":\"Apple\"}")
-		)
+	public void deleteFruit() throws Exception {
+		this.mockMvc.perform(delete("/fruits/Apple"))
 			.andExpect(status().isNoContent());
 
 		Mockito.verify(this.fruitService).deleteFruit(Mockito.eq("Apple"));
 		Mockito.verifyNoMoreInteractions(this.fruitService);
-	}
-
-	@Test
-	public void deleteInvalidFruit() throws Exception {
-		this.mockMvc.perform(
-			MockMvcRequestBuilders.delete("/fruits")
-				.contentType(MediaType.APPLICATION_JSON)
-				.content("{\"description\":\"Description\"}")
-		)
-			.andExpect(status().isBadRequest());
-
-		Mockito.verifyNoInteractions(this.fruitService);
 	}
 }

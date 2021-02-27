@@ -5,7 +5,6 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.blankOrNullString;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.acme.service.FruitService;
 import org.junit.jupiter.api.Test;
@@ -14,6 +13,7 @@ import org.mockito.Mockito;
 import io.quarkus.test.junit.QuarkusTest;
 import io.quarkus.test.junit.mockito.InjectMock;
 import io.restassured.http.ContentType;
+import io.smallrye.mutiny.Uni;
 
 @QuarkusTest
 public class FruitResourceTest {
@@ -43,7 +43,7 @@ public class FruitResourceTest {
 	@Test
 	public void getFruitFound() {
 		Mockito.when(this.fruitService.getFruit(Mockito.eq("Apple")))
-			.thenReturn(Optional.of(new Fruit("Apple", "Winter fruit")));
+			.thenReturn(Uni.createFrom().item(new Fruit("Apple", "Winter fruit")));
 
 		given()
 			.when().get("/fruits/Apple")
@@ -62,7 +62,7 @@ public class FruitResourceTest {
 	@Test
 	public void getFruitNotFound() {
 		Mockito.when(this.fruitService.getFruit(Mockito.eq("pear")))
-			.thenReturn(Optional.empty());
+			.thenReturn(Uni.createFrom().nullItem());
 
 		given()
 			.when().get("/fruits/pear")
@@ -109,27 +109,12 @@ public class FruitResourceTest {
 	}
 
 	@Test
-	public void delete() {
+	public void deleteFruit() {
 		given()
-			.contentType(ContentType.JSON)
-			.body(new Fruit("Apple", "Apple"))
-			.when().delete("/fruits")
-			.then()
-				.statusCode(204);
+			.when().delete("/fruits/Apple")
+			.then().statusCode(204);
 
 		Mockito.verify(this.fruitService).deleteFruit(Mockito.eq("Apple"));
 		Mockito.verifyNoMoreInteractions(this.fruitService);
-	}
-
-	@Test
-	public void deleteInvalidFruit() {
-		given()
-			.contentType(ContentType.JSON)
-			.body(new Fruit(null, "Description"))
-			.when().delete("/fruits")
-			.then()
-			.statusCode(400);
-
-		Mockito.verifyNoInteractions(this.fruitService);
 	}
 }

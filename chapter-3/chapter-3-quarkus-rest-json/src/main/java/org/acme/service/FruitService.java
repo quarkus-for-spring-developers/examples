@@ -1,13 +1,14 @@
 package org.acme.service;
 
 import java.util.Collection;
-import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 import javax.enterprise.context.ApplicationScoped;
 
 import org.acme.rest.Fruit;
+
+import io.smallrye.mutiny.Uni;
 
 @ApplicationScoped
 public class FruitService {
@@ -22,8 +23,8 @@ public class FruitService {
 		return this.fruits.values();
 	}
 
-	public Optional<Fruit> getFruit(String fruitName) {
-		return Optional.ofNullable(this.fruits.get(fruitName));
+	public Uni<Fruit> getFruit(String fruitName) {
+		return Uni.createFrom().item(this.fruits.get(fruitName));
 	}
 
 	public Collection<Fruit> addFruit(Fruit fruit) {
