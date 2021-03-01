@@ -18,22 +18,16 @@ class FruitServiceTest {
 
 	@Test
 	public void getFruitFound() {
-		assertThat(
-			this.fruitService.getFruit("Apple")
-				.subscribe()
-				.withSubscriber(UniAssertSubscriber.create())
-				.assertCompleted()
-				.getItem()
-			)
+		var fruit = this.fruitService.getFruit("Apple")
+			.subscribe()
+			.withSubscriber(UniAssertSubscriber.create())
+			.assertCompleted()
+			.getItem();
+
+		assertThat(fruit)
 			.isNotNull()
-			.extracting(
-				Fruit::getName,
-				Fruit::getDescription
-			)
-			.containsExactly(
-				"Apple",
-				"Winter fruit"
-			);
+			.extracting(Fruit::getName, Fruit::getDescription)
+			.containsExactly("Apple", "Winter fruit");
 	}
 
 	@Test

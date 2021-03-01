@@ -19,14 +19,8 @@ class FruitServiceTest {
 		assertThat(this.fruitService.getFruit("Apple"))
 			.isPresent()
 			.get()
-			.extracting(
-				Fruit::getName,
-				Fruit::getDescription
-			)
-			.containsExactly(
-				"Apple",
-				"Winter fruit"
-			);
+			.extracting(Fruit::getName, Fruit::getDescription)
+			.containsExactly("Apple", "Winter fruit");
 	}
 
 	@Test
