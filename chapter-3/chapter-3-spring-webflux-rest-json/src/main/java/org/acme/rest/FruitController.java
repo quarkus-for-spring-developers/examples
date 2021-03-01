@@ -34,7 +34,7 @@ public class FruitController {
 	}
 
 	@GetMapping(path = "/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public Mono<ResponseEntity<Fruit>> getFruit(@PathVariable("name") String name) {
+	public Mono<ResponseEntity<Fruit>> getFruit(@PathVariable String name) {
 		return this.fruitService.getFruit(name)
 			.map(ResponseEntity::ok)
 			.defaultIfEmpty(ResponseEntity.notFound().build());
