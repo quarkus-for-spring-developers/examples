@@ -2,6 +2,9 @@ package org.acme.rest;
 
 import javax.validation.constraints.NotBlank;
 
+import io.quarkus.runtime.annotations.RegisterForReflection;
+
+@RegisterForReflection
 public class Fruit {
 	private String name;
 	private String description;
