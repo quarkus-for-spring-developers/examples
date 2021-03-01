@@ -3,6 +3,7 @@ package org.acme.rest;
 import java.util.Collection;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -44,7 +45,7 @@ public class FruitResource {
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Collection<Fruit> add(@Valid Fruit fruit) {
+	public Collection<Fruit> add(@NotNull @Valid Fruit fruit) {
 		return this.fruitService.addFruit(fruit);
 	}
 
