@@ -16,10 +16,17 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import org.acme.service.FruitService;
+import org.eclipse.microprofile.openapi.annotations.Operation;
+import org.eclipse.microprofile.openapi.annotations.media.Content;
+import org.eclipse.microprofile.openapi.annotations.media.Schema;
+import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
+import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
 import io.smallrye.mutiny.Uni;
 
 @Path("/fruits")
+@Tag(name = "Fruit Resource", description = "Endpoints for fruits")
 public class FruitResource {
 	private final FruitService fruitService;
 
@@ -29,6 +36,8 @@ public class FruitResource {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
+	@Operation(summary = "Get all fruits", description = "Get all fruits")
+	@APIResponse(responseCode = "200", description = "All fruits")
 	public Collection<Fruit> list() {
 		return this.fruitService.getFruits();
 	}
@@ -36,7 +45,10 @@ public class FruitResource {
 	@GET
 	@Path("/{name}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Uni<Response> getFruit(@PathParam("name") String name) {
+	@Operation(summary = "Get a fruit", description = "Get a fruit")
+	@APIResponse(responseCode = "200", description = "Requested fruit", content = @Content(schema = @Schema(implementation = Fruit.class)))
+	@APIResponse(responseCode = "404", description = "Fruit not found")
+	public Uni<Response> getFruit(@Parameter(required = true, description = "Fruit name") @PathParam("name") String name) {
 		return this.fruitService.getFruit(name)
 			.onItem().ifNotNull().transform(fruit -> Response.ok(fruit).build())
 			.onItem().ifNull().continueWith(Response.status(Status.NOT_FOUND).build());
@@ -45,13 +57,17 @@ public class FruitResource {
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Collection<Fruit> add(@NotNull @Valid Fruit fruit) {
+	@Operation(summary = "Add a new fruit", description = "Add a new fruit")
+	@APIResponse(responseCode = "200", description = "Fruit added")
+	public Collection<Fruit> add(@Parameter(required = true, description = "Fruit to add") @NotNull @Valid Fruit fruit) {
 		return this.fruitService.addFruit(fruit);
 	}
 
 	@DELETE
 	@Path("/{name}")
-	public void deleteFruit(@PathParam("name") String name) {
+	@Operation(summary = "Delete a fruit", description = "Delete a fruit")
+	@APIResponse(responseCode = "204", description = "Fruit deleted")
+	public void deleteFruit(@Parameter(required = true, description = "Fruit name") @PathParam("name") String name) {
 		this.fruitService.deleteFruit(name);
 	}
 }

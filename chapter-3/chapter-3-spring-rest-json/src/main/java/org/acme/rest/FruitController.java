@@ -18,8 +18,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
 @RequestMapping("/fruits")
+@Tag(name = "Fruit Resource", description = "Endpoints for fruits")
 public class FruitController {
 	private final FruitService fruitService;
 
@@ -28,25 +34,34 @@ public class FruitController {
 	}
 
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+	@Operation(summary = "Get all fruits", description = "Get all fruits")
+	@ApiResponse(responseCode = "200", description = "All fruits")
 	public Collection<Fruit> list() {
 		return this.fruitService.getFruits();
 	}
 
 	@GetMapping(path = "/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Fruit> getFruit(@PathVariable("name") String name) {
+	@Operation(summary = "Get a fruit", description = "Get a fruit")
+	@ApiResponse(responseCode = "200", description = "Requested fruit")
+	@ApiResponse(responseCode = "404", description = "Fruit not found")
+	public ResponseEntity<Fruit> getFruit(@Parameter(required = true, description = "Fruit name") @PathVariable("name") String name) {
 		return this.fruitService.getFruit(name)
 			.map(ResponseEntity::ok)
 			.orElseGet(() -> ResponseEntity.notFound().build());
 	}
 
 	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public Collection<Fruit> add(@Valid @RequestBody Fruit fruit) {
+	@Operation(summary = "Add a new fruit", description = "Add a new fruit")
+	@ApiResponse(responseCode = "200", description = "Fruit added")
+	public Collection<Fruit> add(@Parameter(required = true, description = "Fruit to add") @Valid @RequestBody Fruit fruit) {
 		return this.fruitService.addFruit(fruit);
 	}
 
 	@DeleteMapping("/{name}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void deleteFruit(@PathVariable String name) {
+	@Operation(summary = "Delete a fruit", description = "Delete a fruit")
+	@ApiResponse(responseCode = "204", description = "Fruit deleted")
+	public void deleteFruit(@Parameter(required = true, description = "Fruit name") @PathVariable String name) {
 		this.fruitService.deleteFruit(name);
 	}
 }

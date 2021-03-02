@@ -15,6 +15,7 @@
 	<description>Chapter 3 Spring Rest Json</description>
 	<properties>
 		<java.version>11</java.version>
+		<springdoc.version>1.5.5</springdoc.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -24,6 +25,11 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-validation</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-ui</artifactId>
+			<version>${springdoc.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

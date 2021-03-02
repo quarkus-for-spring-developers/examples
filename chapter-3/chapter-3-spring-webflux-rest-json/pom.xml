@@ -15,6 +15,7 @@
 	<description>Chapter 3 Spring WebFlux Rest Json</description>
 	<properties>
 		<java.version>11</java.version>
+		<springdoc.version>1.5.5</springdoc.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -25,7 +26,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-webflux</artifactId>
 		</dependency>
-
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-webflux-ui</artifactId>
+			<version>${springdoc.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
