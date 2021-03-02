@@ -100,7 +100,7 @@ public class FruitResourceTest {
 	public void addInvalidFruit() {
 		given()
 			.contentType(ContentType.JSON)
-			.body(new Fruit(null, "Description"))
+			.body("{\"description\":\"Description\"}")
 			.when().post("/fruits")
 			.then()
 				.statusCode(400);
