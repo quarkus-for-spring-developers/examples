@@ -1,6 +1,8 @@
 package org.acme.rest;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import java.util.List;
@@ -16,6 +18,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -109,5 +112,22 @@ class FruitControllerTest {
 
 		Mockito.verify(this.fruitService).deleteFruit(Mockito.eq("Apple"));
 		Mockito.verifyNoMoreInteractions(this.fruitService);
+	}
+
+	@Test
+	public void streamFruits() throws Exception {
+		Mockito.when(this.fruitService.getFruits())
+			.thenReturn(List.of(new Fruit("Apple", "Winter fruit"), new Fruit("Pear", "Delicious fruit")));
+
+		MvcResult mvcResult = this.mockMvc.perform(get("/fruits/stream"))
+			.andExpect(request().asyncStarted())
+			.andDo(log())
+			.andReturn();
+
+		this.mockMvc.perform(asyncDispatch(mvcResult))
+			.andDo(log())
+			.andExpect(status().isOk())
+			.andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_EVENT_STREAM))
+			.andExpect(content().string("data:{\"name\":\"Apple\",\"description\":\"Winter fruit\"}\n\ndata:{\"name\":\"Pear\",\"description\":\"Delicious fruit\"}\n\n"));
 	}
 }

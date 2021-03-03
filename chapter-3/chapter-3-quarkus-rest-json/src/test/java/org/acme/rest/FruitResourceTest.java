@@ -4,7 +4,11 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.blankOrNullString;
 
+import java.time.Duration;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.acme.service.FruitService;
 import org.junit.jupiter.api.Test;
@@ -13,6 +17,7 @@ import org.mockito.Mockito;
 import io.quarkus.test.junit.QuarkusTest;
 import io.quarkus.test.junit.mockito.InjectMock;
 import io.restassured.http.ContentType;
+import io.smallrye.mutiny.Multi;
 import io.smallrye.mutiny.Uni;
 
 @QuarkusTest
@@ -116,5 +121,31 @@ public class FruitResourceTest {
 
 		Mockito.verify(this.fruitService).deleteFruit(Mockito.eq("Apple"));
 		Mockito.verifyNoMoreInteractions(this.fruitService);
+	}
+
+	@Test
+	public void streamFruits() {
+		Mockito.when(this.fruitService.streamFruits())
+			.thenReturn(streamFruitsMock());
+
+		given()
+			.when().get("/fruits/stream")
+			.then()
+				.statusCode(200)
+				.contentType("text/event-stream")
+				.body(is("data:{\"name\":\"Apple\",\"description\":\"Winter fruit\"}\n\ndata:{\"name\":\"Pear\",\"description\":\"Delicious fruit\"}\n\n"));
+	}
+
+	private Multi<Fruit> streamFruitsMock() {
+		return Multi.createFrom()
+			.ticks()
+			.every(Duration.ofSeconds(1))
+			.onItem().transform(tick ->
+				Stream.of(new Fruit("Apple", "Winter fruit"), new Fruit("Pear", "Delicious fruit"))
+					.sorted(Comparator.comparing(Fruit::getName))
+					.collect(Collectors.toList())
+					.get(tick.intValue())
+			)
+			.select().first(2);
 	}
 }

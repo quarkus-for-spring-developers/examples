@@ -22,6 +22,7 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
+import org.jboss.resteasy.reactive.RestSseElementType;
 
 import io.smallrye.mutiny.Multi;
 import io.smallrye.mutiny.Uni;
@@ -75,6 +76,7 @@ public class FruitResource {
 	@GET
 	@Path("/stream")
 	@Produces(MediaType.SERVER_SENT_EVENTS)
+	@RestSseElementType(MediaType.APPLICATION_JSON)
 	@Operation(summary = "Stream a fruit every second", description = "Stream a fruit every second")
 	@APIResponse(responseCode = "200", description = "One fruit every second")
 	public Multi<Fruit> streamFruits() {

@@ -2,6 +2,13 @@ package org.acme.rest;
 
 import java.io.IOException;
 import java.util.Collection;
+import java.util.Comparator;
+import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -72,18 +79,29 @@ public class FruitController {
 	@ApiResponse(responseCode = "200", description = "One fruit every second")
 	public SseEmitter streamFruits() {
 		SseEmitter emitter = new SseEmitter();
+		AtomicInteger counter = new AtomicInteger();
+		ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
 
-		this.fruitService.streamFruits(
-			fruit -> {
+		executor.scheduleWithFixedDelay(() -> {
+			int tick = counter.getAndIncrement();
+			List<Fruit> fruits = this.fruitService.getFruits()
+				.stream()
+				.sorted(Comparator.comparing(Fruit::getName))
+				.collect(Collectors.toList());
+
+			if (tick < fruits.size()) {
 				try {
-					emitter.send(fruit, MediaType.APPLICATION_JSON);
+					emitter.send(fruits.get(tick), MediaType.APPLICATION_JSON);
 				}
 				catch (IOException ex) {
 					emitter.completeWithError(ex);
 				}
-			},
-			emitter::complete
-		);
+			}
+			else {
+				emitter.complete();
+				executor.shutdown();
+			}
+		}, 0, 1, TimeUnit.SECONDS);
 
 		return emitter;
 	}

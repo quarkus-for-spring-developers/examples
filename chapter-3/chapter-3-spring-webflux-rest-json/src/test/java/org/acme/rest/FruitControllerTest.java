@@ -1,6 +1,10 @@
 package org.acme.rest;
 
+import java.time.Duration;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.acme.service.FruitService;
 import org.junit.jupiter.api.Test;
@@ -119,5 +123,29 @@ class FruitControllerTest {
 
 		Mockito.verify(this.fruitService).deleteFruit(Mockito.eq("Apple"));
 		Mockito.verifyNoMoreInteractions(this.fruitService);
+	}
+
+	@Test
+	public void streamFruits() {
+		Mockito.when(this.fruitService.streamFruits())
+			.thenReturn(streamFruitsMock());
+
+		this.webTestClient.get()
+			.uri("/fruits/stream")
+			.exchange()
+			.expectStatus().isOk()
+			.expectHeader().contentTypeCompatibleWith(MediaType.TEXT_EVENT_STREAM)
+			.expectBody(String.class).isEqualTo("data:{\"name\":\"Apple\",\"description\":\"Winter fruit\"}\n\ndata:{\"name\":\"Pear\",\"description\":\"Delicious fruit\"}\n\n");
+	}
+
+	private Flux<Fruit> streamFruitsMock() {
+		return Flux.interval(Duration.ofSeconds(1))
+			.map(tick ->
+				Stream.of(new Fruit("Apple", "Winter fruit"), new Fruit("Pear", "Delicious fruit"))
+					.sorted(Comparator.comparing(Fruit::getName))
+					.collect(Collectors.toList())
+					.get(tick.intValue())
+			)
+			.take(2);
 	}
 }
