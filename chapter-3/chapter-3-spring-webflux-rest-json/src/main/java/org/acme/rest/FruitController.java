@@ -7,6 +7,8 @@ import org.acme.service.FruitService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.codec.ServerSentEvent;
+import org.springframework.http.codec.ServerSentEvent.Builder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -63,5 +65,14 @@ public class FruitController {
 	@ApiResponse(responseCode = "204", description = "Fruit deleted")
 	public Mono<Void> deleteFruit(@Parameter(required = true, description = "Fruit name") @PathVariable String name) {
 		return this.fruitService.deleteFruit(name);
+	}
+
+	@GetMapping(path = "/stream", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+	@Operation(summary = "Stream a fruit every second", description = "Stream a fruit every second")
+	@ApiResponse(responseCode = "200", description = "One fruit every second")
+	public Flux<ServerSentEvent<Fruit>> streamFruits() {
+		return this.fruitService.streamFruits()
+			.map(ServerSentEvent::builder)
+			.map(Builder::build);
 	}
 }

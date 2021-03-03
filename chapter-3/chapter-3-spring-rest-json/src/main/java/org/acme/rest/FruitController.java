@@ -1,5 +1,6 @@
 package org.acme.rest;
 
+import java.io.IOException;
 import java.util.Collection;
 
 import javax.validation.Valid;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -63,5 +65,26 @@ public class FruitController {
 	@ApiResponse(responseCode = "204", description = "Fruit deleted")
 	public void deleteFruit(@Parameter(required = true, description = "Fruit name") @PathVariable String name) {
 		this.fruitService.deleteFruit(name);
+	}
+
+	@GetMapping(path = "/stream", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+	@Operation(summary = "Stream a fruit every second", description = "Stream a fruit every second")
+	@ApiResponse(responseCode = "200", description = "One fruit every second")
+	public SseEmitter streamFruits() {
+		SseEmitter emitter = new SseEmitter();
+
+		this.fruitService.streamFruits(
+			fruit -> {
+				try {
+					emitter.send(fruit, MediaType.APPLICATION_JSON);
+				}
+				catch (IOException ex) {
+					emitter.completeWithError(ex);
+				}
+			},
+			emitter::complete
+		);
+
+		return emitter;
 	}
 }

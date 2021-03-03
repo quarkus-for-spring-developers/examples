@@ -1,7 +1,10 @@
 package org.acme.service;
 
+import java.time.Duration;
+import java.util.Comparator;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+import java.util.stream.Collectors;
 
 import org.acme.rest.Fruit;
 
@@ -35,5 +38,17 @@ public class FruitService {
 	public Mono<Void> deleteFruit(String fruitName) {
 		return Mono.fromSupplier(() -> this.fruits.remove(fruitName))
 			.then();
+	}
+
+	public Flux<Fruit> streamFruits() {
+		return Flux.interval(Duration.ofSeconds(1))
+			.map(tick ->
+				this.fruits.values()
+					.stream()
+					.sorted(Comparator.comparing(Fruit::getName))
+					.collect(Collectors.toList())
+					.get(tick.intValue())
+			)
+			.take(this.fruits.size());
 	}
 }
