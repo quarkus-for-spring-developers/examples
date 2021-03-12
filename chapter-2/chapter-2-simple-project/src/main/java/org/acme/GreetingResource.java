@@ -7,11 +7,6 @@ import javax.ws.rs.core.MediaType;
 
 @Path("/hello-resteasy")
 public class GreetingResource {
-//	@ConfigProperty(name = "greeting.name")
-//	String greeting;
-
-//	@Inject
-//	GreetingService greetingService;
 
 	private final GreetingService greetingService;
 
@@ -22,7 +17,6 @@ public class GreetingResource {
 	@GET
 	@Produces(MediaType.TEXT_PLAIN)
 	public String hello() {
-//		return "Hello " + this.greeting;
-		return this.greetingService.getGreeting();
+		return greetingService.getGreeting();
 	}
 }
