@@ -5,14 +5,21 @@ import java.util.StringJoiner;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
-import io.quarkus.hibernate.orm.panache.PanacheEntity;
+import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 
 @Entity
 @Table(name = "fruits")
-public class Fruit extends PanacheEntity {
+public class Fruit extends PanacheEntityBase {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	public Long id;
+
 	@Column(nullable = false, unique = true)
 	@NotBlank(message = "Name is mandatory")
 	public String name;

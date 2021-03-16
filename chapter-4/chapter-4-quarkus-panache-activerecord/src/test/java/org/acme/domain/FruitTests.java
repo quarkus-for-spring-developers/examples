@@ -43,6 +43,6 @@ class FruitTests {
 
 		assertThat(fruit.get().id)
 			.isNotNull()
-			.isGreaterThan(1L);
+			.isGreaterThan(2L);
 	}
 }
