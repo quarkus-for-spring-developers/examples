@@ -46,6 +46,6 @@ class FruitRepositoryTests {
 
 		assertThat(fruit.get().getId())
 			.isNotNull()
-			.isGreaterThan(1L);
+			.isGreaterThan(2L);
 	}
 }
