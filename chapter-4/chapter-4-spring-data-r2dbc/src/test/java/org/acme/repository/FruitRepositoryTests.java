@@ -11,7 +11,9 @@ import org.acme.domain.Fruit;
 import org.junit.jupiter.api.Test;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
+@SpringBootTest
 class FruitRepositoryTests extends TestContainerBase {
 	@Autowired
 	FruitRepository fruitRepository;

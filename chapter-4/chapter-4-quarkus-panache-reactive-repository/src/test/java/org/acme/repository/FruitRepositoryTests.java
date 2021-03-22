@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.acme.PostgresResource;
 import org.acme.domain.Fruit;
 import org.junit.jupiter.api.Test;
 

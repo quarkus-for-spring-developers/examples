@@ -6,9 +6,9 @@ import static org.hamcrest.Matchers.blankOrNullString;
 
 import java.util.List;
 
+import org.acme.PostgresResource;
 import org.acme.domain.Fruit;
 import org.acme.repository.FruitRepository;
-import org.acme.repository.PostgresResource;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
