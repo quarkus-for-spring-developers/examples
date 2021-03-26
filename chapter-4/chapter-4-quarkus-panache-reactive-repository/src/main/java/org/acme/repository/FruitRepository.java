@@ -10,6 +10,6 @@ import io.smallrye.mutiny.Uni;
 @ApplicationScoped
 public class FruitRepository implements PanacheRepository<Fruit> {
 	public Uni<Fruit> findByName(String name) {
-		return find("name", name).singleResult();
+		return find("name", name).firstResult();
 	}
 }
