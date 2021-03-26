@@ -16,7 +16,7 @@ import io.smallrye.mutiny.Uni;
 
 @ApplicationScoped
 public class FruitService {
-	private ConcurrentMap<String, Fruit> fruits = new ConcurrentHashMap<>();
+	private final ConcurrentMap<String, Fruit> fruits = new ConcurrentHashMap<>();
 
 	public FruitService() {
 		this.fruits.put("Apple", new Fruit("Apple", "Winter fruit"));
