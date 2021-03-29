@@ -2,7 +2,11 @@ package org.acme.rest;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+import javax.validation.Valid;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -40,5 +44,15 @@ public class FruitResource {
 			.map(Response::ok)
 			.map(ResponseBuilder::build)
 			.orElseGet(() -> Response.status(Status.NOT_FOUND).build());
+	}
+
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Blocking
+	@Transactional
+	public Fruit addFruit(@Valid Fruit fruit) {
+		this.fruitRepository.persist(fruit);
+		return fruit;
 	}
 }

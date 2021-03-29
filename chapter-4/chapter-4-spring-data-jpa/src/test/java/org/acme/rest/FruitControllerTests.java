@@ -1,6 +1,6 @@
 package org.acme.rest;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import java.util.List;
@@ -69,6 +69,26 @@ class FruitControllerTests {
 			.andExpect(status().isNotFound());
 
 		Mockito.verify(this.fruitRepository).findById(Mockito.eq(1L));
+		Mockito.verifyNoMoreInteractions(this.fruitRepository);
+	}
+
+	@Test
+	public void addFruit() throws Exception {
+		Mockito.when(this.fruitRepository.save(Mockito.any(Fruit.class)))
+			.thenReturn(new Fruit(1L, "Grapefruit", "Summer fruit"));
+
+		this.mockMvc.perform(
+			post("/fruits")
+				.contentType(MediaType.APPLICATION_JSON)
+				.content("{\"name\":\"Grapefruit\",\"description\":\"Summer fruit\"}")
+		)
+			.andExpect(status().isOk())
+			.andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+			.andExpect(jsonPath("id").value(1))
+			.andExpect(jsonPath("name").value("Grapefruit"))
+			.andExpect(jsonPath("description").value("Summer fruit"));
+
+		Mockito.verify(this.fruitRepository).save(Mockito.any(Fruit.class));
 		Mockito.verifyNoMoreInteractions(this.fruitRepository);
 	}
 }

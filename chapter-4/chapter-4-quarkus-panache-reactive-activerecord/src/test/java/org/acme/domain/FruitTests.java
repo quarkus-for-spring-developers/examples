@@ -1,12 +1,9 @@
-package org.acme.repository;
+package org.acme.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import javax.inject.Inject;
-
 import org.acme.PostgresResource;
-import org.acme.TestTransaction;
-import org.acme.domain.Fruit;
+import org.acme.rest.TestTransaction;
 import org.junit.jupiter.api.Test;
 
 import io.quarkus.test.common.QuarkusTestResource;
@@ -15,15 +12,11 @@ import io.smallrye.mutiny.helpers.test.UniAssertSubscriber;
 
 @QuarkusTest
 @QuarkusTestResource(PostgresResource.class)
-class FruitRepositoryTests {
-	@Inject
-	FruitRepository fruitRepository;
-
+public class FruitTests {
 	@Test
 	public void findByName() {
-		Fruit fruit = this.fruitRepository
-			.persist(new Fruit(null, "Grapefruit", "Summer fruit"))
-			.replaceWith(this.fruitRepository.findByName("Grapefruit"))
+		Fruit fruit = Fruit.persist(new Fruit(null, "Grapefruit", "Summer fruit"))
+			.replaceWith(Fruit.findByName("Grapefruit"))
 			.stage(TestTransaction::withRollback)
 			.subscribe()
 			.withSubscriber(UniAssertSubscriber.create())
@@ -33,10 +26,10 @@ class FruitRepositoryTests {
 
 		assertThat(fruit)
 			.isNotNull()
-			.extracting(Fruit::getName, Fruit::getDescription)
+			.extracting("name", "description")
 			.containsExactly("Grapefruit", "Summer fruit");
 
-		assertThat(fruit.getId())
+		assertThat(fruit.id)
 			.isNotNull()
 			.isGreaterThan(2L);
 	}

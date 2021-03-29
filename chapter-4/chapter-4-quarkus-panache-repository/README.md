@@ -1,4 +1,4 @@
-# chapter-4-quarkus-persistence project
+# chapter-4-quarkus-panache-repository project
 
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
@@ -48,13 +48,12 @@ Or, if you don't have GraalVM installed, you can run the native executable build
 ./mvnw package -Pnative -Dquarkus.native.container-build=true
 ```
 
-You can then execute your native executable with: `./target/chapter-4-quarkus-persistence-1.0.0-SNAPSHOT-runner`
+You can then execute your native executable with: `./target/chapter-4-quarkus-panache-repository-1.0.0-SNAPSHOT-runner`
 
 If you want to learn more about building native executables, please consult https://quarkus.io/guides/maven-tooling.html.
 
 ## Related guides
 
-- Flyway ([guide](https://quarkus.io/guides/flyway)): Handle your database schema migrations
 - Hibernate ORM with Panache ([guide](https://quarkus.io/guides/hibernate-orm-panache)): Simplify your persistence code for Hibernate ORM via the active record or the repository pattern
 
 ## Provided examples

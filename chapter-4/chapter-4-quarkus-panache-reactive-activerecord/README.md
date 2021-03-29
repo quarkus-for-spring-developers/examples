@@ -1,4 +1,4 @@
-# chapter-4-quarkus-panache-activerecord project
+# chapter-4-quarkus-panache-reactive-activerecord project
 
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
@@ -51,10 +51,6 @@ Or, if you don't have GraalVM installed, you can run the native executable build
 You can then execute your native executable with: `./target/chapter-4-quarkus-persistence-1.0.0-SNAPSHOT-runner`
 
 If you want to learn more about building native executables, please consult https://quarkus.io/guides/maven-tooling.html.
-
-## Related guides
-
-- Hibernate ORM with Panache ([guide](https://quarkus.io/guides/hibernate-orm-panache)): Simplify your persistence code for Hibernate ORM via the active record or the repository pattern
 
 ## Provided examples
 

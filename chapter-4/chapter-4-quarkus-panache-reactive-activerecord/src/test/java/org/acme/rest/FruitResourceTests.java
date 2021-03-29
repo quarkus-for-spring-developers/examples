@@ -5,7 +5,6 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.blankOrNullString;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.acme.domain.Fruit;
 import org.junit.jupiter.api.Test;
@@ -14,6 +13,7 @@ import org.mockito.Mockito;
 import io.quarkus.panache.mock.PanacheMock;
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;
+import io.smallrye.mutiny.Uni;
 
 @QuarkusTest
 class FruitResourceTests {
@@ -21,7 +21,7 @@ class FruitResourceTests {
 	public void getAll() {
 		PanacheMock.mock(Fruit.class);
 		Mockito.when(Fruit.listAll())
-			.thenReturn(List.of(new Fruit(1L, "Apple", "Hearty Fruit")));
+			.thenReturn(Uni.createFrom().item(List.of(new Fruit(1L, "Apple", "Hearty Fruit"))));
 
 		given()
 			.when().get("/fruits")
@@ -42,8 +42,8 @@ class FruitResourceTests {
 	@Test
 	public void getFruitFound() {
 		PanacheMock.mock(Fruit.class);
-		Mockito.when(Fruit.findByIdOptional(Mockito.eq(1L)))
-			.thenReturn(Optional.of(new Fruit(1L, "Apple", "Hearty Fruit")));
+		Mockito.when(Fruit.findById(Mockito.eq(1L)))
+			.thenReturn(Uni.createFrom().item(new Fruit(1L, "Apple", "Hearty Fruit")));
 
 		given()
 			.when().get("/fruits/1")
@@ -56,15 +56,15 @@ class FruitResourceTests {
 					"description", is("Hearty Fruit")
 				);
 
-		PanacheMock.verify(Fruit.class).findByIdOptional(Mockito.eq(1L));
+		PanacheMock.verify(Fruit.class).findById(Mockito.eq(1L));
 		PanacheMock.verifyNoMoreInteractions(Fruit.class);
 	}
 
 	@Test
 	public void getFruitNotFound() {
 		PanacheMock.mock(Fruit.class);
-		Mockito.when(Fruit.findByIdOptional(Mockito.eq(1L)))
-			.thenReturn(Optional.empty());
+		Mockito.when(Fruit.findById(Mockito.eq(1L)))
+			.thenReturn(Uni.createFrom().nullItem());
 
 		given()
 			.when().get("/fruits/1")
@@ -72,14 +72,14 @@ class FruitResourceTests {
 				.statusCode(404)
 				.body(blankOrNullString());
 
-		PanacheMock.verify(Fruit.class).findByIdOptional(Mockito.eq(1L));
+		PanacheMock.verify(Fruit.class).findById(Mockito.eq(1L));
 		PanacheMock.verifyNoMoreInteractions(Fruit.class);
 	}
 
 	@Test
 	public void addFruit() {
 		PanacheMock.mock(Fruit.class);
-		PanacheMock.doNothing()
+		PanacheMock.doReturn(Uni.createFrom().voidItem())
 			.when(Fruit.class).persist();
 
 		given()

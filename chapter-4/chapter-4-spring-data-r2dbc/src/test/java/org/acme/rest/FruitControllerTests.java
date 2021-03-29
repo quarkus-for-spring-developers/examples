@@ -58,9 +58,9 @@ class FruitControllerTests extends TestContainerBase {
 			.expectStatus().isOk()
 			.expectHeader().contentTypeCompatibleWith(MediaType.APPLICATION_JSON)
 			.expectBody()
-			.jsonPath("id").isEqualTo(1)
-			.jsonPath("name").isEqualTo("Apple")
-			.jsonPath("description").isEqualTo("Hearty Fruit");
+				.jsonPath("id").isEqualTo(1)
+				.jsonPath("name").isEqualTo("Apple")
+				.jsonPath("description").isEqualTo("Hearty Fruit");
 
 		Mockito.verify(this.fruitRepository).findById(Mockito.eq(1L));
 		Mockito.verifyNoMoreInteractions(this.fruitRepository);
@@ -77,6 +77,27 @@ class FruitControllerTests extends TestContainerBase {
 			.expectStatus().isNotFound();
 
 		Mockito.verify(this.fruitRepository).findById(Mockito.eq(1L));
+		Mockito.verifyNoMoreInteractions(this.fruitRepository);
+	}
+
+	@Test
+	public void addFruit() {
+		Mockito.when(this.fruitRepository.save(Mockito.any(Fruit.class)))
+			.thenReturn(Mono.just(new Fruit(1L, "Grapefruit", "Summer fruit")));
+
+		this.webTestClient.post()
+			.uri("/fruits")
+			.contentType(MediaType.APPLICATION_JSON)
+			.bodyValue("{\"name\":\"Grapefruit\",\"description\":\"Summer fruit\"}")
+			.exchange()
+			.expectStatus().isOk()
+			.expectHeader().contentTypeCompatibleWith(MediaType.APPLICATION_JSON)
+			.expectBody()
+				.jsonPath("id").isEqualTo(1)
+				.jsonPath("name").isEqualTo("Grapefruit")
+				.jsonPath("description").isEqualTo("Summer fruit");
+
+		Mockito.verify(this.fruitRepository).save(Mockito.any(Fruit.class));
 		Mockito.verifyNoMoreInteractions(this.fruitRepository);
 	}
 }

@@ -2,7 +2,6 @@ package org.acme.rest;
 
 import java.util.List;
 
-import javax.transaction.Transactional;
 import javax.validation.Valid;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -12,40 +11,37 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.ResponseBuilder;
 import javax.ws.rs.core.Response.Status;
 
 import org.acme.domain.Fruit;
 
-import io.smallrye.common.annotation.Blocking;
+import io.quarkus.hibernate.reactive.panache.Panache;
+import io.smallrye.mutiny.Uni;
 
 @Path("/fruits")
 public class FruitResource {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Blocking
-	public List<Fruit> getAll() {
+	public Uni<List<Fruit>> getAll() {
 		return Fruit.listAll();
 	}
 
 	@GET
 	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	@Blocking
-	public Response getFruit(@PathParam("id") Long id) {
-		return Fruit.findByIdOptional(id)
-			.map(Response::ok)
-			.map(ResponseBuilder::build)
-			.orElseGet(() -> Response.status(Status.NOT_FOUND).build());
+	public Uni<Response> getFruit(@PathParam("id") Long id) {
+		return Fruit.findById(id)
+			.onItem().ifNotNull().transform(fruit -> Response.ok(fruit).build())
+			.onItem().ifNull().continueWith(() -> Response.status(Status.NOT_FOUND).build());
 	}
 
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Blocking
-	@Transactional
-	public Fruit addFruit(@Valid Fruit fruit) {
-		fruit.persist();
-		return fruit;
+	public Uni<Fruit> addFruit(@Valid Fruit fruit) {
+		return Panache.withTransaction(() ->
+			fruit.persist()
+				.replaceWith(fruit)
+		);
 	}
 }

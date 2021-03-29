@@ -1,8 +1,7 @@
 package org.acme.repository;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -20,20 +19,7 @@ class FruitRepositoryTests {
 	FruitRepository fruitRepository;
 
 	@Test
-	public void startingPointAsExpected() {
-		List<Fruit> fruits = this.fruitRepository.findAll();
-
-		assertThat(fruits)
-			.hasSize(2)
-			.extracting(Fruit::getName, Fruit::getDescription)
-			.containsExactlyInAnyOrder(
-				tuple("Apple", "Hearty fruit"),
-				tuple("Pear", "Juicy fruit")
-			);
-	}
-
-	@Test
-	public void insertingCorrect() {
+	public void findByName() {
 		this.fruitRepository.save(new Fruit(null, "Grapefruit", "Summer fruit"));
 
 		Optional<Fruit> fruit = this.fruitRepository.findByName("Grapefruit");
