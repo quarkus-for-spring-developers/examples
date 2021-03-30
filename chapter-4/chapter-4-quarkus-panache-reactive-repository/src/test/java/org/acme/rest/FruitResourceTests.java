@@ -29,14 +29,14 @@ class FruitResourceTests {
 		given()
 			.when().get("/fruits")
 			.then()
-			.statusCode(200)
-			.contentType(ContentType.JSON)
-			.body(
-				"$.size()", is(1),
-				"[0].id", is(1),
-				"[0].name", is("Apple"),
-				"[0].description", is("Hearty Fruit")
-			);
+				.statusCode(200)
+				.contentType(ContentType.JSON)
+				.body(
+					"$.size()", is(1),
+					"[0].id", is(1),
+					"[0].name", is("Apple"),
+					"[0].description", is("Hearty Fruit")
+				);
 
 		Mockito.verify(this.fruitRepository).listAll();
 		Mockito.verifyNoMoreInteractions(this.fruitRepository);
@@ -50,13 +50,13 @@ class FruitResourceTests {
 		given()
 			.when().get("/fruits/1")
 			.then()
-			.statusCode(200)
-			.contentType(ContentType.JSON)
-			.body(
-				"id", is(1),
-				"name", is("Apple"),
-				"description", is("Hearty Fruit")
-			);
+				.statusCode(200)
+				.contentType(ContentType.JSON)
+				.body(
+					"id", is(1),
+					"name", is("Apple"),
+					"description", is("Hearty Fruit")
+				);
 
 		Mockito.verify(this.fruitRepository).findById(Mockito.eq(1L));
 		Mockito.verifyNoMoreInteractions(this.fruitRepository);
@@ -81,8 +81,6 @@ class FruitResourceTests {
 	public void addFruit() {
 		Mockito.when(this.fruitRepository.persist(Mockito.any(Fruit.class)))
 			.thenReturn(Uni.createFrom().voidItem());
-//		Mockito.when(this.fruitRepository.findById(Mockito.nullable(Long.class)))
-//			.thenReturn(Uni.createFrom().item(new Fruit(1L, "Grapefruit", "Summer fruit")));
 
 		given()
 			.when()
