@@ -5,6 +5,7 @@ import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
+import org.acme.domain.CustomRuntimeException;
 import org.acme.rest.Fruit;
 
 import org.springframework.stereotype.Service;
@@ -33,5 +34,9 @@ public class FruitService {
 
 	public void deleteFruit(String fruitName) {
 		this.fruits.remove(fruitName);
+	}
+
+	public void performWorkGeneratingError() {
+		throw new CustomRuntimeException("Got some kind of error from somewhere");
 	}
 }

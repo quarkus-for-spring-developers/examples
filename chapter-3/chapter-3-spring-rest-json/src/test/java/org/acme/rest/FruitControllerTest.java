@@ -8,6 +8,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.util.List;
 import java.util.Optional;
 
+import org.acme.domain.CustomRuntimeException;
 import org.acme.service.FruitService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -111,6 +112,22 @@ class FruitControllerTest {
 			.andExpect(status().isNoContent());
 
 		Mockito.verify(this.fruitService).deleteFruit(Mockito.eq("Apple"));
+		Mockito.verifyNoMoreInteractions(this.fruitService);
+	}
+
+	@Test
+	public void doSomethingGeneratingError() throws Exception {
+		Mockito.doThrow(new CustomRuntimeException("Error"))
+			.when(this.fruitService).performWorkGeneratingError();
+
+		this.mockMvc.perform(get("/fruits/error"))
+			.andExpect(status().isInternalServerError())
+			.andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+			.andExpect(header().string("X-CUSTOM-ERROR", "500"))
+			.andExpect(jsonPath("errorCode").value(500))
+			.andExpect(jsonPath("errorMessage").value("Error"));
+
+		Mockito.verify(this.fruitService).performWorkGeneratingError();
 		Mockito.verifyNoMoreInteractions(this.fruitService);
 	}
 

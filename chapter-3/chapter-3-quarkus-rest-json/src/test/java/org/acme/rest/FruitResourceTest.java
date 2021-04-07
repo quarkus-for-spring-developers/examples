@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.acme.domain.CustomRuntimeException;
 import org.acme.service.FruitService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -120,6 +121,26 @@ public class FruitResourceTest {
 			.then().statusCode(204);
 
 		Mockito.verify(this.fruitService).deleteFruit(Mockito.eq("Apple"));
+		Mockito.verifyNoMoreInteractions(this.fruitService);
+	}
+
+	@Test
+	public void doSomethingGeneratingError() throws Exception {
+		Mockito.doThrow(new CustomRuntimeException("Error"))
+			.when(this.fruitService).performWorkGeneratingError();
+
+		given()
+			.when().get("/fruits/error")
+			.then()
+				.statusCode(500)
+				.contentType(ContentType.JSON)
+				.header("X-CUSTOM-ERROR", "500")
+				.body(
+					"errorCode", is(500),
+					"errorMessage", is("Error")
+				);
+
+		Mockito.verify(this.fruitService).performWorkGeneratingError();
 		Mockito.verifyNoMoreInteractions(this.fruitService);
 	}
 

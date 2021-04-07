@@ -67,6 +67,15 @@ public class FruitController {
 		return this.fruitService.deleteFruit(name);
 	}
 
+	@GetMapping("/error")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	@Operation(summary = "Do something that will most likely generate an error", description = "Do something that will most likely generate an error")
+	@ApiResponse(responseCode = "204", description = "Success")
+	@ApiResponse(responseCode = "500", description = "Something bad happened")
+	public Mono<Void> doSomethingGeneratingError() {
+		return this.fruitService.performWorkGeneratingError();
+	}
+
 	@GetMapping(path = "/stream", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
 	@Operation(summary = "Stream a fruit every second", description = "Stream a fruit every second")
 	@ApiResponse(responseCode = "200", description = "One fruit every second")

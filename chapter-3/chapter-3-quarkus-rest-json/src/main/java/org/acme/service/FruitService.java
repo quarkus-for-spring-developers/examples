@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 import javax.enterprise.context.ApplicationScoped;
 
+import org.acme.domain.CustomRuntimeException;
 import org.acme.rest.Fruit;
 
 import io.smallrye.mutiny.Multi;
@@ -38,6 +39,10 @@ public class FruitService {
 
 	public void deleteFruit(String fruitName) {
 		this.fruits.remove(fruitName);
+	}
+
+	public void performWorkGeneratingError() {
+		throw new CustomRuntimeException("Got some kind of error from somewhere");
 	}
 
 	public Multi<Fruit> streamFruits() {

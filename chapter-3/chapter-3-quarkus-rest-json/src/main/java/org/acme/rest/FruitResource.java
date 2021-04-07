@@ -73,6 +73,15 @@ public class FruitResource {
 	}
 
 	@GET
+	@Path("/error")
+	@Operation(summary = "Do something that will most likely generate an error", description = "Do something that will most likely generate an error")
+	@APIResponse(responseCode = "204", description = "Success")
+	@APIResponse(responseCode = "500", description = "Something bad happened")
+	public void doSomethingGeneratingError() {
+		this.fruitService.performWorkGeneratingError();
+	}
+
+	@GET
 	@Path("/stream")
 	@Produces(MediaType.SERVER_SENT_EVENTS)
 	@Operation(summary = "Stream a fruit every second", description = "Stream a fruit every second")

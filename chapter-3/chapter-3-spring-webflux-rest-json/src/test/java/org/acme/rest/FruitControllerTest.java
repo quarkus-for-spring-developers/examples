@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.acme.domain.CustomRuntimeException;
 import org.acme.service.FruitService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
@@ -122,6 +124,25 @@ class FruitControllerTest {
 			.expectStatus().isNoContent();
 
 		Mockito.verify(this.fruitService).deleteFruit(Mockito.eq("Apple"));
+		Mockito.verifyNoMoreInteractions(this.fruitService);
+	}
+
+	@Test
+	public void doSomethingGeneratingError() {
+		Mockito.when(this.fruitService.performWorkGeneratingError())
+			.thenReturn(Mono.error(new CustomRuntimeException("Error")));
+
+		this.webTestClient.get()
+			.uri("/fruits/error")
+			.exchange()
+			.expectStatus().isEqualTo(HttpStatus.INTERNAL_SERVER_ERROR)
+			.expectHeader().contentTypeCompatibleWith(MediaType.APPLICATION_JSON)
+			.expectHeader().valueEquals("X-CUSTOM-ERROR", "500")
+			.expectBody()
+				.jsonPath("errorCode").isEqualTo(500)
+				.jsonPath("errorMessage").isEqualTo("Error");
+
+		Mockito.verify(this.fruitService).performWorkGeneratingError();
 		Mockito.verifyNoMoreInteractions(this.fruitService);
 	}
 

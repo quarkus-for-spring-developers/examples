@@ -6,6 +6,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.stream.Collectors;
 
+import org.acme.domain.CustomRuntimeException;
 import org.acme.rest.Fruit;
 
 import org.springframework.stereotype.Service;
@@ -38,6 +39,10 @@ public class FruitService {
 	public Mono<Void> deleteFruit(String fruitName) {
 		return Mono.fromSupplier(() -> this.fruits.remove(fruitName))
 			.then();
+	}
+
+	public Mono<Void> performWorkGeneratingError() {
+		return Mono.error(new CustomRuntimeException("Got some kind of error from somewhere"));
 	}
 
 	public Flux<Fruit> streamFruits() {
