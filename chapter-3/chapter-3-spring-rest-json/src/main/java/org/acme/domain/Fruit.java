@@ -1,4 +1,4 @@
-package org.acme.rest;
+package org.acme.domain;
 
 import javax.validation.constraints.NotBlank;
 

@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.acme.domain.CustomRuntimeException;
+import org.acme.domain.Fruit;
 import org.acme.service.FruitService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

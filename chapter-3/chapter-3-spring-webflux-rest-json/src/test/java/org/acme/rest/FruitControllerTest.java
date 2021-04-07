@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.acme.domain.CustomRuntimeException;
+import org.acme.domain.Fruit;
 import org.acme.service.FruitService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
+import org.acme.domain.Fruit;
 import org.acme.service.FruitService;
 
 import org.springframework.http.HttpStatus;

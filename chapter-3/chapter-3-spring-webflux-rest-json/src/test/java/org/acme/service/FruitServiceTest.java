@@ -1,6 +1,6 @@
 package org.acme.service;
 
-import org.acme.rest.Fruit;
+import org.acme.domain.Fruit;
 import org.junit.jupiter.api.Test;
 
 import reactor.test.StepVerifier;

@@ -2,7 +2,7 @@ package org.acme.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.acme.rest.Fruit;
+import org.acme.domain.Fruit;
 import org.junit.jupiter.api.Test;
 
 import io.smallrye.mutiny.helpers.test.UniAssertSubscriber;

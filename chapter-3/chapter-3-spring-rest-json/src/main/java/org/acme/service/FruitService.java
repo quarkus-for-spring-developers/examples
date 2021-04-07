@@ -6,7 +6,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 import org.acme.domain.CustomRuntimeException;
-import org.acme.rest.Fruit;
+import org.acme.domain.Fruit;
 
 import org.springframework.stereotype.Service;
 

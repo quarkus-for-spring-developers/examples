@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 import javax.enterprise.context.ApplicationScoped;
 
 import org.acme.domain.CustomRuntimeException;
-import org.acme.rest.Fruit;
+import org.acme.domain.Fruit;
 
 import io.smallrye.mutiny.Multi;
 import io.smallrye.mutiny.Uni;
