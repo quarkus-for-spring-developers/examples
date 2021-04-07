@@ -80,7 +80,7 @@ class FruitResourceTests {
 	public void addFruit() {
 		PanacheMock.mock(Fruit.class);
 		PanacheMock.doNothing()
-			.when(Fruit.class).persist();
+			.when(Fruit.class).persist(Mockito.any(Fruit.class));
 
 		given()
 			.when()

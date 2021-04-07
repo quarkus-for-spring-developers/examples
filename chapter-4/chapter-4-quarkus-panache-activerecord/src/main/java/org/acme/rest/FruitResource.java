@@ -45,7 +45,7 @@ public class FruitResource {
 	@Blocking
 	@Transactional
 	public Fruit addFruit(@Valid Fruit fruit) {
-		fruit.persist();
+		Fruit.persist(fruit);
 		return fruit;
 	}
 }

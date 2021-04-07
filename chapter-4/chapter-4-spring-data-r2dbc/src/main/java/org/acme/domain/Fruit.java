@@ -1,5 +1,6 @@
 package org.acme.domain;
 
+import java.util.Objects;
 import java.util.StringJoiner;
 
 import javax.validation.constraints.NotBlank;
@@ -56,5 +57,24 @@ public class Fruit {
 			.add("name='" + this.name + "'")
 			.add("description='" + this.description + "'")
 			.toString();
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+
+		if ((o == null) || (getClass() != o.getClass())) {
+			return false;
+		}
+
+		Fruit fruit = (Fruit) o;
+		return this.id.equals(fruit.id);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(this.id);
 	}
 }
