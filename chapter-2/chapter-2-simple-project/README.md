@@ -1,4 +1,5 @@
-# chapter-2-simple-project project
+# Chapter 2 - Simple Quarkus Project
+This is a simple Quarkus JAX-RS example.
 
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
 

@@ -1,4 +1,5 @@
-# chapter-4-quarkus-panache-reactive-activerecord project
+# Chapter 4 - Quarkus Panache Reactive (Active Record Pattern)
+This is an example using Quarkus Panache Reactive and the active record pattern.
 
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
 

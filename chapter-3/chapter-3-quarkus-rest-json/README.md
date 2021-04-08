@@ -1,4 +1,5 @@
-# chapter-3-quarkus-rest-json project
+# Chapter 3 - Quarkus JAX-RS RESTful application
+This is a simple Quarkus JAX-RS project using RESTEasy Reactive.
 
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
 

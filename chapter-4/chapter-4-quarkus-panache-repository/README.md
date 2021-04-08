@@ -1,4 +1,5 @@
-# chapter-4-quarkus-panache-repository project
+# Chapter 4 - Quarkus Panache (Repository Pattern)
+This is an example using Quarkus Panache and the repository pattern.
 
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
