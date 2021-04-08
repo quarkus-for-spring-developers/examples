@@ -49,11 +49,11 @@ class FruitControllerTests extends TestContainerBase {
 
 	@Test
 	public void getFruitFound() {
-		Mockito.when(this.fruitRepository.findById(Mockito.eq(1L)))
+		Mockito.when(this.fruitRepository.findByName(Mockito.eq("Apple")))
 			.thenReturn(Mono.just(new Fruit(1L, "Apple", "Hearty Fruit")));
 
 		this.webTestClient.get()
-			.uri("/fruits/1")
+			.uri("/fruits/Apple")
 			.exchange()
 			.expectStatus().isOk()
 			.expectHeader().contentTypeCompatibleWith(MediaType.APPLICATION_JSON)
@@ -62,21 +62,21 @@ class FruitControllerTests extends TestContainerBase {
 				.jsonPath("name").isEqualTo("Apple")
 				.jsonPath("description").isEqualTo("Hearty Fruit");
 
-		Mockito.verify(this.fruitRepository).findById(Mockito.eq(1L));
+		Mockito.verify(this.fruitRepository).findByName(Mockito.eq("Apple"));
 		Mockito.verifyNoMoreInteractions(this.fruitRepository);
 	}
 
 	@Test
 	public void getFruitNotFound() {
-		Mockito.when(this.fruitRepository.findById(Mockito.eq(1L)))
+		Mockito.when(this.fruitRepository.findByName(Mockito.eq("Apple")))
 			.thenReturn(Mono.empty());
 
 		this.webTestClient.get()
-			.uri("/fruits/1")
+			.uri("/fruits/Apple")
 			.exchange()
 			.expectStatus().isNotFound();
 
-		Mockito.verify(this.fruitRepository).findById(Mockito.eq(1L));
+		Mockito.verify(this.fruitRepository).findByName(Mockito.eq("Apple"));
 		Mockito.verifyNoMoreInteractions(this.fruitRepository);
 	}
 

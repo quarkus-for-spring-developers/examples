@@ -44,11 +44,11 @@ class FruitResourceTests {
 
 	@Test
 	public void getFruitFound() {
-		Mockito.when(this.fruitRepository.findByIdOptional(Mockito.eq(1L)))
+		Mockito.when(this.fruitRepository.findByName(Mockito.eq("Apple")))
 			.thenReturn(Optional.of(new Fruit(1L, "Apple", "Hearty Fruit")));
 
 		given()
-			.when().get("/fruits/1")
+			.when().get("/fruits/Apple")
 			.then()
 				.statusCode(200)
 				.contentType(ContentType.JSON)
@@ -58,22 +58,22 @@ class FruitResourceTests {
 					"description", is("Hearty Fruit")
 				);
 
-		Mockito.verify(this.fruitRepository).findByIdOptional(Mockito.eq(1L));
+		Mockito.verify(this.fruitRepository).findByName(Mockito.eq("Apple"));
 		Mockito.verifyNoMoreInteractions(this.fruitRepository);
 	}
 
 	@Test
 	public void getFruitNotFound() {
-		Mockito.when(this.fruitRepository.findByIdOptional(Mockito.eq(1L)))
+		Mockito.when(this.fruitRepository.findByName(Mockito.eq("Apple")))
 			.thenReturn(Optional.empty());
 
 		given()
-			.when().get("/fruits/1")
+			.when().get("/fruits/Apple")
 			.then()
 				.statusCode(404)
 				.body(blankOrNullString());
 
-		Mockito.verify(this.fruitRepository).findByIdOptional(Mockito.eq(1L));
+		Mockito.verify(this.fruitRepository).findByName(Mockito.eq("Apple"));
 		Mockito.verifyNoMoreInteractions(this.fruitRepository);
 	}
 

@@ -27,10 +27,10 @@ public class FruitResource {
 	}
 
 	@GET
-	@Path("/{id}")
+	@Path("/{name}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Uni<Response> getFruit(@PathParam("id") Long id) {
-		return Fruit.findById(id)
+	public Uni<Response> getFruit(@PathParam("name") String name) {
+		return Fruit.findByName(name)
 			.onItem().ifNotNull().transform(fruit -> Response.ok(fruit).build())
 			.onItem().ifNull().continueWith(() -> Response.status(Status.NOT_FOUND).build());
 	}

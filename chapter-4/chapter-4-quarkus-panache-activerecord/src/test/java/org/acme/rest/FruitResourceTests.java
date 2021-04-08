@@ -42,11 +42,11 @@ class FruitResourceTests {
 	@Test
 	public void getFruitFound() {
 		PanacheMock.mock(Fruit.class);
-		Mockito.when(Fruit.findByIdOptional(Mockito.eq(1L)))
+		Mockito.when(Fruit.findByName(Mockito.eq("Apple")))
 			.thenReturn(Optional.of(new Fruit(1L, "Apple", "Hearty Fruit")));
 
 		given()
-			.when().get("/fruits/1")
+			.when().get("/fruits/Apple")
 			.then()
 				.statusCode(200)
 				.contentType(ContentType.JSON)
@@ -56,23 +56,23 @@ class FruitResourceTests {
 					"description", is("Hearty Fruit")
 				);
 
-		PanacheMock.verify(Fruit.class).findByIdOptional(Mockito.eq(1L));
+		PanacheMock.verify(Fruit.class).findByName(Mockito.eq("Apple"));
 		PanacheMock.verifyNoMoreInteractions(Fruit.class);
 	}
 
 	@Test
 	public void getFruitNotFound() {
 		PanacheMock.mock(Fruit.class);
-		Mockito.when(Fruit.findByIdOptional(Mockito.eq(1L)))
+		Mockito.when(Fruit.findByName(Mockito.eq("Apple")))
 			.thenReturn(Optional.empty());
 
 		given()
-			.when().get("/fruits/1")
+			.when().get("/fruits/Apple")
 			.then()
 				.statusCode(404)
 				.body(blankOrNullString());
 
-		PanacheMock.verify(Fruit.class).findByIdOptional(Mockito.eq(1L));
+		PanacheMock.verify(Fruit.class).findByName(Mockito.eq("Apple"));
 		PanacheMock.verifyNoMoreInteractions(Fruit.class);
 	}
 

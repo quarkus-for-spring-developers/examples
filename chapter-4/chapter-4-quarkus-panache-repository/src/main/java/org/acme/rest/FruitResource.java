@@ -36,11 +36,11 @@ public class FruitResource {
 	}
 
 	@GET
-	@Path("/{id}")
+	@Path("/{name}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Blocking
-	public Response getFruit(@PathParam("id") Long id) {
-		return this.fruitRepository.findByIdOptional(id)
+	public Response getFruit(@PathParam("name") String name) {
+		return this.fruitRepository.findByName(name)
 			.map(Response::ok)
 			.map(ResponseBuilder::build)
 			.orElseGet(() -> Response.status(Status.NOT_FOUND).build());

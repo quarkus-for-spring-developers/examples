@@ -46,29 +46,29 @@ class FruitControllerTests {
 
 	@Test
 	public void getFruitFound() throws Exception {
-		Mockito.when(this.fruitRepository.findById(Mockito.eq(1L)))
+		Mockito.when(this.fruitRepository.findByName(Mockito.eq("Apple")))
 			.thenReturn(Optional.of(new Fruit(1L, "Apple", "Hearty Fruit")));
 
-		this.mockMvc.perform(get("/fruits/1"))
+		this.mockMvc.perform(get("/fruits/Apple"))
 			.andExpect(status().isOk())
 			.andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
 			.andExpect(jsonPath("id").value(1))
 			.andExpect(jsonPath("name").value("Apple"))
 			.andExpect(jsonPath("description").value("Hearty Fruit"));
 
-		Mockito.verify(this.fruitRepository).findById(Mockito.eq(1L));
+		Mockito.verify(this.fruitRepository).findByName(Mockito.eq("Apple"));
 		Mockito.verifyNoMoreInteractions(this.fruitRepository);
 	}
 
 	@Test
 	public void getFruitNotFound() throws Exception {
-		Mockito.when(this.fruitRepository.findById(Mockito.eq(1L)))
+		Mockito.when(this.fruitRepository.findByName(Mockito.eq("Apple")))
 			.thenReturn(Optional.empty());
 
-		this.mockMvc.perform(get("/fruits/1"))
+		this.mockMvc.perform(get("/fruits/Apple"))
 			.andExpect(status().isNotFound());
 
-		Mockito.verify(this.fruitRepository).findById(Mockito.eq(1L));
+		Mockito.verify(this.fruitRepository).findByName(Mockito.eq("Apple"));
 		Mockito.verifyNoMoreInteractions(this.fruitRepository);
 	}
 

@@ -31,9 +31,9 @@ public class FruitController {
 		return this.fruitRepository.findAll();
 	}
 
-	@GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Fruit> getFruit(@PathVariable Long id) {
-		return this.fruitRepository.findById(id)
+	@GetMapping(path = "/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Fruit> getFruit(@PathVariable String name) {
+		return this.fruitRepository.findByName(name)
 			.map(ResponseEntity::ok)
 			.orElseGet(() -> ResponseEntity.notFound().build());
 	}
