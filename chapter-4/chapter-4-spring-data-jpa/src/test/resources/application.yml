@@ -1,0 +1,3 @@
+spring:
+  datasource:
+    url: jdbc:tc:postgresql:13:///chapter4?TC_INITSCRIPT=db/schema.sql

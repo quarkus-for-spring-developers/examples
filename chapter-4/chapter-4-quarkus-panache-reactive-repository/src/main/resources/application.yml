@@ -1,0 +1,15 @@
+quarkus:
+  datasource:
+    username: fruits
+    password: fruits
+    devservices:
+      image-name: quay.io/edeandrea/postgres-13-fruits:latest
+  hibernate-orm:
+    database:
+      generation: none
+
+"%prod":
+  quarkus:
+    datasource:
+      reactive:
+        url: postgresql://localhost:5432/fruits

@@ -1,0 +1,22 @@
+quarkus:
+  datasource:
+    username: fruits
+    password: fruits
+    devservices:
+      image-name: quay.io/edeandrea/postgres-13-fruits:latest
+  hibernate-orm:
+    database:
+      generation: validate
+
+"%prod":
+  quarkus:
+    datasource:
+      jdbc:
+        url: jdbc:postgresql://localhost:5432/fruits
+
+"%test":
+  quarkus:
+    datasource:
+      jdbc:
+        url: jdbc:tc:postgresql:13:///chapter4?TC_INITSCRIPT=db/schema.sql
+        driver: org.testcontainers.jdbc.ContainerDatabaseDriver
