@@ -1,6 +1,8 @@
 # Chapter 4 - Persistence
 This directory contains example projects used in 4 - Persistence.
 
+All of the examples showcase the exact same use cases as discussed in Chapter 4 of the book.
+
 ## Examples List
 - [Spring Data JPA](chapter-4-spring-data-jpa/)
 - [Quarkus Panache (Repository Pattern)](chapter-4-quarkus-panache-repository/)
