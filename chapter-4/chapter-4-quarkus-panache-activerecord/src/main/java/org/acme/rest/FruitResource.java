@@ -34,8 +34,7 @@ public class FruitResource {
 	@Blocking
 	public Response getFruit(@PathParam("name") String name) {
 		return Fruit.findByName(name)
-			.map(Response::ok)
-			.map(ResponseBuilder::build)
+			.map(fruit -> Response.ok(fruit).build())
 			.orElseGet(() -> Response.status(Status.NOT_FOUND).build());
 	}
 
