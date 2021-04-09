@@ -18,5 +18,5 @@ quarkus:
   quarkus:
     datasource:
       jdbc:
-        url: jdbc:tc:postgresql:13:///chapter4?TC_INITSCRIPT=db/schema.sql
+        url: jdbc:tc:postgresql:13:///fruits?TC_INITSCRIPT=db/schema.sql
         driver: org.testcontainers.jdbc.ContainerDatabaseDriver
