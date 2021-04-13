@@ -36,7 +36,7 @@ public class Fruit extends PanacheEntityBase {
 	}
 
 	public static Optional<Fruit> findByName(String name) {
-		return find("name", name).singleResultOptional();
+		return find("name", name).firstResultOptional();
 	}
 
 	@Override

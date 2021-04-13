@@ -11,6 +11,6 @@ import io.quarkus.hibernate.orm.panache.PanacheRepositoryBase;
 @ApplicationScoped
 public class FruitRepository implements PanacheRepositoryBase<Fruit, Long> {
 	public Optional<Fruit> findByName(String name) {
-		return find("name", name).singleResultOptional();
+		return find("name", name).firstResultOptional();
 	}
 }
