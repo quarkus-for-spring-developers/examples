@@ -5,19 +5,19 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>2.4.0</version>
+    <version>2.4.4</version>
     <relativePath />
   </parent>
 
   <groupId>com.example.events</groupId>
-  <artifactId>function</artifactId>
+  <artifactId>chapter-5-cloud-events</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>Spring Cloud Function::Events Example</name>
+  <name>chapter-5-spring-cloud-event</name>
   <description>A Spring Cloud Function, using Cloud Events</description>
 
   <properties>
     <java.version>11</java.version>
-    <spring-cloud-function.version>3.1.0-SNAPSHOT</spring-cloud-function.version>
+    <spring-cloud-function.version>3.1.1</spring-cloud-function.version>
     <compiler-plugin.version>3.8.1</compiler-plugin.version>
     <maven.compiler.parameters>true</maven.compiler.parameters>
     <maven.compiler.source>11</maven.compiler.source>

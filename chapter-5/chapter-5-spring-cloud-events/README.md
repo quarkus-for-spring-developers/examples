@@ -1,6 +1,5 @@
-# Function project
-
-Welcome to your new Function project!
+chapter-5-spring-cloud-events project
+========================
 
 This sample project contains a single function based on Spring Cloud Function: `functions.CloudFunctionApplication.uppercase()`, which returns the uppercase of the data passed via CloudEvents.
 
@@ -96,6 +95,12 @@ http -v "$URL/uppercase" \
   Ce-Type:dev.knative.example \
   Ce-Specversion:1.0 \
   input=$(whoami)
+```
+
+Then, you should see the similar logs below:
+
+```
+{"input":"danieloh","operation":"Uppercase","output":"DANIELOH","error":null}
 ```
 
 ## Cleanup

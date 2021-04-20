@@ -1,19 +1,15 @@
-# Function project
+chapter-5-quarkus-cloud-events project
+========================
 
-Welcome to your new Quarkus function project!
+This project illustrates how you can bind Knative Events using Funqy extension. The project also contains a single function: `functions.Function.function()`, the function just returns its argument.
 
-This sample project contains a single function: `functions.Function.function()`,
-the function just returns its argument.
+## Running the application in dev mode
 
-## Local execution
-Make sure that `Java 11 SDK` is installed.
+You can run your application in dev mode that enables live coding using:
 
-To start server locally run `./mvnw quarkus:dev`.
-The command starts http server and automatically watches for changes of source code.
-If source code changes the change will be propagated to running server. It also opens debugging port `5005`
-so debugger can be attached if needed.
-
-To run test locally run `./mvnw test`.
+```shell script
+./mvnw compile quarkus:dev
+```
 
 ## The `func` CLI
 
@@ -25,39 +21,9 @@ export FUNC_REGISTRY=docker.io/johndoe
 echo "export FUNC_REGISTRY=docker.io/johndoe" >> ~/.bashrc 
 ```
 
-### Building
+## Sending CloudEvent messages
 
-This command builds OCI image for the function.
-
-```shell script
-func build                  # build jar
-func build --builder native # build native binary
-```
-
-### Running
-
-This command runs the function locally in a container
-using the image created above.
-```shell script
-func run
-```
-
-### Deploying
-
-This commands will build and deploy the function into cluster.
-
-```shell script
-func deploy # also triggers build
-```
-
-## Function invocation
-
-Do not forget to set `URL` variable to the route of your function.
-
-You get the route by following command.
-```shell script
-func describe
-```
+Do not forget to set `URL` variable to the route of your function in `Kubernetes` cluster or `Local` environment.
 
 ### cURL
 
@@ -83,4 +49,47 @@ http -v ${URL} \
   Ce-Type:dev.knative.example \
   Ce-Specversion:1.0 \
   message=$(whoami)
+```
+
+Then, you should see the similar logs below:
+
+```
+{"message":"danieloh"}
+```
+
+## Deploying your function to Kubernetes via func CLI
+
+Quarkus functions can be created and managed using the CLI interactively, scripted, or by direct integration with the client library. The Function Developer's Guideand examples herein demonstrate the CLI-based approach. Install the latest CLI [here](https://github.com/boson-project/func/blob/main/docs/installing_cli.md).
+
+### Building
+
+This command builds OCI image for the function.
+
+```shell script
+func build                  # build jar
+func build --builder native # build native binary
+```
+
+### Running
+
+This command runs the function locally in a container using the image created above.
+
+```shell script
+func run
+```
+
+### Deploying
+
+This commands will build and deploy the function into cluster.
+
+```shell script
+func deploy # also triggers build
+```
+
+## Cleanup
+
+To remove the deployed function from your cluster, run:
+
+```shell
+func delete
 ```
