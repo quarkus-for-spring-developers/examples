@@ -1,17 +1,25 @@
-# chapter-5-quarkus-vertx-eventbus project
+chapter-5-quarkus-vertx-eventbus project
+========================
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
+This project illustrates how you can consume and produce events using Vert.x Event Bus.
 
-If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
+`Quarkus` allows different beans to interact using asynchronous events, thus promoting loose-coupling. The messages are sent to virtual addresses. It offers 3 types of delivery mechanism:
+
+* `point-to-point` - send the message, one consumer receives it. If several consumers listen to the address, a round robin is applied;
+
+* `publish/subscribe` - publish a message, all the consumers listening to the address are receiving the message;
+
+* `request/reply` - send the message and expect a response. The receiver can respond to the message in an asynchronous-fashion
 
 ## Running the application in dev mode
 
 You can run your application in dev mode that enables live coding using:
+
 ```shell script
 ./mvnw compile quarkus:dev
 ```
 
-> **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at http://localhost:8080/q/dev/.
+Then, open your browser to `http://localhost:8080/async/{name]`, and you should see the Uppercase of {name}.
 
 ## Packaging and running the application
 
@@ -49,11 +57,3 @@ If you want to learn more about building native executables, please consult http
 
 - RESTEasy Mutiny ([guide](https://quarkus.io/guides/getting-started-reactive#mutiny)): Mutiny support for RESTEasy server
 - Eclipse Vert.x ([guide](https://quarkus.io/guides/vertx)): Write reactive applications with the Vert.x API
-
-## Provided examples
-
-### RESTEasy JAX-RS example
-
-REST is easy peasy with this Hello World RESTEasy resource.
-
-[Related guide section...](https://quarkus.io/guides/getting-started#the-jax-rs-resources)
