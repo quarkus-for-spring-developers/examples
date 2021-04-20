@@ -1,0 +1,12 @@
+name: chapter-5-quarkus-cloud-events
+namespace: ""
+runtime: quarkus
+image: ""
+imageDigest: ""
+trigger: events
+builder: quay.io/boson/faas-quarkus-jvm-builder
+builderMap:
+  default: quay.io/boson/faas-quarkus-jvm-builder
+  jvm: quay.io/boson/faas-quarkus-jvm-builder
+  native: quay.io/boson/faas-quarkus-native-builder
+envVars: {}

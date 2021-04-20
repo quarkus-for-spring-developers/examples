@@ -1,0 +1,10 @@
+name: chapter-5-spring-cloud-events
+namespace: ""
+runtime: springboot
+image: ""
+imageDigest: ""
+trigger: events
+builder: quay.io/boson/faas-springboot-builder
+builderMap:
+  default: quay.io/boson/faas-springboot-builder
+envVars: {}
