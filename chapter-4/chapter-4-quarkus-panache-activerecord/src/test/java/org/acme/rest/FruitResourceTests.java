@@ -96,7 +96,7 @@ class FruitResourceTests {
 					"description", is("Summer fruit")
 				);
 
-		PanacheMock.verify(Fruit.class).persist();
+		PanacheMock.verify(Fruit.class).persist(Mockito.any(Fruit.class));
 		PanacheMock.verifyNoMoreInteractions(Fruit.class);
 	}
 }
