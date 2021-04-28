@@ -16,10 +16,10 @@ public class TestTransaction {
 		this.rxtx = rxtx;
 	}
 
-	public <T> Mono<T> withRollback(Mono<T> publisher) {
+	public <T> Mono<T> withRollback(Mono<T> mono) {
 		return this.rxtx.execute(tx -> {
 			tx.setRollbackOnly();
-			return publisher;
+			return mono;
 		}).next();
 	}
 }
