@@ -11,6 +11,12 @@ To produce reactive stream messages like the price generator, Spring developers 
 docker-compose up
 ```
 
+## Install the Kafka cli (if not already present)
+### macOS (via Homebrew)
+```shell
+brew install kafka
+```
+
 ## Create Kafka Topic
 
 ```shell script
