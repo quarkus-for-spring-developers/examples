@@ -1,19 +1,20 @@
 package org.acme.chapter5springeventbus;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
 
 @Component
 public class MySpringEventPublisher {
+    private final ApplicationEventPublisher applicationEventPublisher;
 
-    @Autowired
-    private ApplicationEventPublisher applicationEventPublisher;
+    public MySpringEventPublisher(ApplicationEventPublisher applicationEventPublisher) {
+        this.applicationEventPublisher = applicationEventPublisher;
+    }
 
-    public void publishCustomEvent(final String message) {
+    public void publishCustomEvent(String message) {
         System.out.println("Publishing custom event......");
-        final MySpringEvent myEvent = new MySpringEvent(this, message);
-        applicationEventPublisher.publishEvent(myEvent);
+        MySpringEvent myEvent = new MySpringEvent(this, message);
+        this.applicationEventPublisher.publishEvent(myEvent);
     }
 
 }
