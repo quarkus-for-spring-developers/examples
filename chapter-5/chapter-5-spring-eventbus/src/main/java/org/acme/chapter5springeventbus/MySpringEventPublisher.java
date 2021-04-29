@@ -13,7 +13,7 @@ public class MySpringEventPublisher {
 
     public void publishCustomEvent(String message) {
         System.out.println("Publishing custom event......");
-        MySpringEvent myEvent = new MySpringEvent(this, message);
+        MySpringEvent myEvent = new MySpringEvent(message);
         this.applicationEventPublisher.publishEvent(myEvent);
     }
 

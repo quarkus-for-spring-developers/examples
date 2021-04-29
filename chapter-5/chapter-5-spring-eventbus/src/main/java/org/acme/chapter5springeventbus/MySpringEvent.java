@@ -1,18 +1,14 @@
 package org.acme.chapter5springeventbus;
 
-import org.springframework.context.ApplicationEvent;
-
-public class MySpringEvent extends ApplicationEvent {
-
+public class MySpringEvent {
     private String message;
 
-    public MySpringEvent(final Object source, final String message) {
-        super(source);
+    public MySpringEvent(String message) {
         this.message = message;
     }
 
     public String getMessage() {
-        return message;
+        return this.message;
     }
 
 }
