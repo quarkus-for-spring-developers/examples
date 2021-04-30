@@ -1,6 +1,5 @@
 package org.acme;
 
-import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -16,9 +15,11 @@ import org.eclipse.microprofile.reactive.messaging.Channel;
 @Path("/prices")
 public class PriceResource {
 
-    @Inject
-    @Channel("my-data-stream")
-    Publisher<Double> prices;
+    private final Publisher<Double> prices;
+
+    public PriceResource(@Channel("my-data-stream") Publisher<Double> prices) {
+      this.prices = prices;
+    }
 
     @GET
     @Path("/stream")
