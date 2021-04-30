@@ -20,9 +20,7 @@ public abstract class TestContainerBase {
 	static void registerDynamicProperties(DynamicPropertyRegistry registry) {
 		registry.add("spring.r2dbc.url",
 			() -> String.format("r2dbc:postgresql://%s:%d/%s", DB.getHost(), DB.getFirstMappedPort(), DB.getDatabaseName()));
-		registry.add("spring.r2dbc.username",
-			() -> DB.getUsername());
-		registry.add("spring.r2dbc.password",
-			() -> DB.getPassword());
+		registry.add("spring.r2dbc.username", DB::getUsername);
+		registry.add("spring.r2dbc.password", DB::getPassword);
 	}
 }
