@@ -5,11 +5,10 @@ import org.slf4j.LoggerFactory;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
-@Service
+@Component
 public class KafkaProducer {
-
 	private static final Logger LOGGER = LoggerFactory.getLogger(KafkaProducer.class);
 
 	private final KafkaTemplate<String, String> kafkaTemplate;
@@ -21,7 +20,7 @@ public class KafkaProducer {
 	}
 
 	public void sendData(String payload) {
+		LOGGER.info("Sent message: Payload[{}] to Kafka Topic[{}]", payload, this.topicName);
 		this.kafkaTemplate.send(this.topicName, payload);
-		LOGGER.info("Sent message: Price[{}] to Kafka Topic[{}]", payload, this.topicName);
 	}
 }
