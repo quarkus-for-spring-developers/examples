@@ -18,7 +18,7 @@ public class KafkaProducerController {
 
 	@GetMapping("/{message}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void send(@PathVariable String message) throws Exception {
+	public void send(@PathVariable String message) {
 		this.producer.sendData(message);
 	}
 }

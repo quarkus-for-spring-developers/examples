@@ -15,13 +15,13 @@ public class KafkaProducer {
 	private final KafkaTemplate<String, String> kafkaTemplate;
 	private final String topicName;
 
-	public KafkaProducer(KafkaTemplate<String, String> kafkaTemplate, @Value("prices") String topicName) {
+	public KafkaProducer(KafkaTemplate<String, String> kafkaTemplate, @Value("${kafka.topic.name}") String topicName) {
 		this.kafkaTemplate = kafkaTemplate;
 		this.topicName = topicName;
 	}
 
-	public void sendData(String payload) throws Exception {
+	public void sendData(String payload) {
 		this.kafkaTemplate.send(this.topicName, payload);
-        LOGGER.info("Sent message: Price[{}] to Kafka Topic[{}]", payload, this.topicName);
+		LOGGER.info("Sent message: Price[{}] to Kafka Topic[{}]", payload, this.topicName);
 	}
 }
