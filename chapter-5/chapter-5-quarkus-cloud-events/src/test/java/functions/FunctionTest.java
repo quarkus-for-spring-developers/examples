@@ -2,7 +2,6 @@ package functions;
 
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.RestAssured;
-import org.hamcrest.CoreMatchers;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -14,6 +13,7 @@ public class FunctionTest {
 
     @Test
     void testFunction() {
+        // new Function()
         Output output = (new Function()).function(new Input("Hello!"), null);
         Assertions.assertEquals("Hello!", output.getMessage());
     }
