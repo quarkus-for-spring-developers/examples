@@ -38,7 +38,7 @@ public class SpringCloudEventsApplicationTests {
 
     Input input = new Input();
 
-    input.input = "hello";
+    input.setInput("hello");
 
     HttpHeaders ceHeaders = new HttpHeaders();
     ceHeaders.add(SPECVERSION, "1.0");
@@ -62,9 +62,9 @@ public class SpringCloudEventsApplicationTests {
     Output output = objectMapper.readValue(body,
         Output.class);
     assertThat(output, notNullValue());
-    assertThat(output.input, equalTo("hello"));
-    assertThat(output.operation, equalTo("Convert to UpperCase"));
-    assertThat(output.output, equalTo("HELLO"));
-    assertThat(output.error, nullValue());
+    assertThat(output.getInput(), equalTo("hello"));
+    assertThat(output.getOperation(), equalTo("Convert to UpperCase"));
+    assertThat(output.getOutput(), equalTo("HELLO"));
+    assertThat(output.getError(), nullValue());
   }
 }

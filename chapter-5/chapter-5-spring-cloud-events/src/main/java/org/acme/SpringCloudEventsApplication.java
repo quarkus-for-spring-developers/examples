@@ -44,9 +44,9 @@ public class SpringCloudEventsApplication {
       Input input = m.getPayload();
       LOGGER.log(Level.INFO, "Input {0} ", input);
       Output output = new Output();
-      output.input = input.input;
-      output.operation = httpHeaders.getFirst(SUBJECT);
-      output.output = input.input != null ? input.input.toUpperCase() : "NO DATA";
+      output.setInput(input.getInput());
+      output.setOperation(httpHeaders.getFirst(SUBJECT));
+      output.setOutput(input.getInput() != null ? input.getInput().toUpperCase() : "NO DATA");
       return output;
     };
   }
