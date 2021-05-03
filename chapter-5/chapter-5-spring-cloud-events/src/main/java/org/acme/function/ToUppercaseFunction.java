@@ -23,17 +23,19 @@ public class ToUppercaseFunction implements Function<Message<Input>, Output> {
   public Output apply(Message<Input> inputMessage) {
     HttpHeaders httpHeaders = HeaderUtils.fromMessage(inputMessage.getHeaders());
 
-    LOGGER.info("Input CE Id: {0}", httpHeaders.getFirst(ID));
-    LOGGER.info("Input CE Spec Version: {0}", httpHeaders.getFirst(SPECVERSION));
-    LOGGER.info("Input CE Source: {0}", httpHeaders.getFirst(SOURCE));
-    LOGGER.info("Input CE Subject: {0}", httpHeaders.getFirst(SUBJECT));
+    LOGGER.info("Input CE Id: {}", httpHeaders.getFirst(ID));
+    LOGGER.info("Input CE Spec Version: {}", httpHeaders.getFirst(SPECVERSION));
+    LOGGER.info("Input CE Source: {}", httpHeaders.getFirst(SOURCE));
+    LOGGER.info("Input CE Subject: {}", httpHeaders.getFirst(SUBJECT));
 
     Input input = inputMessage.getPayload();
-    LOGGER.info("Input: {0}", input);
+    LOGGER.info("Input: {}", input);
     
     String outputStr = Optional.ofNullable(input.getInput())
       .map(String::toUpperCase)
       .orElse("NO DATA");
+    
+    LOGGER.info("Output CE: {}", outputStr);
     
     Output output = new Output();
     output.setInput(input.getInput());

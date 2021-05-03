@@ -7,6 +7,16 @@ public class Output {
   private String output;
   private String error;
 
+  public Output() {
+  }
+
+  public Output(String input, String operation, String output, String error) {
+    this.input = input;
+    this.operation = operation;
+    this.output = output;
+    this.error = error;
+  }
+
   public String getInput() {
     return this.input;
   }
