@@ -32,9 +32,6 @@ public class SpringCloudEventsApplicationTests {
   @MethodSource("toUppercaseFunctionArguments")
   @DisplayName("toUppercase")
   public void testUpperCaseJsonInput(String inputText, String expectedOutputText) {
-    Input input = new Input();
-    input.setInput(inputText);
-
     HttpHeaders ceHeaders = new HttpHeaders();
     ceHeaders.add(SPECVERSION, "1.0");
     ceHeaders.add(ID, UUID.randomUUID().toString());
@@ -43,7 +40,7 @@ public class SpringCloudEventsApplicationTests {
     ceHeaders.add(SUBJECT, "Convert to UpperCase");
     ceHeaders.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
 
-    HttpEntity<Input> request = new HttpEntity<>(input, ceHeaders);
+    HttpEntity<Input> request = new HttpEntity<>(new Input(inputText), ceHeaders);
     ResponseEntity<Output> response = this.rest.postForEntity("/uppercase", request, Output.class);
     
     assertThat(response)
