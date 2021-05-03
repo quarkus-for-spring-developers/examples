@@ -1,26 +1,25 @@
 package functions;
 
 import io.quarkus.test.junit.QuarkusTest;
-import io.restassured.RestAssured;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.notNullValue;
+import static io.restassured.RestAssured.given;
 
 @QuarkusTest
 public class FunctionTest {
 
     @Test
     void testFunction() {
-        // new Function()
-        Output output = (new Function()).function(new Input("Hello!"), null);
+        Output output = new Function().function(new Input("Hello!"), null);
         Assertions.assertEquals("Hello!", output.getMessage());
     }
 
     @Test
     public void testFunctionIntegration() {
-        RestAssured.given().contentType("application/json")
+        given().contentType("application/json")
                 .body("{\"message\": \"Hello!\"}")
                 .header("ce-id", "42")
                 .header("ce-specversion", "1.0")
