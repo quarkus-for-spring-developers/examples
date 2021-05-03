@@ -1,7 +1,6 @@
-package org.acme;
+package org.acme.domain;
 
 public class Input {
-
   private String input;
 
   public String getInput() {
@@ -15,7 +14,7 @@ public class Input {
   @Override
   public String toString() {
     return "Input{" +
-        "input='" + input + '\'' +
+        "input='" + this.input + '\'' +
         '}';
   }
 }

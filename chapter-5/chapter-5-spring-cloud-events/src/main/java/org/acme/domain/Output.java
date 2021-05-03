@@ -1,4 +1,4 @@
-package org.acme;
+package org.acme.domain;
 
 public class Output {
 
@@ -42,10 +42,10 @@ public class Output {
   @Override
   public String toString() {
     return "Output{" +
-        "input='" + input + '\'' +
-        ", operation='" + operation + '\'' +
-        ", output='" + output + '\'' +
-        ", error='" + error + '\'' +
+        "input='" + this.input + '\'' +
+        ", operation='" + this.operation + '\'' +
+        ", output='" + this.output + '\'' +
+        ", error='" + this.error + '\'' +
         '}';
   }
 }
