@@ -15,9 +15,9 @@ public class GreetingService {
 
     @ConsumeEvent("blocking-consumer")
     @Blocking
-    void consumeBlocking(String message) {
-        // Something blocking
-        System.out.println("Processing blocking I/O on the event bus...");
+    public String consumeBlocking(String message) {
+        // Add something blocking logic
+        return "Processing Blocking I/O: " + message;
     }
 
 }
