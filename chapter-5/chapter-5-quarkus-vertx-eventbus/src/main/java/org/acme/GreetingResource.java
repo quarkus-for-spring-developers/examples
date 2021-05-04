@@ -26,5 +26,13 @@ public class GreetingResource {
         return bus.<String>request("greeting", name)        
                  .onItem().transform(Message::body);
     }
+
+    @GET
+    @Produces(MediaType.TEXT_PLAIN)
+    @Path("block/{message}")
+    public Uni<String> blockingConsumer(String message) {
+        return bus.<String>request("blocking-consumer", message)        
+                 .onItem().transform(Message::body);
+    }
    
 }
