@@ -1,12 +1,13 @@
-package org.acme;
+package org.acme.service;
 
 import java.time.Duration;
 import java.util.Random;
 
 import javax.enterprise.context.ApplicationScoped;
 
-import io.smallrye.mutiny.Multi;
 import org.eclipse.microprofile.reactive.messaging.Outgoing;
+
+import io.smallrye.mutiny.Multi;
 
 /**
  * A bean producing random prices every 5 seconds.
@@ -21,7 +22,7 @@ public class PriceGenerator {
     public Multi<Integer> generate() {
         return Multi.createFrom().ticks().every(Duration.ofSeconds(5))
                 .onOverflow().drop()
-                .map(tick -> random.nextInt(100));
+                .map(tick -> this.random.nextInt(100));
     }
 
 }

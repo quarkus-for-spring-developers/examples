@@ -1,13 +1,30 @@
-chapter-5-spring-kafka-streams project
+chapter-5-quarkus-kafka-streams project
 ========================
 
-This project illustrates how Spring Boot allows developers to consume and produce reactive stream messages by utilizing the Apache Kafka Streams APIs.
+This project illustrates how you can interact with Apache Kafka using [Spring Cloud Stream](https://docs.spring.io/spring-cloud-stream-binder-kafka/docs/current/reference/html/spring-cloud-stream-binder-kafka.html#_apache_kafka_binder).
 
-To produce reactive stream messages like the price generator, Spring developers need to implement `ProducerFactory` and `KafkaTemplate` beans with serialization logic. Then, the `KafkaTemplate` bean in `RestController` will be used to send the reactive messages to the Kafka cluster. 
+## Kafka cluster
 
-## Spin up the Kafka cluster with Apache ZooKeeper by Docker Compose
+First you need a Kafka cluster. You can follow the instructions from the [Apache Kafka web site](https://kafka.apache.org/quickstart) or run `docker-compose up` if you have docker installed on your machine.
 
-```shell script
+## Anatomy
+
+In addition to the `prices.html` page, the application is composed by 3 components:
+
+* `PriceGenerator`
+  * A bean generating random price. They are sent to a Kafka topic
+* `PriceConverter`
+  * On the consuming side, the `PriceConverter` receives the Kafka message and convert the price.
+  The result is sent to an in-memory stream of data
+* `PriceController`
+  * The `PriceController` retrieves the in-memory stream of data in which the converted prices are sent and send these prices to the browser using Server-Sent Events.
+
+The interaction with Kafka is managed by the Kafka Binder in Spring Cloud Stream.
+The configuration is located in the application configuration, `application.properties`.
+
+## Spin up the Kafka cluster with Apache ZooKeeper using Docker Compose
+
+```shell
 docker-compose up
 ```
 
@@ -18,8 +35,7 @@ brew install kafka
 ```
 
 ## Create Kafka Topic
-
-```shell script
+```shell
 sh ./create-topics.sh
 ```
 
@@ -31,32 +47,9 @@ You can run your Spring boot application:
 ./mvnw spring-boot:run
 ```
 
-Then, you should see that the Kafka client is ready:
-
-```
-INFO 8602 --- [nio-8080-exec-1] o.a.kafka.common.utils.AppInfoParser     : Kafka version: 2.6.0
-INFO 8602 --- [nio-8080-exec-1] o.a.kafka.common.utils.AppInfoParser     : Kafka commitId: 62abe01bee039651
-INFO 8602 --- [nio-8080-exec-1] o.a.kafka.common.utils.AppInfoParser     : Kafka startTimeMs: 1618886455966
-INFO 8602 --- [ad | producer-1] org.apache.kafka.clients.Metadata        : [Producer clientId=producer-1] Cluster ID: EApZO2XNSIaS6NONVRnKSg
-```
-
-## Produce and Consume the Event Message
-
-Use `curl` command to send a message to the Kafka Topic:
-
-```
-curl localhost:8080/prices/10
-``` 
-
-Then, you should see the below logs in Spring Boot:
-
-```
-INFO 8602 --- [nio-8080-exec-1] org.acme.service.KafkaProducer           : Sent message: Price[10] to Kafka Topic[prices]
-INFO 8602 --- [ntainer#0-0-C-1] org.acme.service.KafkaConsumer           : Received message: 10
-```
+Once running, point your browser to http://localhost:8080/prices.html and watch the price change every 5 seconds. You can also `curl http://localhost:8080/prices/stream` and watch the prices be emitted every 5 seconds.
 
 ## Packaging and running the application
-
 The application can be packaged using:
 ```shell script
 ./mvnw package
@@ -69,8 +62,8 @@ The application is now runnable using `java -jar target/chapter-5-spring-kafka-s
 For further reference, please consider the following sections:
 
 * [Official Apache Maven documentation](https://maven.apache.org/guides/index.html)
-* [Spring Boot Maven Plugin Reference Guide](https://docs.spring.io/spring-boot/docs/2.4.4/maven-plugin/reference/html/)
-* [Create an OCI image](https://docs.spring.io/spring-boot/docs/2.4.4/maven-plugin/reference/html/#build-image)
+* [Spring Boot Maven Plugin Reference Guide](https://docs.spring.io/spring-boot/docs/2.4.5/maven-plugin/reference/html/)
+* [Create an OCI image](https://docs.spring.io/spring-boot/docs/2.4.5/maven-plugin/reference/html/#build-image)
 * [Apache Kafka Streams Support](https://docs.spring.io/spring-kafka/docs/current/reference/html/_reference.html#kafka-streams)
 * [Apache Kafka Streams Binding Capabilities of Spring Cloud Stream](https://docs.spring.io/spring-cloud-stream/docs/current/reference/htmlsingle/#_kafka_streams_binding_capabilities_of_spring_cloud_stream)
-* [Spring for Apache Kafka](https://docs.spring.io/spring-boot/docs/2.4.4/reference/htmlsingle/#boot-features-kafka)
+* [Spring for Apache Kafka](https://docs.spring.io/spring-boot/docs/2.4.5/reference/htmlsingle/#boot-features-kafka)

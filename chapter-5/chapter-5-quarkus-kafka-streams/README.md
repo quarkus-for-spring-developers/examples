@@ -27,7 +27,7 @@ The result is sent to an in-memory stream of data
 * `PriceResource`  - the `PriceResource` retrieves the in-memory stream of data in which the converted prices are sent and send these prices to the browser using Server-Sent Events.
 
 The interaction with Kafka is managed by MicroProfile Reactive Messaging.
-The configuration is located in the application configuration.
+The configuration is located in the application configuration, `application.properties`.
 
 ## Spin up the Kafka cluster with Apache ZooKeeper by Docker Compose
 
