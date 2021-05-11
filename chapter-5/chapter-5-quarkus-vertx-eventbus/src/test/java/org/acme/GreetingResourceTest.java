@@ -1,49 +1,55 @@
 package org.acme;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.CoreMatchers.is;
 
 import io.quarkus.test.junit.QuarkusTest;
-import io.smallrye.mutiny.helpers.test.UniAssertSubscriber;
-
-import javax.inject.Inject;
+import io.quarkus.test.junit.mockito.InjectMock;
+import io.restassured.http.ContentType;
 
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 @QuarkusTest
 public class GreetingResourceTest {
 
-    @Inject
-    GreetingResource greetingResource;
+    @InjectMock
+    GreetingService greetingService;
 
     @Test
     public void testGreeting() {
-                
-        String message = this.greetingResource.greeting("quarkus events")
-        .subscribe()
-        .withSubscriber(UniAssertSubscriber.create())
-        .await()
-        .assertCompleted()
-        .getItem();
 
-        assertThat(message)
-            .isNotNull()
-            .isEqualTo("QUARKUS EVENTS");      
+        Mockito.when(this.greetingService.consume(Mockito.eq("events")))
+            .thenReturn("EVENTS");
+            
+        given()
+            .when().get("/async/events")
+            .then()
+                .statusCode(200)
+                .contentType(ContentType.TEXT)
+                .body(is("EVENTS"));
+
+        Mockito.verify(this.greetingService).consume(Mockito.eq("events"));
+        Mockito.verifyNoMoreInteractions(this.greetingService);   
 
     }
 
     @Test
     public void testBlockingConsumer() {
-                
-        String message = this.greetingResource.blockingConsumer("blocking events")
-        .subscribe()
-        .withSubscriber(UniAssertSubscriber.create())
-        .await()
-        .assertCompleted()
-        .getItem();
 
-        assertThat(message)
-            .isNotNull()
-            .isEqualTo("Processing Blocking I/O: blocking events");      
+        Mockito.when(this.greetingService.consumeBlocking(Mockito.eq("events")))
+            .thenReturn("Processing Blocking I/O: events");
+
+        given()
+            .when().get("/async/block/events")
+            .then()
+                .statusCode(200)
+                .contentType(ContentType.TEXT)
+                .body(is("Processing Blocking I/O: events"));
+
+        Mockito.verify(this.greetingService).consumeBlocking(Mockito.eq("events"));
+        Mockito.verifyNoMoreInteractions(this.greetingService);
+
     }
 
 }
