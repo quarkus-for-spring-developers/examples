@@ -1,7 +1,7 @@
 # Chapter 4 - Persistence
 This directory contains example projects used in 4 - Persistence.
 
-All of the examples showcase the exact same use cases as discussed in Chapter 4 of the book.
+All of the examples showcase the exact same use cases as discussed in Chapter 4 of the book. The examples consist of a RESTful interface exposing several endpoints using a persistent back-end communicating with a PostgreSQL database.
 
 ## Examples List
 - [Spring Data JPA](chapter-4-spring-data-jpa/)
