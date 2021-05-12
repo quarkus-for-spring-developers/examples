@@ -1,25 +1,30 @@
 package org.acme;
 
+import java.io.File;
 import java.util.Collections;
 import java.util.Map;
 
-import org.testcontainers.containers.KafkaContainer;
-import org.testcontainers.utility.DockerImageName;
+import org.testcontainers.containers.DockerComposeContainer;
+import org.testcontainers.containers.wait.strategy.Wait;
 
 import io.quarkus.test.common.QuarkusTestResourceLifecycleManager;
 
 public class KafkaResource implements QuarkusTestResourceLifecycleManager {
 
-    private final KafkaContainer kafka = new KafkaContainer(DockerImageName.parse("confluentinc/cp-kafka:5.4.3"));
+    static final DockerComposeContainer<?> DOCKER_COMPOSE =
+		new DockerComposeContainer<>(new File("docker-compose.yaml"))
+			.withExposedService("zookeeper", 1, 2181, Wait.forListeningPort())
+			.withExposedService("kafka", 1, 9092, Wait.forListeningPort());
 
     @Override
     public Map<String, String> start() {
-        kafka.start();
-        return Collections.singletonMap("kafka.bootstrap.servers", kafka.getBootstrapServers());
+        DOCKER_COMPOSE.start();
+        return Collections.singletonMap("kafka.bootstrap.servers", "localhost:9092");
     }
 
     @Override
     public void stop() {
-        kafka.close();
+        DOCKER_COMPOSE.close();
     }
+
 }
