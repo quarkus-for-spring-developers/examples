@@ -1,4 +1,3 @@
 spring:
   datasource:
     url: jdbc:tc:postgresql:13:///fruits?TC_INITSCRIPT=db/schema.sql
-    driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver
