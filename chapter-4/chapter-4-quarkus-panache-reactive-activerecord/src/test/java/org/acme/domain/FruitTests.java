@@ -2,16 +2,13 @@ package org.acme.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.acme.PostgresResource;
 import org.acme.rest.TestTransaction;
 import org.junit.jupiter.api.Test;
 
-import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusTest;
 import io.smallrye.mutiny.helpers.test.UniAssertSubscriber;
 
 @QuarkusTest
-@QuarkusTestResource(PostgresResource.class)
 public class FruitTests {
 	@Test
 	public void findByName() {
