@@ -13,10 +13,3 @@ quarkus:
     datasource:
       jdbc:
         url: jdbc:postgresql://localhost:5432/fruits
-
-"%test":
-  quarkus:
-    datasource:
-      jdbc:
-        url: jdbc:tc:postgresql:13:///fruits?TC_INITSCRIPT=db/schema.sql
-        driver: org.testcontainers.jdbc.ContainerDatabaseDriver
