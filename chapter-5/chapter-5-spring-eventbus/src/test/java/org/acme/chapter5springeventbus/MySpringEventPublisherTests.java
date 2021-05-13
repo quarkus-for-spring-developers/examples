@@ -19,8 +19,7 @@ class MySpringEventPublisherTests {
 	public void messageReceived() {
 		this.eventPublisher.publishCustomEvent("Test");
 
-		// times(2) because the application will publish an event on startup
-		Mockito.verify(this.listener, Mockito.times(2)).handleEvent(Mockito.any(MySpringEvent.class));
+		Mockito.verify(this.listener).handleEvent(Mockito.eq(new MySpringEvent("Test")));
 		Mockito.verifyNoMoreInteractions(this.listener);
 	}
 }
