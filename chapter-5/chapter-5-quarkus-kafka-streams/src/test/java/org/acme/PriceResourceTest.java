@@ -17,7 +17,7 @@ import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusTest;
 
 @QuarkusTest
-@QuarkusTestResource(KafkaResource.class)
+@QuarkusTestResource(DockerComposeResource.class)
 class PriceResourceTest {
 
     private static final String PRICES_SSE_ENDPOINT = "http://localhost:8081/prices/stream";

@@ -9,7 +9,7 @@ import org.testcontainers.containers.wait.strategy.Wait;
 
 import io.quarkus.test.common.QuarkusTestResourceLifecycleManager;
 
-public class KafkaResource implements QuarkusTestResourceLifecycleManager {
+public class DockerComposeResource implements QuarkusTestResourceLifecycleManager {
 
     static final DockerComposeContainer<?> DOCKER_COMPOSE =
 		new DockerComposeContainer<>(new File("docker-compose.yaml"))
