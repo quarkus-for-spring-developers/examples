@@ -9,7 +9,7 @@ import org.springframework.messaging.MessageChannel;
 public class ChannelConfig {
 	@Bean
 	public MessageChannel greetingChannel() {
-		return MessageChannels.direct("greeting").get();
+		return MessageChannels.flux("greeting").get();
 	}
 
 	@Bean

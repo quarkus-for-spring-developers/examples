@@ -21,7 +21,7 @@ public class GreetingController {
 
 	@GetMapping(path = "/{name}", produces = MediaType.TEXT_PLAIN_VALUE)
 	public Mono<String> greeting(@PathVariable String name) {
-		return Mono.fromFuture(this.greetingGateway.greeting(name));
+		return this.greetingGateway.greeting(Mono.justOrEmpty(name));
 	}
 
 	@GetMapping(path = "/block/{message}", produces = MediaType.TEXT_PLAIN_VALUE)

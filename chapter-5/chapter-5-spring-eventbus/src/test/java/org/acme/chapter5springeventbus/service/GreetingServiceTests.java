@@ -4,11 +4,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 
+import reactor.core.publisher.Mono;
+import reactor.test.StepVerifier;
+
 class GreetingServiceTests {
 	@Test
 	public void consume() {
-		assertThat(new GreetingService().consume("hi"))
-			.isEqualTo("HI");
+		StepVerifier.create(new GreetingService().consume(Mono.just("hi")))
+			.expectNext("HI")
+			.verifyComplete();
 	}
 
 	@Test
