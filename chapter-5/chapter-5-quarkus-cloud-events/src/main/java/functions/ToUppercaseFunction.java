@@ -1,12 +1,14 @@
 package functions;
 
+import functions.domain.Input;
+import functions.domain.Output;
 import io.quarkus.funqy.Context;
 import io.quarkus.funqy.Funq;
 import io.quarkus.funqy.knative.events.CloudEvent;
 
-public class Function {
+public class ToUppercaseFunction {
 
-    @Funq
+    @Funq("uppercase")
     public Output function(Input input, @Context CloudEvent cloudEvent) {
         if (cloudEvent != null) {
             System.out.println(
@@ -17,7 +19,7 @@ public class Function {
                             ", subject='" + cloudEvent.subject() + '\'' +
                             '}');
         }
-        return new Output(input.getMessage());
+        return new Output(input.getMessage().toUpperCase());
     }
 
 }

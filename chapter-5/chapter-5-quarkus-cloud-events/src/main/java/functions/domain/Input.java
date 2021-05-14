@@ -1,11 +1,11 @@
-package functions;
+package functions.domain;
 
-public class Output {
+public class Input {
     private String message;
 
-    public Output() {}
+    public Input() {}
 
-    public Output(String message) {
+    public Input(String message) {
         this.message = message;
     }
 
