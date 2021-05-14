@@ -22,10 +22,10 @@ public class InMemoryChannel<T> {
 	}
 
 	/**
-	 * Default constructor using {@code Sinks.many().multicast().directBestEffort()} as the {@link Sinks.Many} implementation.
+	 * Default constructor using {@code Sinks.many().multicast().onBackpressureBuffer(1, false)} as the {@link Sinks.Many} implementation.
 	 */
 	public InMemoryChannel() {
-		this(Sinks.many().multicast().directBestEffort());
+		this(Sinks.many().multicast().onBackpressureBuffer(1, false));
 	}
 
 	/**
