@@ -7,9 +7,3 @@ quarkus:
   hibernate-orm:
     database:
       generation: none
-
-"%prod":
-  quarkus:
-    datasource:
-      reactive:
-        url: postgresql://localhost:5432/fruits
