@@ -2,6 +2,8 @@ package org.acme.repository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.time.Duration;
+
 import org.acme.TestContainerBase;
 import org.acme.TestTransaction;
 import org.acme.domain.Fruit;
@@ -24,7 +26,7 @@ class FruitRepositoryTests extends TestContainerBase {
 			.save(new Fruit(null, "Grapefruit", "Summer fruit"))
 			.then(this.fruitRepository.findByName("Grapefruit"))
 			.as(this.testTransaction::withRollback)
-			.block();
+			.block(Duration.ofSeconds(10));
 
 		assertThat(fruit)
 			.isNotNull()

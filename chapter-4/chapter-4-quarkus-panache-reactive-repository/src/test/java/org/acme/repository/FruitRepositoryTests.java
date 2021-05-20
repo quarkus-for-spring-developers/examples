@@ -2,6 +2,8 @@ package org.acme.repository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.time.Duration;
+
 import javax.inject.Inject;
 
 import org.acme.TestTransaction;
@@ -9,7 +11,6 @@ import org.acme.domain.Fruit;
 import org.junit.jupiter.api.Test;
 
 import io.quarkus.test.junit.QuarkusTest;
-import io.smallrye.mutiny.helpers.test.UniAssertSubscriber;
 
 @QuarkusTest
 class FruitRepositoryTests {
@@ -18,15 +19,13 @@ class FruitRepositoryTests {
 
 	@Test
 	public void findByName() {
-		Fruit fruit = this.fruitRepository
-			.persist(new Fruit(null, "Grapefruit", "Summer fruit"))
-			.replaceWith(this.fruitRepository.findByName("Grapefruit"))
-			.stage(TestTransaction::withRollback)
-			.subscribe()
-			.withSubscriber(UniAssertSubscriber.create())
+		Fruit fruit = TestTransaction.withRollback(() ->
+			this.fruitRepository
+				.persist(new Fruit(null, "Grapefruit", "Summer fruit"))
+				.replaceWith(this.fruitRepository.findByName("Grapefruit"))
+		)
 			.await()
-			.assertCompleted()
-			.getItem();
+			.atMost(Duration.ofSeconds(10));
 
 		assertThat(fruit)
 			.isNotNull()
