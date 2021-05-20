@@ -16,7 +16,6 @@ public class GreetingService {
     @ConsumeEvent("blocking-consumer")
     @Blocking
     public String consumeBlocking(String message) {
-        // Add something blocking logic
         return "Processing Blocking I/O: " + message;
     }
 

@@ -32,7 +32,6 @@ public class GreetingControllerTests {
 			.expectHeader().contentTypeCompatibleWith(MediaType.TEXT_PLAIN)
 			.expectBody(String.class).isEqualTo("HI");
 
-//		Mockito.verify(this.greetingService).consume(Mockito.eq("hi"));
 		Mockito.verify(this.greetingService).consume(Mockito.argThat(mono ->"hi".equals(mono.block(Duration.ofSeconds(5)))));
 		Mockito.verifyNoMoreInteractions(this.greetingService);
 	}
