@@ -6,4 +6,4 @@ All of the examples showcase the exact same use cases as discussed in Chapter 3 
 
 ## Examples List
 
-- [Quarkus RESTful application](chapter-6-quarkus-rest-json/)
+- [Quarkus RESTful application](chapter-6-quarkus-rest/)
