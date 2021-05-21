@@ -80,7 +80,7 @@ class FruitResourceTests {
 	public void addFruit() {
 		PanacheMock.mock(Fruit.class);
 		PanacheMock.doNothing()
-			.when(Fruit.class).persist(Mockito.any(Fruit.class));
+			.when(Fruit.class).persist(Mockito.any(Fruit.class), Mockito.any());
 
 		given()
 			.when()
@@ -96,7 +96,7 @@ class FruitResourceTests {
 					"description", is("Summer fruit")
 				);
 
-		PanacheMock.verify(Fruit.class).persist(Mockito.any(Fruit.class));
+		PanacheMock.verify(Fruit.class).persist(Mockito.any(Fruit.class), Mockito.any());
 		PanacheMock.verifyNoMoreInteractions(Fruit.class);
 	}
 }
