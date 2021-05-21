@@ -22,10 +22,11 @@ class FruitRepositoryTests extends TestContainerBase {
 
 	@Test
 	public void findByName() {
-		Fruit fruit = this.fruitRepository
-			.save(new Fruit(null, "Grapefruit", "Summer fruit"))
-			.then(this.fruitRepository.findByName("Grapefruit"))
-			.as(this.testTransaction::withRollback)
+		Fruit fruit = this.testTransaction.withRollback(() ->
+			this.fruitRepository
+				.save(new Fruit(null, "Grapefruit", "Summer fruit"))
+				.then(this.fruitRepository.findByName("Grapefruit"))
+		)
 			.block(Duration.ofSeconds(10));
 
 		assertThat(fruit)

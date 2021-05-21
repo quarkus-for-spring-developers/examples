@@ -1,5 +1,7 @@
 package org.acme;
 
+import java.util.function.Supplier;
+
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.reactive.TransactionalOperator;
 
@@ -16,10 +18,10 @@ public class TestTransaction {
 		this.rxtx = rxtx;
 	}
 
-	public <T> Mono<T> withRollback(Mono<T> mono) {
+	public <T> Mono<T> withRollback(Supplier<Mono<T>> mono) {
 		return this.rxtx.execute(tx -> {
 			tx.setRollbackOnly();
-			return mono;
+			return mono.get();
 		}).next();
 	}
 }
