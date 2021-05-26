@@ -1,0 +1,71 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-configuration
+  labels:
+    app: postgresql
+data:
+  POSTGRES_DB: fruits
+  POSTGRES_USER: fruits
+  POSTGRES_PASSWORD: fruits
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    name: postgresql
+  name: postgresql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: postgresql
+  template:
+    metadata:
+      labels:
+        name: postgresql
+    spec:
+      containers:
+      - image: quay.io/edeandrea/postgres-13-fruits:latest
+        name: postgresql
+        ports:
+        - containerPort: 5432
+        envFrom:
+          - configMapRef:
+              name: postgres-configuration
+        volumeMounts:
+        - mountPath: /var/lib/postgresql/data
+          name: postgresql-data
+      volumes:
+      - name: postgresql-data
+        persistentVolumeClaim:
+          claimName: postgresql
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    name: postgresql
+  name: postgresql 
+spec:
+  ports:
+  - port: 5432 
+    protocol: TCP
+    targetPort: 5432
+  selector:
+    name: postgresql
+  type: ClusterIP
+---
+apiVersion: v1
+kind: PersistentVolumeClaim 
+metadata:
+  labels:
+    name: postgresql
+  name: postgresql
+spec:
+  accessModes:
+   - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi

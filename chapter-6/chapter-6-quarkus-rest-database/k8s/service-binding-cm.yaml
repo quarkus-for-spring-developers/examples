@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: fruit-db
+data:
+  host: |
+    postgresql
+  port: |
+    5432
+  database: |
+    fruits
+  username: |
+    fruits
+  password: |
+    fruits
+  type: |
+    postgresql
