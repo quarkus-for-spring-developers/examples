@@ -1,8 +1,9 @@
 package org.acme.rest;
 
-import static java.util.concurrent.TimeUnit.MILLISECONDS;
 import static org.awaitility.Awaitility.await;
 
+import java.net.URI;
+import java.time.Duration;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -15,25 +16,28 @@ import org.acme.DockerComposeResource;
 import org.junit.jupiter.api.Test;
 
 import io.quarkus.test.common.QuarkusTestResource;
+import io.quarkus.test.common.http.TestHTTPEndpoint;
+import io.quarkus.test.common.http.TestHTTPResource;
 import io.quarkus.test.junit.QuarkusTest;
 
 @QuarkusTest
 @QuarkusTestResource(DockerComposeResource.class)
 class PriceResourceTest {
-
-    private static final String PRICES_SSE_ENDPOINT = "http://localhost:8081/prices/stream";
+    @TestHTTPEndpoint(PriceResource.class)
+    @TestHTTPResource("stream")
+    URI uri;
 
     @Test
     void testPricesEventStream() {
         Client client = ClientBuilder.newClient();
-        WebTarget target = client.target(PRICES_SSE_ENDPOINT);
+        WebTarget target = client.target(this.uri);
 
         List<Double> received = new CopyOnWriteArrayList<>();
 
         SseEventSource source = SseEventSource.target(target).build();
         source.register(inboundSseEvent -> received.add(Double.valueOf(inboundSseEvent.readData())));
         source.open();
-        await().atMost(100000, MILLISECONDS).until(() -> received.size() == 3);
+        await().atMost(Duration.ofSeconds(20)).until(() -> received.size() == 3);
         source.close();
     }
 }
