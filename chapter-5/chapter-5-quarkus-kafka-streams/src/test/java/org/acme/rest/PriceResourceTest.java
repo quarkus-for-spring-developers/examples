@@ -24,7 +24,7 @@ import io.quarkus.test.junit.QuarkusTest;
 @QuarkusTestResource(DockerComposeResource.class)
 class PriceResourceTest {
     @TestHTTPEndpoint(PriceResource.class)
-    @TestHTTPResource("stream")
+    @TestHTTPResource("/stream")
     URI uri;
 
     @Test
