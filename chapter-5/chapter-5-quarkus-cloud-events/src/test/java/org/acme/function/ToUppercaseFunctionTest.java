@@ -1,11 +1,11 @@
-package functions;
+package org.acme.function;
 
-import io.quarkus.test.junit.QuarkusTest;
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.*;
+
 import org.junit.jupiter.api.Test;
 
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.notNullValue;
-import static io.restassured.RestAssured.given;
+import io.quarkus.test.junit.QuarkusTest;
 
 @QuarkusTest
 public class ToUppercaseFunctionTest {

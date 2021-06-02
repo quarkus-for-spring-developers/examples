@@ -1,7 +1,8 @@
-package functions;
+package org.acme.function;
 
-import functions.domain.Input;
-import functions.domain.Output;
+import org.acme.domain.Input;
+import org.acme.domain.Output;
+
 import io.quarkus.funqy.Context;
 import io.quarkus.funqy.Funq;
 import io.quarkus.funqy.knative.events.CloudEvent;

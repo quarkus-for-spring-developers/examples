@@ -1,4 +1,4 @@
-package functions;
+package org.acme.function;
 
 import io.quarkus.funqy.Funq;
 

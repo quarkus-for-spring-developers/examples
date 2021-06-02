@@ -1,4 +1,4 @@
-package functions.domain;
+package org.acme.domain;
 
 public class Input {
     private String message;
@@ -10,7 +10,7 @@ public class Input {
     }
 
     public String getMessage() {
-        return message;
+        return this.message;
     }
 
     public void setMessage(String message) {
