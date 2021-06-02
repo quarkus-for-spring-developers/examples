@@ -21,11 +21,11 @@ public class GreetingController {
 
 	@GetMapping(path = "/{name}", produces = MediaType.TEXT_PLAIN_VALUE)
 	public Mono<String> greeting(@PathVariable String name) {
-		return greetingGateway.greeting(Mono.justOrEmpty(name));
+		return this.greetingGateway.greeting(Mono.justOrEmpty(name));
 	}
 
 	@GetMapping(path = "/block/{message}", produces = MediaType.TEXT_PLAIN_VALUE)
 	public Mono<String> blockingConsumer(@PathVariable String message) {
-		return Mono.justOrEmpty(greetingGateway.blockingGreeting(message));
+		return Mono.justOrEmpty(this.greetingGateway.blockingGreeting(message));
 	}
 }
