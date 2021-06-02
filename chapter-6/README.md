@@ -8,3 +8,4 @@ All of the examples showcase the exact same use cases as discussed in Chapter 3 
 
 - [Quarkus RESTful application](chapter-6-quarkus-rest/)
 - [Spring on Quarkus JPA application and Service Binding](chapter-6-quarkus-rest-database/)
+- [Quarkus REST application & remote debugging](chapter-6-quarkus-rest-debug/)
