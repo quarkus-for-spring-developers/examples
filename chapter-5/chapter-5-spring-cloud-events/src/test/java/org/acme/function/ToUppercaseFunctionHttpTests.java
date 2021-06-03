@@ -1,4 +1,4 @@
-package org.acme;
+package org.acme.function;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.cloud.function.cloudevent.CloudEventMessageUtils.*;
@@ -8,7 +8,6 @@ import java.util.stream.Stream;
 
 import org.acme.domain.Input;
 import org.acme.domain.Output;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -24,18 +23,17 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-public class SpringCloudEventsApplicationTests {
+public class ToUppercaseFunctionHttpTests {
   @Autowired
-  private TestRestTemplate rest;
+  TestRestTemplate rest;
 
   @ParameterizedTest(name = ParameterizedTest.DISPLAY_NAME_PLACEHOLDER + "[" + ParameterizedTest.INDEX_PLACEHOLDER + "] (" + ParameterizedTest.ARGUMENTS_WITH_NAMES_PLACEHOLDER + ")")
   @MethodSource("toUppercaseFunctionArguments")
-  @DisplayName("toUppercase")
-  public void testUpperCaseJsonInput(String inputText, String expectedOutputText) {
+  public void toUppercase(String inputText, String expectedOutputText) {
     HttpHeaders ceHeaders = new HttpHeaders();
     ceHeaders.add(SPECVERSION, "1.0");
     ceHeaders.add(ID, UUID.randomUUID().toString());
-    ceHeaders.add(TYPE, "com.redhat.faas.springboot.test");
+    ceHeaders.add(TYPE, "com.redhat.faas.springboot.uppercase.test");
     ceHeaders.add(SOURCE, "http://localhost:8080/uppercase");
     ceHeaders.add(SUBJECT, "Convert to UpperCase");
     ceHeaders.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
@@ -45,8 +43,8 @@ public class SpringCloudEventsApplicationTests {
     
     assertThat(response)
       .isNotNull()
-      .extracting(ResponseEntity::getStatusCode)
-      .isEqualTo(HttpStatus.OK);
+      .extracting(ResponseEntity::getStatusCode, re -> re.getHeaders().getContentType())
+      .containsExactly(HttpStatus.OK, MediaType.APPLICATION_JSON);
     
     assertThat(response.getBody())
       .isNotNull()
@@ -64,46 +62,10 @@ public class SpringCloudEventsApplicationTests {
       );
   }
 
-  private static Stream<Arguments> toUppercaseFunctionArguments() {
+  static Stream<Arguments> toUppercaseFunctionArguments() {
     return Stream.of(
       Arguments.of("hello", "HELLO"),
       Arguments.of(null, "NO DATA")
-    );
-  }
-
-  @ParameterizedTest(name = ParameterizedTest.DISPLAY_NAME_PLACEHOLDER + "[" + ParameterizedTest.INDEX_PLACEHOLDER + "] (" + ParameterizedTest.ARGUMENTS_WITH_NAMES_PLACEHOLDER + ")")
-  @MethodSource("healthFunctionArguments")
-  @DisplayName("health")
-  public void health(String probe, String expectedResult) {
-    HttpHeaders ceHeaders = new HttpHeaders();
-    ceHeaders.add(SPECVERSION, "1.0");
-    ceHeaders.add(ID, UUID.randomUUID().toString());
-    ceHeaders.add(TYPE, "com.redhat.faas.springboot.test");
-    ceHeaders.add(SOURCE, "http://localhost:8080/health");
-    ceHeaders.add(SUBJECT, "HealthCheck");
-    ceHeaders.add(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_PLAIN_VALUE);
-
-    HttpEntity<String> request = new HttpEntity<>(probe, ceHeaders);
-    ResponseEntity<String> response = this.rest.postForEntity("/health", request, String.class);
-
-    assertThat(response)
-      .isNotNull()
-      .extracting(
-        ResponseEntity::getStatusCode,
-        ResponseEntity::getBody
-      )
-      .containsExactly(
-        HttpStatus.OK,
-        expectedResult
-      );
-  }
-
-  private static Stream<Arguments> healthFunctionArguments() {
-    return Stream.of(
-      Arguments.of("readiness", "ready"),
-      Arguments.of("liveness", "live"),
-      Arguments.of("somethingelse", "OK"),
-      Arguments.of(null, "OK")
     );
   }
 }

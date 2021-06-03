@@ -31,16 +31,12 @@ public class ToUppercaseFunction implements Function<Message<Input>, Output> {
     Input input = inputMessage.getPayload();
     LOGGER.info("Input: {}", input);
     
-    String outputStr = Optional.ofNullable(input.getInput())
+    String inputStr = input.getInput();
+    String outputStr = Optional.ofNullable(inputStr)
       .map(String::toUpperCase)
       .orElse("NO DATA");
     
     LOGGER.info("Output CE: {}", outputStr);
-    
-    Output output = new Output();
-    output.setInput(input.getInput());
-    output.setOperation(httpHeaders.getFirst(SUBJECT));
-    output.setOutput(outputStr);
-    return output;
+    return new Output(inputStr, httpHeaders.getFirst(SUBJECT), outputStr, null);
   }
 }
