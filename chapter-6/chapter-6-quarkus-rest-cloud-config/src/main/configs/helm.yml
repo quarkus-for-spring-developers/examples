@@ -11,6 +11,10 @@
 #
 config:
   gitUri: https://github.com/ch007m/config-repo
+extraEnv:
+  - name: SPRING_CLOUD_CONFIG_SERVER_GIT_DEFAULT-LABEL
+    value: main
+
 ingress:
   enabled: false
   hosts:
