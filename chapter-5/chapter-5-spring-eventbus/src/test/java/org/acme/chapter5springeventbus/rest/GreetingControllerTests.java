@@ -38,13 +38,16 @@ public class GreetingControllerTests {
 
 	@Test
 	public void blocking() {
+		Mockito.when(this.greetingService.consumeBlocking(Mockito.eq("hi")))
+			.thenReturn("HI");
+
 		this.webTestClient
 			.get()
 			.uri("/async/block/hi")
 			.exchange()
 			.expectStatus().isOk()
 			.expectHeader().contentTypeCompatibleWith(MediaType.TEXT_PLAIN)
-			.expectBody(String.class).isEqualTo("Processing Blocking I/O: hi");
+			.expectBody(String.class).isEqualTo("HI");
 
 		Mockito.verify(this.greetingService).consumeBlocking(Mockito.eq("hi"));
 		Mockito.verifyNoMoreInteractions(this.greetingService);
