@@ -11,3 +11,4 @@ All of the examples showcase the exact same use cases as discussed in Chapter 3 
 - [Quarkus REST application & remote debugging](chapter-6-quarkus-rest-debug/)
 - [Quarkus and remote configuration](chapter-6-quarkus-rest-config/)
 - [Using a Cloud config server](chapter-6-quarkus-rest-cloud-config/)
+- [Monitoring, metrics, distributed traces](chapter-6-quarkus-rest-monitoring/)
