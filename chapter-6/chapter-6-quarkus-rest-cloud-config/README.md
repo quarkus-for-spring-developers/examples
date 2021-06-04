@@ -9,7 +9,7 @@ If you want to learn more about Quarkus, please visit its website: https://quark
 
 If the `helm` tool is installed on your machine, you can deploy the SCC server on a kubernetes cluster
 using the following commands
-```angular2html
+```shell script
 kubectl create ns config-storage
 helm install \
   spring-cloud-config-server kiwigrid/spring-cloud-config-server \
