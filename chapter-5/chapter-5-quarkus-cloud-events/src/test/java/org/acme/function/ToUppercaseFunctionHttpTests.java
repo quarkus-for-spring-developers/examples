@@ -29,7 +29,7 @@ public class ToUppercaseFunctionHttpTests {
 				.header("ce-type", "com.redhat.faas.quarkus.uppercase.test")
 				.header("ce-source", "http://localhost:8080/uppercase")
 				.header("ce-subject", "Convert to UpperCase")
-				.post("/uppercase")
+				.post("/")
 			.then()
 				.statusCode(200)
 				.contentType(ContentType.JSON)

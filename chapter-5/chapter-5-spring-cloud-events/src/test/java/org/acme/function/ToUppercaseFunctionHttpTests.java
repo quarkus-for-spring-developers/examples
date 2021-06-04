@@ -39,7 +39,7 @@ public class ToUppercaseFunctionHttpTests {
     ceHeaders.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
 
     HttpEntity<Input> request = new HttpEntity<>(new Input(inputText), ceHeaders);
-    ResponseEntity<Output> response = this.rest.postForEntity("/uppercase", request, Output.class);
+    ResponseEntity<Output> response = this.rest.postForEntity("/", request, Output.class);
     
     assertThat(response)
       .isNotNull()
