@@ -80,12 +80,12 @@ class FruitResourceTests {
 	@Test
 	public void addFruit() {
 		Mockito.when(this.fruitRepository.persist(Mockito.any(Fruit.class)))
-			.thenReturn(Uni.createFrom().voidItem());
+			.thenReturn(Uni.createFrom().item(new Fruit(1L, "Grapefruit", "Summer fruit")));
 
 		given()
 			.when()
 				.contentType(ContentType.JSON)
-				.body("{\"id\":1,\"name\":\"Grapefruit\",\"description\":\"Summer fruit\"}")
+				.body("{\"name\":\"Grapefruit\",\"description\":\"Summer fruit\"}")
 				.post("/fruits")
 			.then()
 				.statusCode(200)

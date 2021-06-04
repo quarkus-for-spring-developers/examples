@@ -46,9 +46,6 @@ public class FruitResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Uni<Fruit> addFruit(@Valid Fruit fruit) {
-		return Panache.withTransaction(() ->
-			this.fruitRepository.persist(fruit)
-				.replaceWith(fruit)
-		);
+		return Panache.withTransaction(() -> this.fruitRepository.persist(fruit));
 	}
 }
