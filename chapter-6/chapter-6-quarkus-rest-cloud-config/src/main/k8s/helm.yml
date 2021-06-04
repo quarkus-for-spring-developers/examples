@@ -1,0 +1,26 @@
+#
+# Helm chart to install the Spring Cloud Config server
+# Commands to be executed
+# kubectl create ns config-storage
+# helm install \
+#    spring-cloud-config-server kiwigrid/spring-cloud-config-server \
+#    -n config-storage \
+#    -f src/main/configs/helm.yml
+#
+# helm delete spring-cloud-config-server -n config-storage
+#
+config:
+  # gitUri: https://github.com/quarkus-for-spring-developers/examples.git
+  gitUri: https://github.com/ch007m/config-repo.git
+  gitSearchpath: chapter-6
+extraEnv:
+  - name: SPRING_CLOUD_CONFIG_SERVER_GIT_DEFAULT-LABEL
+    value: main
+
+# ingress:
+#   enabled: false
+#   hosts:
+#     - host: spring-cloud-config.127.0.0.1.nip.io
+#       paths:
+#         - /
+#
