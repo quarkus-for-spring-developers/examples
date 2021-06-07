@@ -21,7 +21,7 @@ helm install \
 
 ## Package the application
 
-Package the application and build/psuh the container image to docker hub, quay.io, ... using the following command
+Package the application and build/push the container image to docker hub, quay.io, ... using the following command
 ```shell script
 ./mvnw clean package
 ```
@@ -31,11 +31,11 @@ Package the application and build/psuh the container image to docker hub, quay.i
 Deploy the application
 ```bash
 kubectl create ns quarkus-demo-cloud-config
-kubectl applys -f ./target/kubernetes/kubernetes.yml -n quarkus-demo-cloud-config
+kubectl apply -f ./target/kubernetes/kubernetes.yml -n quarkus-demo-cloud-config
 ```
 
 Access it using your browser pointing to the following url `http://chapter-6-quarkus-rest-cloud-config.127.0.0.1.nip.io`
-**WARNIN**: Change the domain name using the Ingress or OpenShift route address
+**WARNING**: Change the domain name using the Ingress or OpenShift route address
 
 ## Alternative
 
