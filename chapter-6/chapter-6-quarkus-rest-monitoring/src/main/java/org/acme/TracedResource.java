@@ -16,9 +16,11 @@ import org.jboss.logging.Logger;
 public class TracedResource {
 
     private static final Logger LOG = Logger.getLogger(TracedResource.class);
+    private final FrancophoneService exampleBean;
 
-    @Inject
-    FrancophoneService exampleBean;
+    public TracedResource(FrancophoneService exampleBean) {
+        this.exampleBean = exampleBean;
+    }
 
     @Context
     private UriInfo uriInfo;
