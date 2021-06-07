@@ -12,15 +12,25 @@ Package the application and build/push the container image to docker hub, quay.i
 ./mvnw clean package
 ```
 
-## Running the application in dev mode
+## Deploy the application on the Kubernetes platform
 
-You can run your application in dev mode that enables live coding using:
-```shell script
-./mvnw compile quarkus:dev
+Deploy the application
+```bash
+kubectl create ns quarkus-demo-debug
+kubectl apply -f ./target/kubernetes/kubernetes.yml -n quarkus-demo-debug
 ```
+Access it using your browser pointing to the following url `http://chapter-6-quarkus-rest-debug.127.0.0.1.nip.io`
+**WARNING**: Change the domain name using the Ingress or OpenShift route address
 
-> **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at http://localhost:8080/q/dev/.
+## Launch the application locally
 
-## Packaging and running the application
-
-Next, check the URL of the “Hello” endpoint within your browser to see if your remote application is alive and replies  “http://chapter-6-quarkus-rest-debug.127.0.0.1.nip.io/hello”
+- Launch locally your quarkus application containing the code that you would like to verify or change remotely
+```bash
+./mvnw quarkus:remote-dev
+```
+- Do some code changes: java classes, ...
+- As soon as the code has been recompiled, it will be pushed to the remote application running as a linux container within a pod
+```bash
+2021-06-02 09:56:25,322 INFO  [io.qua.ver.htt.dep.dev.HttpRemoteDevClient] (Remote dev client thread) Sending dev/app/org/acme/GreeterResource.class
+```
+- Check again the response using the URL of the endpoint ;-)
