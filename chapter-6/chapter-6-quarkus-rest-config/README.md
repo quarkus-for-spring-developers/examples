@@ -13,6 +13,30 @@ Package the application and build/push the container image to docker hub, quay.i
 ./mvnw clean package
 ```
 
+## Using ConfigMap
+
+If you plan to use a ConfiMap or Secret, then it is needed to :
+
+- Create a file which contains the properties locally (e.g src/main/configs/greeting-env).
+  ```
+greeting.message=Hello configmap
+greeting.name=quarkus
+- The 2 properties should be removed too from the `application.properties` file
+- Next, you can create a `ConfigMap` using the content of this file with the help of this command: 
+```bash
+kubectl create -n quarkus-demo-config configmap greeting-map --from-env-file=src/main/configs/greeting-env
+```
+- To generate the proper Kubernetes Deployment MANIFEST, we will use a different property able to generate the field `envFrom` using as `configMapRef`.
+- So comment within the properties file the following properties
+```
+#quarkus.kubernetes.env.vars."greeting.message"=Hello from Kubernetes to
+#quarkus.kubernetes.env.vars."greeting.name"=Quarkus developers
+```
+- And add this one 
+```
+quarkus.kubernetes.env.configmaps=greeting-map
+```
+
 ## Deploy the application on the Kubernetes platform
 
 Deploy the application
