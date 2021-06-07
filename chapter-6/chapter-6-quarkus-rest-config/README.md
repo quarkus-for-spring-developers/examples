@@ -15,7 +15,7 @@ Package the application and build/push the container image to docker hub, quay.i
 
 ## Using ConfigMap
 
-If you plan to use a ConfiMap or Secret, then it is needed to :
+If you plan to use a ConfigMap or Secret, then it is needed to :
 
 - Create a file which contains the properties locally (e.g src/main/configs/greeting-env).
   ```
