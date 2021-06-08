@@ -6,7 +6,7 @@ This directory contains example projects used in chapter 6 `Quarkus and the Clou
 
 - [Quarkus RESTful application](chapter-6-quarkus-rest/)
 - [Spring on Quarkus JPA application and Service Binding](chapter-6-quarkus-rest-database/)
-- [Quarkus REST application & remote debugging](chapter-6-quarkus-rest-debug/)
-- [Quarkus and remote configuration](chapter-6-quarkus-rest-config/)
+- [Quarkus REST application & remote developing](chapter-6-quarkus-rest-debug/)
+- [Quarkus and configuration externalized](chapter-6-quarkus-rest-config/)
 - [Using a Cloud config server](chapter-6-quarkus-rest-cloud-config/)
 - [Monitoring, metrics, distributed traces](chapter-6-quarkus-rest-monitoring/)
