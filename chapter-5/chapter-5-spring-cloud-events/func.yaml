@@ -7,4 +7,5 @@ trigger: events
 builder: quay.io/boson/faas-springboot-builder
 builderMap:
   default: quay.io/boson/faas-springboot-builder
-envVars: {}
+env: {}
+annotations: {}
