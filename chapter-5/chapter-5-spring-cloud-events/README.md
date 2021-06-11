@@ -18,8 +18,6 @@ To run tests locally run `./mvnw test`.
 
 The [func CLI](https://github.com/boson-project/func) is a new open source client library and command-line interface tool for the development of platform-agnostic functions on any Kubernetes cluster. Install the [func tool](https://github.com/boson-project/func/blob/main/docs/installing_cli.md) on your OS (e.g. Linux, macOS, and Windows). Then make sure to log in to a Kubernetes cluster where you need to deploy the function.
 
-This command will build and deploy the function into cluster.
-
 It's recommended to set `FUNC_REGISTRY` environment variable.
 
 ```shell script
@@ -47,6 +45,8 @@ func run
 ```
 
 ### Deploying
+
+This command will build and deploy the function into cluster.
 
 ```shell script
 func deploy -v # also triggers build
