@@ -37,7 +37,7 @@ curl -v ${URL} \
   -H "Ce-Source:cloud-event-example" \
   -H "Ce-Type:dev.knative.example" \
   -H "Ce-Specversion:1.0" \
-  -d "{\"message\": \"hello\"}\""
+  -d "{\"input\": \"hello\"}\""
 ```
 
 ### HTTPie
@@ -50,13 +50,13 @@ http -v ${URL} \
   Ce-Source:cloud-event-example \
   Ce-Type:dev.knative.example \
   Ce-Specversion:1.0 \
-  message=hello
+  input=hello
 ```
 
 Then, you should see the similar logs below:
 
 ```
-{"message":"HELLO"}
+{"input":"HELLO"}
 ```
 
 ## Deploying your function to Kubernetes via func CLI
