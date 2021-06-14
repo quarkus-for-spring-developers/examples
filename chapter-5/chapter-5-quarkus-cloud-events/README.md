@@ -53,10 +53,15 @@ http -v ${URL} \
   input=hello
 ```
 
-Then, you should see the similar logs below:
+Then, you should see the similar output below:
 
 ```
-{"input":"HELLO"}
+{
+    "error": null,
+    "input": "hello",
+    "operation": null,
+    "output": "HELLO"
+}
 ```
 
 ## Deploying your function to Kubernetes via func CLI

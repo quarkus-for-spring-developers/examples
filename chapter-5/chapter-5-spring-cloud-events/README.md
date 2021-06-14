@@ -76,33 +76,38 @@ export URL=$(kn service describe $(basename $PWD) -ourl)
 ### cURL
 
 ```shell script
-curl -v "$URL/uppercase" \
+URL=http://localhost:8080/
+curl -v ${URL} \
   -H "Content-Type:application/json" \
   -H "Ce-Id:1" \
-  -H "Ce-Subject:Uppercase" \
   -H "Ce-Source:cloud-event-example" \
   -H "Ce-Type:dev.knative.example" \
   -H "Ce-Specversion:1.0" \
-  -d "{\"input\": \"$(whoami)\"}\""
+  -d "{\"input\": \"hello\"}\""
 ```
 
 ### HTTPie
 
 ```shell script
-http -v "$URL/uppercase" \
+URL=http://localhost:8080/
+http -v ${URL} \
   Content-Type:application/json \
   Ce-Id:1 \
-  Ce-Subject:Uppercase \
   Ce-Source:cloud-event-example \
   Ce-Type:dev.knative.example \
   Ce-Specversion:1.0 \
-  input=$(whoami)
+  input=hello
 ```
 
-Then, you should see the similar logs below:
+Then, you should see the similar output below:
 
 ```
-{"input":"danieloh","operation":"Uppercase","output":"DANIELOH","error":null}
+{
+    "error": null,
+    "input": "hello",
+    "operation": null,
+    "output": "HELLO"
+}
 ```
 
 ## Cleanup
