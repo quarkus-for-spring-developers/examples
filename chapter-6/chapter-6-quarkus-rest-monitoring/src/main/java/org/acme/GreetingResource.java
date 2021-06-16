@@ -8,17 +8,17 @@ import io.micrometer.core.instrument.MeterRegistry;
 import io.micrometer.core.instrument.Tags;
 
 @Path("/hello")
-public class GreetingResource extends RegisterMeterRegistry {
+public class GreetingResource {
+    private final MeterRegistry registry;
 
     public GreetingResource(MeterRegistry registry) {
-        super(registry);
+        this.registry = registry;
     }
 
     @GET
     @Path("/{name}")
     public String sayHello(@PathParam(value = "name") String name) {
-        registry.counter("greeting_counter", Tags.of("name", name)).increment();
-
+        this.registry.counter("greeting_counter", Tags.of("name", name)).increment();
         return "Hello!";
     }
 }
