@@ -23,9 +23,6 @@ public class TracedResource {
         this.exampleBean = exampleBean;
     }
 
-    @Context
-    private UriInfo uriInfo;
-
     @GET
     @Path("/hello")
     @Produces(MediaType.TEXT_PLAIN)
@@ -37,9 +34,9 @@ public class TracedResource {
     @GET
     @Path("/chain")
     @Produces(MediaType.TEXT_PLAIN)
-    public Uni<String> chain() {
+    public Uni<String> chain(@Context UriInfo uriInfo) {
         return ClientBuilder.newClient()
-          .target(this.uriInfo.getBaseUriBuilder().path("/hello/hh"))
+          .target(uriInfo.getBaseUriBuilder().path("/hello/hh"))
           .request()
           .rx(UniInvoker.class)
           .get(String.class)
