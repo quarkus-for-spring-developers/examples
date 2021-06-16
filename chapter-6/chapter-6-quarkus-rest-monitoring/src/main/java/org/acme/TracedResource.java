@@ -1,16 +1,17 @@
 package org.acme;
 
-import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriInfo;
 
-import org.eclipse.microprofile.rest.client.RestClientBuilder;
-
 import org.jboss.logging.Logger;
+import org.jboss.resteasy.reactive.client.impl.UniInvoker;
+
+import io.smallrye.mutiny.Uni;
 
 @Path("/")
 public class TracedResource {
@@ -36,10 +37,12 @@ public class TracedResource {
     @GET
     @Path("/chain")
     @Produces(MediaType.TEXT_PLAIN)
-    public String chain() {
-        GreetingResource resourceClient = RestClientBuilder.newBuilder()
-                .baseUri(uriInfo.getBaseUri())
-                .build(GreetingResource.class);
-        return "chain -> " + exampleBean.bonjour() + " -> " + resourceClient.sayHello("hh");
+    public Uni<String> chain() {
+        return ClientBuilder.newClient()
+          .target(this.uriInfo.getBaseUriBuilder().path("/hello/hh"))
+          .request()
+          .rx(UniInvoker.class)
+          .get(String.class)
+          .onItem().transform(response -> "chain -> " + this.exampleBean.bonjour() + " -> " + response);
     }
 }
