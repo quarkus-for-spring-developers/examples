@@ -19,7 +19,7 @@ Deploy the application
 kubectl create ns quarkus-demo-debug
 kubectl apply -f ./target/kubernetes/kubernetes.yml -n quarkus-demo-debug
 ```
-Access it using your browser pointing to the following url `http://chapter-6-quarkus-rest-debug.127.0.0.1.nip.io`
+Access it using your browser pointing to the following url `http://chapter-6-quarkus-rest-debug.127.0.0.1.nip.io/hello`
 **WARNING**: Change the domain name using the Ingress or OpenShift route address
 
 ## Launch the application locally
