@@ -18,12 +18,14 @@ Package the application and build/push the container image to docker hub, quay.i
 If you plan to use a ConfigMap or Secret, then it is needed to :
 
 - Create a file which contains the properties locally (e.g src/main/configs/greeting-env).
-  ```
+```
 greeting.message=Hello configmap
 greeting.name=quarkus
+```
 - The 2 properties should be removed too from the `application.properties` file
 - Next, you can create a `ConfigMap` using the content of this file with the help of this command: 
 ```bash
+kubectl create ns quarkus-demo-config
 kubectl create -n quarkus-demo-config configmap greeting-map --from-env-file=src/main/configs/greeting-env
 ```
 - To generate the proper Kubernetes Deployment MANIFEST, we will use a different property able to generate the field `envFrom` using as `configMapRef`.
@@ -41,8 +43,7 @@ quarkus.kubernetes.env.configmaps=greeting-map
 
 Deploy the application
 ```bash
-kubectl create ns quarkus-demo-config
 kubectl apply -f ./target/kubernetes/kubernetes.yml -n quarkus-demo-config
 ```
-Access it using your browser pointing to the following url `http://chapter-6-quarkus-rest-config.127.0.0.1.nip.io`
+Access it using your browser pointing to the following url `http://chapter-6-quarkus-rest-config.127.0.0.1.nip.io/hello`
 **WARNING**: Change the domain name using the Ingress or OpenShift route address
