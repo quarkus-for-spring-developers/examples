@@ -29,8 +29,8 @@ Access it using your browser pointing to the following url `http://chapter-6-qua
 ./mvnw quarkus:remote-dev
 ```
 - Do some code changes: java classes, ...
-- As soon as the code has been recompiled, it will be pushed to the remote application running as a linux container within a pod
+- Check again the response using the URL of the endpoint ;-). This new request triggers the recompilation of the code as can be seen in the console output:
 ```bash
 2021-06-02 09:56:25,322 INFO  [io.qua.ver.htt.dep.dev.HttpRemoteDevClient] (Remote dev client thread) Sending dev/app/org/acme/GreeterResource.class
 ```
-- Check again the response using the URL of the endpoint ;-)
+As soon as the code has been recompiled, it will be pushed to the remote application running as a linux container within a pod
