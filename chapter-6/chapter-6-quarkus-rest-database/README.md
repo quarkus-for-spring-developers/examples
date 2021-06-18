@@ -41,5 +41,5 @@ kubectl apply -n quarkus-demo-db -f ./k8s/service-binding-secret.yaml
 ```bash
 kubectl apply -f ./target/kubernetes/kubernetes.yml -n quarkus-demo-db
 ```
-Access it using your browser pointing to the following url `http://chapter-6-quarkus-rest-database.127.0.0.1.nip.io`
+Access it using your browser pointing to the following url `http://chapter-6-quarkus-rest-database.127.0.0.1.nip.io/api/fruits`
 **WARNING**: Change the domain name using the Ingress or OpenShift route address
