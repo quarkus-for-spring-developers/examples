@@ -11,7 +11,6 @@ import javax.validation.constraints.NotBlank;
 @Entity
 @Table(name = "fruits")
 public class Fruit {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -19,7 +18,7 @@ public class Fruit {
     @Column(nullable = false, unique = true)
     @NotBlank(message = "Name is mandatory")
     private String name;
-    public String description;
+    private String description;
 
     public Fruit() {
     }
@@ -35,7 +34,7 @@ public class Fruit {
     }
 
     public Long getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(Long id) {
@@ -43,10 +42,18 @@ public class Fruit {
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
