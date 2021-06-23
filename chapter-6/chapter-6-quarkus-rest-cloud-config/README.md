@@ -17,6 +17,7 @@ helm install \
   -n config-storage \
   -f src/main/k8s/helm.yml
 ```
+**NOTE**: You may need to add the Kiwigrid Helm repository to your repositories. You can do it by running the following command:   `helm repo add kiwigrid https://kiwigrid.github.io`
 **NOTE**: The SCC server can be removed using the command `helm delete spring-cloud-config-server -n config-storage`
 
 ## Package the application
