@@ -17,10 +17,10 @@ public class TracedResourceTest {
     @Test
     public void testHelloEndpoint() {
         given()
-                .when().get("/hello/quarkus")
+                .when().get("/traced/hello")
                 .then()
                 .statusCode(200)
-                .body(is("Hello!"));
+                .body(is("hello"));
     }
 
     @Test
@@ -29,7 +29,7 @@ public class TracedResourceTest {
           .thenReturn("bonjour");
 
         given()
-          .when().get("/chain")
+          .when().get("/traced/chain")
           .then()
           .statusCode(200)
           .body(is("chain -> bonjour -> Hello!"));
