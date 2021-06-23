@@ -13,7 +13,7 @@ import org.jboss.resteasy.reactive.client.impl.UniInvoker;
 
 import io.smallrye.mutiny.Uni;
 
-@Path("/")
+@Path("/traced")
 public class TracedResource {
 
     private static final Logger LOG = Logger.getLogger(TracedResource.class);
