@@ -13,7 +13,7 @@ Package the application and build/push the container image to docker hub, quay.i
 ./mvnw clean package
 ```
 **NOTE**: Uncomment the `quarkus.container-image*` properties within the `application.properties` file and change the values according to the registry where you will push the image.
-Instead of changing the properties within the `application.properties` file, you can also pass them as such:
+Instead of changing the properties within the file, you can also define them as such:
 
 ```bash
  mvn clean package \
