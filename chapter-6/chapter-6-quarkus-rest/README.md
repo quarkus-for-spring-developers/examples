@@ -35,6 +35,36 @@ Deploy the application
 kubectl create ns quarkus-demo
 kubectl apply -f ./target/kubernetes/kubernetes.yml -n quarkus-demo
 ```
+### Port forwarding
+To access the service running within the Kubernetes, execute the following command respnsible to fowardthe traffic from your locallhost to the 
+proxied service:
+
+```bash
+kubectl port-forward -n quarkus-demo service/chapter-6-quarkus-rest 8888:80
+```
+
+curl or http your service
+```bash
+http :8888/fruits
+
+HTTP/1.1 200 OK
+Content-Type: application/json
+content-length: 99
+
+[
+    {
+        "description": "Winter fruit",
+        "name": "Apple"
+    },
+    {
+        "description": "Tropical fruit",
+        "name": "Pineapple"
+    }
+]
+```
+
+### Using ingress
+
 Access it using your browser pointing to the following url `http://chapter-6-quarkus-rest.127.0.0.1.nip.io/fruits`
 **WARNING**: Change the domain name using the Ingress or OpenShift route address
 
