@@ -24,7 +24,7 @@ You can run your application in dev mode that enables live coding using:
 curl http://localhost:8080/hello/quarkus
 ```
 - It should return `Hello!`
-- So good so far, we can also see the metrics at the following url `http://localhost:8080/q/metrics` where you should see the `greeting_counter counter`
+- So far so good, we can also see the metrics at the following url `http://localhost:8080/q/metrics` where you should see the `greeting_counter counter`
 ```
 # HELP greeting_counter_total
 # TYPE greeting_counter_total counter
@@ -44,6 +44,6 @@ docker run -p 5775:5775/udp -p 6831:6831/udp -p 6832:6832/udp -p 5778:5778 -p 16
 - Once both the application and tracing system are started, you can make a request to the provided endpoint:
 ```
 $ curl http://localhost:8080/hello/quarkus
-hello
+Hello!
 ```
 - Then visit the Jaeger UI `http://localhost:16686/` to see the tracing information.
