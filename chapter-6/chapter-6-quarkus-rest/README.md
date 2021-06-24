@@ -13,6 +13,18 @@ Package the application and build/push the container image to docker hub, quay.i
 ```
 **NOTE**: Uncomment the `quarkus.container-image` properties and change the values according to the registry where you will push the image
 
+Instead of changing the `quarkus.container-image*` properties within the `application.properties` file, you can also pass the parameters as such:
+```bash
+ mvn clean package \
+    -Dquarkus.container-image.registry=localhost:5000 \
+    -Dquarkus.container-image.group=quarkus \
+    -Dquarkus.container-image.tag=1.0 \
+    -Dquarkus.container-image.build=true \
+    -Dquarkus.container-image.push=true \
+    -Dquarkus.container-image.insecure=true \
+    -Dquarkus.container-image.name=chapter-6-quarkus-rest
+```
+
 ## Deploy the application on the Kubernetes platform
 
 Deploy the application
@@ -22,4 +34,36 @@ kubectl apply -f ./target/kubernetes/kubernetes.yml -n quarkus-demo
 ```
 Access it using your browser pointing to the following url `http://chapter-6-quarkus-rest.127.0.0.1.nip.io/fruits`
 **WARNING**: Change the domain name using the Ingress or OpenShift route address
+
+curl or http your service
+```bash
+http http://chapter-6-quarkus-rest.127.0.0.1.nip.io/fruits
+HTTP/1.1 200 OK
+Connection: keep-alive
+Content-Length: 99
+Content-Type: application/json
+Date: Thu, 24 Jun 2021 16:23:12 GMT
+
+[
+    {
+        "description": "Winter fruit",
+        "name": "Apple"
+    },
+    {
+        "description": "Tropical fruit",
+        "name": "Pineapple"
+    }
+]
+```
+
+## Clean up
+```bash
+kubectl delete deployment,service,ingress --all -n quarkus-demo
+deployment.apps "chapter-6-quarkus-rest" deleted
+service "chapter-6-quarkus-rest" deleted
+ingress.networking.k8s.io "chapter-6-quarkus-rest" deleted
+
+kubectl delete ns quarkus-demo
+namespace "quarkus-demo" deleted
+```
 
