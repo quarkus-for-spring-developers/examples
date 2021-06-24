@@ -25,6 +25,7 @@ Package the application and build/push the container image to docker hub, quay.i
 ```shell script
 ./mvnw clean package
 ```
+**NOTE**: Uncomment the `quarkus.container-image` properties and change the values according to the registry where you will push the image
 
 ## Deploy the application on the Kubernetes platform
 

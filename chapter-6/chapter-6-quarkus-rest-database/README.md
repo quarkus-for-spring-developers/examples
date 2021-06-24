@@ -20,7 +20,9 @@ You can run your application in dev mode that enables live coding using:
 ```shell script
 ./mvnw compile quarkus:dev
 ```
-> **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at http://localhost:8080/q/dev/.
+**NOTE**  Quarkus now ships with a Dev UI, which is available in dev mode only at http://localhost:8080/q/dev/.
+
+**NOTE**: Uncomment the `quarkus.container-image` properties and change the values according to the registry where you will push the image
 
 When started, open the index page to create some `Fruits` and enjoy !
 
