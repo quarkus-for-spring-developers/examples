@@ -8,6 +8,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriInfo;
 
+import io.micrometer.core.annotation.Counted;
 import org.jboss.logging.Logger;
 import org.jboss.resteasy.reactive.client.impl.UniInvoker;
 
@@ -26,6 +27,7 @@ public class TracedResource {
     @GET
     @Path("/hello")
     @Produces(MediaType.TEXT_PLAIN)
+    @Counted
     public String hello() {
         LOG.info("hello");
         return "hello";
