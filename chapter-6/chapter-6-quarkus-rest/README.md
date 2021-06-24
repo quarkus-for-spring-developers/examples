@@ -92,6 +92,8 @@ Date: Thu, 24 Jun 2021 16:23:12 GMT
 ## Clean up
 ```bash
 kubectl delete deployment,service,ingress --all -n quarkus-demo
+or 
+kubectl apply -f ./target/kubernetes/kubernetes.yml -n quarkus-demo
 deployment.apps "chapter-6-quarkus-rest" deleted
 service "chapter-6-quarkus-rest" deleted
 ingress.networking.k8s.io "chapter-6-quarkus-rest" deleted
