@@ -17,10 +17,9 @@ extraEnv:
   - name: SPRING_CLOUD_CONFIG_SERVER_GIT_DEFAULT-LABEL
     value: main
 
-# ingress:
-#   enabled: false
-#   hosts:
-#     - host: spring-cloud-config.127.0.0.1.nip.io
-#       paths:
-#         - /
-#
+#ingress:
+#  enabled: true
+#  hosts:
+#    - host: spring-cloud-config.127.0.0.1.nip.io
+#      paths:
+#        - /
