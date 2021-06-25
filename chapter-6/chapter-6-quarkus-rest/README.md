@@ -16,7 +16,7 @@ Package the application and build/push the container image to docker hub, quay.i
 Instead of changing the properties within the file, you can also define them as such:
 
 ```bash
- mvn clean package \
+./mvnw clean package \
     -Dquarkus.container-image.registry=localhost:5000 \
     -Dquarkus.container-image.group=quarkus \
     -Dquarkus.container-image.tag=1.0 \
@@ -90,7 +90,7 @@ Date: Thu, 24 Jun 2021 16:23:12 GMT
 ## Clean up
 ```bash
 NAMESPACE=quarkus-demo
-kubectl apply -f ./target/kubernetes/kubernetes.yml -n $NAMESPACE
+kubectl delete -f ./target/kubernetes/kubernetes.yml -n $NAMESPACE
 kubectl delete ns $NAMESPACE
 ```
 
