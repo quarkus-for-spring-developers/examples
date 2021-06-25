@@ -2,8 +2,11 @@
 
 This directory contains the examples used within the chapter 6 `Quarkus and the Cloud`.
 
-They have been played successfully using a kubernetes cluster `1.21` created with the 
-Tool [Kind](https://kind.sigs.k8s.io/) which runs the cluster using Docker.
+They have been played successfully using a kubernetes cluster `1.21`. The cluster has been created using the 
+tool [Kind](https://kind.sigs.k8s.io/) which uses a Docker container as kubernetes `node`. 
+
+To install it on your laptop, feel free to use our bash script available [here](https://github.com/snowdrop/k8s-infra/blob/master/kind/kind-reg-ingress.sh).
+It will install and/or delete a cluster, runs a docker local registry, install the Ingress controller and configure some `NodePorts` needed for the remote debugging example.
 
 ## Examples List
 
