@@ -64,9 +64,9 @@ For local tests, you can launch the SCC server using docker
 
 ```bash
 docker run -it -p 8888:8888 \
-      -e SPRING_CLOUD_CONFIG_SERVER_GIT_URI=https://github.com/ch007m/config-repo \
+      -e SPRING_CLOUD_CONFIG_SERVER_GIT_URI=https://github.com/quarkus-for-spring-developers/sccs-config-repo \
       -e SPRING_CLOUD_CONFIG_SERVER_GIT_DEFAULT-LABEL=main \
-      -e SPRING_CLOUD_CONFIG_SERVER_GIT_SEARCHPATHS=chapter-6 \
+      -e SPRING_CLOUD_CONFIG_SERVER_GIT_SEARCHPATHS={application} \
       hyness/spring-cloud-config-server
 ```
 
