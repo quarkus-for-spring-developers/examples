@@ -30,7 +30,7 @@ class Chapter5SpringKafkaStreamsApplicationTests extends DockerComposeBase {
 			.getResponseBody()
 			.take(3)
 			.collectList()
-			.block(Duration.ofSeconds(20));
+			.block(Duration.ofSeconds(45));
 
 		assertThat(emittedPrices)
 			.isNotNull()
