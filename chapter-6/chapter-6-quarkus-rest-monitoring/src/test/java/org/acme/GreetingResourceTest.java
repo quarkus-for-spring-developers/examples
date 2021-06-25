@@ -23,6 +23,6 @@ class GreetingResourceTest {
 			.get("/q/metrics")
 			.then()
 				.statusCode(200)
-				.body(containsString("greeting_counter_total{name=\"hh\",} 1.0"));
+				.body(containsString("greeting_counter_total{name=\"hh\",}"));
 	}
 }
