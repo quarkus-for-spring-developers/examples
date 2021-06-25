@@ -38,3 +38,10 @@ Access it using your browser pointing to the following url `http://chapter-6-qua
 2021-06-02 09:56:25,322 INFO  [io.qua.ver.htt.dep.dev.HttpRemoteDevClient] (Remote dev client thread) Sending dev/app/org/acme/GreeterResource.class
 ```
 As soon as the code has been recompiled, it will be pushed to the remote application running as a linux container within a pod
+
+## Clean up
+```bash
+NAMESPACE=quarkus-demo-debug
+kubectl apply -f ./target/kubernetes/kubernetes.yml -n $NAMESPACE
+kubectl delete ns $NAMESPACE
+```

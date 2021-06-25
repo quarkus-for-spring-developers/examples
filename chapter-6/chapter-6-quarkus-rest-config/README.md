@@ -51,3 +51,10 @@ kubectl apply -f ./target/kubernetes/kubernetes.yml -n quarkus-demo-config
 ```
 Access it using your browser pointing to the following url `http://chapter-6-quarkus-rest-config.127.0.0.1.nip.io/hello`
 **WARNING**: Change the domain name using the Ingress or OpenShift route address
+
+## Clean up
+```bash
+NAMESPACE=quarkus-demo-config
+kubectl apply -f ./target/kubernetes/kubernetes.yml -n $NAMESPACE
+kubectl delete ns $NAMESPACE
+```

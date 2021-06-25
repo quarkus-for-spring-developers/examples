@@ -60,3 +60,10 @@ to access the SCC server locally
 ```bash
 ./mvnw quarkus:dev -Dquarkus.spring-cloud-config.url=http://localhost:8888
 ```
+
+## Clean up
+```bash
+NAMESPACE=quarkus-demo-cloud-config
+kubectl apply -f ./target/kubernetes/kubernetes.yml -n $NAMESPACE
+kubectl delete ns $NAMESPACE
+```
