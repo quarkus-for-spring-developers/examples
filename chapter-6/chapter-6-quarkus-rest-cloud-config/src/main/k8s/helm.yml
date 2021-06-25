@@ -2,6 +2,7 @@
 # Helm chart to install the Spring Cloud Config server
 # Commands to be executed
 # kubectl create ns config-storage
+# helm repo add kiwigrid https://kiwigrid.github.io
 # helm install \
 #    spring-cloud-config-server kiwigrid/spring-cloud-config-server \
 #    -n config-storage \
@@ -16,10 +17,3 @@ config:
 extraEnv:
   - name: SPRING_CLOUD_CONFIG_SERVER_GIT_DEFAULT-LABEL
     value: main
-
-#ingress:
-#  enabled: true
-#  hosts:
-#    - host: spring-cloud-config.127.0.0.1.nip.io
-#      paths:
-#        - /
