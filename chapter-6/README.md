@@ -1,6 +1,6 @@
-# Chapter 6 - Quarkus and the Cloud
+# Chapter 6 - Building Applications for the Cloud
 
-This directory contains the examples used within the chapter 6 `Quarkus and the Cloud`.
+This directory contains the examples used within the chapter 6 `Building Applications for the Cloud`.
 
 They have been played successfully using a kubernetes cluster `1.21`. The cluster has been created using the 
 tool [Kind](https://kind.sigs.k8s.io/) which uses a Docker container as kubernetes `node`. 
