@@ -63,8 +63,24 @@ content-length: 99
 
 ### Using ingress
 
-Access it using your browser pointing to the following url `http://chapter-6-quarkus-rest.127.0.0.1.nip.io/fruits`
-**WARNING**: Change the domain name using the Ingress or OpenShift route address
+Uncomment the following properties within the `application.properties` file.
+```
+quarkus.kubernetes.ingress.expose=true
+quarkus.kubernetes.ingress.host=chapter-6-quarkus-rest.127.0.0.1.nip.io
+```
+**WARNING**: Change the IP address of the host depending the cluster used: kind, minikube, ...
+
+Recompile
+```bash
+./mvnw clean package ....
+```
+
+Redeploy the project
+```bash
+kubectl delete -f ./target/kubernetes/kubernetes.yml -n quarkus-demo
+kubectl apply -f ./target/kubernetes/kubernetes.yml -n quarkus-demo
+```
+Next, access the service using your browser pointing to the following url `http://chapter-6-quarkus-rest.127.0.0.1.nip.io/fruits`
 
 curl or http your service
 ```bash
