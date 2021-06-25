@@ -1,3 +1,5 @@
+[![Build and test projects](https://github.com/quarkus-for-spring-developers/examples/actions/workflows/build-test-projects.yml/badge.svg)](https://github.com/quarkus-for-spring-developers/examples/actions/workflows/build-test-projects.yml)
+
 # Examples
 Example code for the Quarkus for Spring Developers eBook. Code is organized by chapter. Each project is self-contained, meaning there is no parent/child structure amongst projects.
 
