@@ -11,7 +11,7 @@ It will install and/or delete a cluster, runs a docker local registry, install t
 ## Examples
 
 - [Quarkus RESTful application](chapter-6-quarkus-rest/)
-- [Quarkus Hibernate ORM application and Service Binding](chapter-6-quarkus-rest-database/)
+- [Quarkus Hibernate & PostgreSQL application using Service Binding](chapter-6-quarkus-rest-database/)
 - [Quarkus REST application & remote developing](chapter-6-quarkus-rest-debug/)
 - [Quarkus and configuration externalized](chapter-6-quarkus-rest-config/)
 - [Using a Cloud config server](chapter-6-quarkus-rest-cloud-config/)
