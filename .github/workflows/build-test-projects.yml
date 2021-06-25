@@ -1,6 +1,3 @@
-# This workflow will build a Java project with Maven
-# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
-
 name: Build and test projects
 
 on:
@@ -19,7 +16,7 @@ jobs:
       with:
         java-version: '11'
         distribution: 'adopt'
-    - name: Build
+    - name: mvn clean verify
       working-directory: chapter-2/chapter-2-simple-project
       run: ./mvnw -B clean verify
 
@@ -32,7 +29,7 @@ jobs:
       with:
         java-version: '11'
         distribution: 'adopt'
-    - name: Build
+    - name: mvn clean verify
       working-directory: chapter-3/chapter-3-quarkus-rest-json
       run: ./mvnw -B clean verify
         
@@ -45,7 +42,7 @@ jobs:
       with:
         java-version: '11'
         distribution: 'adopt'
-    - name: Build
+    - name: mvn clean verify
       working-directory: chapter-3/chapter-3-spring-rest-json
       run: ./mvnw -B clean verify
 
@@ -58,7 +55,7 @@ jobs:
       with:
         java-version: '11'
         distribution: 'adopt'
-    - name: Build
+    - name: mvn clean verify
       working-directory: chapter-3/chapter-3-spring-webflux-rest-json
       run: ./mvnw -B clean verify
 
@@ -71,6 +68,227 @@ jobs:
       with:
         java-version: '11'
         distribution: 'adopt'
-    - name: Build
+    - name: mvn clean verify
       working-directory: chapter-4/chapter-4-quarkus-panache-activerecord
+      run: ./mvnw -B clean verify
+
+  build-chapter-4-quarkus-panache-reactive-activerecord:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up JDK 11
+      uses: actions/setup-java@v2
+      with:
+        java-version: '11'
+        distribution: 'adopt'
+    - name: mvn clean verify
+      working-directory: chapter-4/chapter-4-quarkus-panache-reactive-activerecord
+      run: ./mvnw -B clean verify
+      
+  build-chapter-4-quarkus-panache-reactive-repository:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up JDK 11
+      uses: actions/setup-java@v2
+      with:
+        java-version: '11'
+        distribution: 'adopt'
+    - name: mvn clean verify
+      working-directory: chapter-4/chapter-4-quarkus-panache-reactive-repository
+      run: ./mvnw -B clean verify
+      
+  build-chapter-4-quarkus-panache-repository:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up JDK 11
+      uses: actions/setup-java@v2
+      with:
+        java-version: '11'
+        distribution: 'adopt'
+    - name: mvn clean verify
+      working-directory: chapter-4/chapter-4-quarkus-panache-repository
+      run: ./mvnw -B clean verify
+      
+  build-chapter-4-spring-data-jpa:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up JDK 11
+      uses: actions/setup-java@v2
+      with:
+        java-version: '11'
+        distribution: 'adopt'
+    - name: mvn clean verify
+      working-directory: chapter-4/chapter-4-spring-data-jpa
+      run: ./mvnw -B clean verify
+      
+  build-chapter-4-spring-data-r2dbc:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up JDK 11
+      uses: actions/setup-java@v2
+      with:
+        java-version: '11'
+        distribution: 'adopt'
+    - name: mvn clean verify
+      working-directory: chapter-4/chapter-4-spring-data-r2dbc
+      run: ./mvnw -B clean verify
+      
+  build-chapter-5-quarkus-cloud-events:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up JDK 11
+      uses: actions/setup-java@v2
+      with:
+        java-version: '11'
+        distribution: 'adopt'
+    - name: mvn clean verify
+      working-directory: chapter-5/chapter-5-quarkus-cloud-events
+      run: ./mvnw -B clean verify
+      
+  build-chapter-5-quarkus-kafka-streams:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up JDK 11
+      uses: actions/setup-java@v2
+      with:
+        java-version: '11'
+        distribution: 'adopt'
+    - name: mvn clean verify
+      working-directory: chapter-5/chapter-5-quarkus-kafka-streams
+      run: ./mvnw -B clean verify
+      
+  build-chapter-5-quarkus-vertx-eventbus:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up JDK 11
+      uses: actions/setup-java@v2
+      with:
+        java-version: '11'
+        distribution: 'adopt'
+    - name: mvn clean verify
+      working-directory: chapter-5/chapter-5-quarkus-vertx-eventbus
+      run: ./mvnw -B clean verify
+
+  build-chapter-5-spring-cloud-events:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up JDK 11
+      uses: actions/setup-java@v2
+      with:
+        java-version: '11'
+        distribution: 'adopt'
+    - name: mvn clean verify
+      working-directory: chapter-5/chapter-5-spring-cloud-events
+      run: ./mvnw -B clean verify
+      
+  build-chapter-5-spring-eventbus:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up JDK 11
+      uses: actions/setup-java@v2
+      with:
+        java-version: '11'
+        distribution: 'adopt'
+    - name: mvn clean verify
+      working-directory: chapter-5/chapter-5-spring-eventbus
+      run: ./mvnw -B clean verify
+      
+  build-chapter-5-spring-kafka-streams:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up JDK 11
+      uses: actions/setup-java@v2
+      with:
+        java-version: '11'
+        distribution: 'adopt'
+    - name: mvn clean verify
+      working-directory: chapter-5/chapter-5-spring-kafka-streams
+      run: ./mvnw -B clean verify
+      
+  build-chapter-6-quarkus-rest-cloud-config:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up JDK 11
+      uses: actions/setup-java@v2
+      with:
+        java-version: '11'
+        distribution: 'adopt'
+    - name: mvn clean verify
+      working-directory: chapter-6/chapter-6-quarkus-rest-cloud-config
+      run: ./mvnw -B clean verify
+      
+  build-chapter-6-quarkus-rest-config:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up JDK 11
+      uses: actions/setup-java@v2
+      with:
+        java-version: '11'
+        distribution: 'adopt'
+    - name: mvn clean verify
+      working-directory: chapter-6/chapter-6-quarkus-rest-config
+      run: ./mvnw -B clean verify
+      
+  build-chapter-6-quarkus-rest-database:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up JDK 11
+      uses: actions/setup-java@v2
+      with:
+        java-version: '11'
+        distribution: 'adopt'
+    - name: mvn clean verify
+      working-directory: chapter-6/chapter-6-quarkus-rest-database
+      run: ./mvnw -B clean verify
+
+  build-chapter-6-quarkus-rest-debug:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up JDK 11
+      uses: actions/setup-java@v2
+      with:
+        java-version: '11'
+        distribution: 'adopt'
+    - name: mvn clean verify
+      working-directory: chapter-6/chapter-6-quarkus-rest-debug
+      run: ./mvnw -B clean verify
+
+  build-chapter-6-quarkus-rest-monitoring:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up JDK 11
+      uses: actions/setup-java@v2
+      with:
+        java-version: '11'
+        distribution: 'adopt'
+    - name: mvn clean verify
+      working-directory: chapter-6/chapter-6-quarkus-rest-monitoring
+      run: ./mvnw -B clean verify
+      
+  build-chapter-6-quarkus-rest:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up JDK 11
+      uses: actions/setup-java@v2
+      with:
+        java-version: '11'
+        distribution: 'adopt'
+    - name: mvn clean verify
+      working-directory: chapter-6/chapter-6-quarkus-rest
       run: ./mvnw -B clean verify
