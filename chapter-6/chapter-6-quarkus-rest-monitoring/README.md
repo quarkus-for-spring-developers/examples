@@ -11,7 +11,6 @@ You can run your application in dev mode that enables live coding using:
 ```shell script
 ./mvnw clean package
 ```
-**NOTE**: Uncomment the `quarkus.container-image` properties and change the values according to the registry where you will push the image
 
 ## Check metrics locally
 

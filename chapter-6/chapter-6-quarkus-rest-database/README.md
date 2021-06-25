@@ -25,7 +25,19 @@ You can run your application in dev mode that enables live coding using:
 ```
 **NOTE**  Quarkus now ships with a Dev UI, which is available in dev mode only at http://localhost:8080/q/dev/.
 
-**NOTE**: Uncomment the `quarkus.container-image` properties and change the values according to the registry where you will push the image
+**NOTE**: Uncomment the `quarkus.container-image*` properties within the `application.properties` file and change the values according to the registry where you will push the image.
+Instead of changing the properties within the file, you can also define them as such:
+
+```bash
+ mvn clean package \
+    -Dquarkus.container-image.registry=localhost:5000 \
+    -Dquarkus.container-image.group=quarkus \
+    -Dquarkus.container-image.tag=1.0 \
+    -Dquarkus.container-image.build=true \
+    -Dquarkus.container-image.push=true \
+    -Dquarkus.container-image.insecure=true \
+    -Dquarkus.container-image.name=chapter-6-quarkus-rest
+```
 
 When started, open the index page to create some `Fruits` and enjoy !
 
