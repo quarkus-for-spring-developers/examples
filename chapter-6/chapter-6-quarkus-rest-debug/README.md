@@ -78,15 +78,15 @@ kubectl apply -f ./target/kubernetes/kubernetes.yml -n quarkus-demo-debug
 - Test again the url of the endpoint using your browser and the new address containing the `NodePort` such as `http://127.0.0.1:30000/hello`
 - Next, using your IDE, launch a remote debugger
 
-![Configure-remote-debugger](/img/remote-debugger.png)
+![Configure-remote-debugger](img/remote-debugger.png)
 
-![Launch it](/img/debug-it.png)
+![Launch it](img/debug-it.png)
 
 - Add a breakpoint within your code and call the service to debug it
 
-![Add breakpoint](/img/add-breakpoint.png)
+![Add breakpoint](img/add-breakpoint.png)
 
-![Breapoint stops](/img/debug-it.png)
+![Breapoint stops](img/debug-it.png)
 
 Enjoy to remote debug !
 
