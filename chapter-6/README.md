@@ -8,11 +8,11 @@ tool [Kind](https://kind.sigs.k8s.io/) which uses a Docker container as kubernet
 To install it on your laptop, feel free to use our bash script available [here](https://github.com/snowdrop/k8s-infra/blob/master/kind/kind-reg-ingress.sh).
 It will install and/or delete a cluster, runs a docker local registry, install the Ingress controller and configure some `NodePorts` needed for the remote debugging example ;-)
 
-## Examples List
+## Examples
 
 - [Quarkus RESTful application](chapter-6-quarkus-rest/)
-- [Spring on Quarkus JPA application and Service Binding](chapter-6-quarkus-rest-database/)
+- [Quarkus Hibernate ORM application and Service Binding](chapter-6-quarkus-rest-database/)
 - [Quarkus REST application & remote developing](chapter-6-quarkus-rest-debug/)
 - [Quarkus and configuration externalized](chapter-6-quarkus-rest-config/)
 - [Using a Cloud config server](chapter-6-quarkus-rest-cloud-config/)
-- [Monitoring, metrics, distributed traces](chapter-6-quarkus-rest-monitoring/)
+- [Monitoring, metrics and distributed traces](chapter-6-quarkus-rest-monitoring/)
