@@ -11,9 +11,8 @@
 # helm delete spring-cloud-config-server -n config-storage
 #
 config:
-  # gitUri: https://github.com/quarkus-for-spring-developers/examples.git
-  gitUri: https://github.com/ch007m/config-repo.git
-  gitSearchpath: chapter-6
+  gitUri: https://github.com/quarkus-for-spring-developers/sccs-config-repo
+  gitSearchpath: {application}
 extraEnv:
   - name: SPRING_CLOUD_CONFIG_SERVER_GIT_DEFAULT-LABEL
     value: main
