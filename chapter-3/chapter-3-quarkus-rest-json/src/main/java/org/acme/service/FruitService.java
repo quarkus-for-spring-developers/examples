@@ -49,7 +49,7 @@ public class FruitService {
 		return Multi.createFrom()
 			.ticks()
 			.every(Duration.ofSeconds(1))
-			.onItem().transform(tick ->
+			.map(tick ->
 				this.fruits.values()
 					.stream()
 					.sorted(Comparator.comparing(Fruit::getName))
