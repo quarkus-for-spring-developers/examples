@@ -79,8 +79,8 @@ class FruitResourceTests {
 	@Test
 	public void addFruit() {
 		PanacheMock.mock(Fruit.class);
-		Mockito.when(Fruit.persist(Mockito.any(Fruit.class), Mockito.any()))
-			.thenReturn(Uni.createFrom().voidItem());
+		PanacheMock.doReturn(Uni.createFrom().voidItem())
+			.when(Fruit.class).persist(Mockito.any(Fruit.class), Mockito.any());
 
 		given()
 			.when()
