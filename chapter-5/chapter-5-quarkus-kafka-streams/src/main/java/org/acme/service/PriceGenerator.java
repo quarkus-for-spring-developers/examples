@@ -16,7 +16,7 @@ import io.smallrye.mutiny.Multi;
 @ApplicationScoped
 public class PriceGenerator {
 
-    private Random random = new Random();
+    private final Random random = new Random();
 
     @Outgoing("generated-price")
     public Multi<Integer> generate() {

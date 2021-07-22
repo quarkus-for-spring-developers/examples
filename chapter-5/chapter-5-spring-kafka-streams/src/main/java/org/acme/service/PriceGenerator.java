@@ -10,7 +10,7 @@ import reactor.core.publisher.Flux;
 
 @Component("generateprice")
 public class PriceGenerator implements Supplier<Flux<Integer>> {
-	private Random random = new Random();
+	private final Random random = new Random();
 
 	@Override
 	public Flux<Integer> get() {
