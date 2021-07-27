@@ -13,7 +13,7 @@ import io.smallrye.reactive.messaging.annotations.Broadcast;
  */
 @ApplicationScoped
 public class PriceConverter {
-    private static final double CONVERSION_RATE = 0.88;
+    static final double CONVERSION_RATE = 0.88;
 
     // Consume from the `prices` channel and produce to the `my-data-stream` channel
     @Incoming("prices")
