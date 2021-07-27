@@ -12,16 +12,13 @@ import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.sse.SseEventSource;
 
-import org.acme.DockerComposeResource;
 import org.junit.jupiter.api.Test;
 
-import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.common.http.TestHTTPEndpoint;
 import io.quarkus.test.common.http.TestHTTPResource;
 import io.quarkus.test.junit.QuarkusTest;
 
 @QuarkusTest
-@QuarkusTestResource(DockerComposeResource.class)
 class PriceResourceTest {
     @TestHTTPEndpoint(PriceResource.class)
     @TestHTTPResource("/stream")
