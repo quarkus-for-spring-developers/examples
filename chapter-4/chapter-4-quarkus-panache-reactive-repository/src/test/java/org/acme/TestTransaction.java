@@ -10,9 +10,10 @@ import io.smallrye.mutiny.Uni;
  */
 public class TestTransaction {
 	public static <T> Uni<T> withRollback(Supplier<Uni<T>> uni) {
-		return Panache.getSession().withTransaction(tx -> {
-			tx.markForRollback();
-			return uni.get();
-		});
+		return Panache.getSession()
+			.flatMap(session -> session.withTransaction(tx -> {
+				tx.markForRollback();
+				return uni.get();
+			}));
 	}
 }

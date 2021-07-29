@@ -15,7 +15,7 @@ import javax.ws.rs.core.Response.Status;
 
 import org.acme.domain.Fruit;
 
-import io.quarkus.hibernate.reactive.panache.Panache;
+import io.quarkus.hibernate.reactive.panache.common.runtime.ReactiveTransactional;
 import io.smallrye.mutiny.Uni;
 
 @Path("/fruits")
@@ -38,10 +38,8 @@ public class FruitResource {
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
+	@ReactiveTransactional
 	public Uni<Fruit> addFruit(@Valid Fruit fruit) {
-		return Panache.withTransaction(() ->
-			Fruit.persist(fruit)
-				.replaceWith(fruit)
-		);
+		return Fruit.persist(fruit).replaceWith(fruit);
 	}
 }
