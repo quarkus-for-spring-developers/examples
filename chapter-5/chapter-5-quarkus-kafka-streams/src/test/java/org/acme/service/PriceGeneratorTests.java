@@ -22,7 +22,8 @@ class PriceGeneratorTests {
 			.select().first(2)
 			.subscribe().withSubscriber(AssertSubscriber.create(2))
 			.assertSubscribed()
-			.awaitItems(2, Duration.ofSeconds(10))
+			.awaitNextItem(Duration.ofSeconds(7)) // Needs to be a second or 2 more than the timing of actual events
+			.awaitNextItem(Duration.ofSeconds(7))
 			.awaitCompletion(Duration.ofSeconds(15))
 			.assertCompleted()
 			.getItems();
