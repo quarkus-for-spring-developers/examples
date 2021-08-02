@@ -36,12 +36,7 @@ class Chapter5SpringKafkaStreamsApplicationTests extends DockerComposeBase {
 
 		assertThat(emittedPrices)
 			.isNotNull()
-			.hasSize(3);
-
-		emittedPrices.forEach(price ->
-			assertThat(price)
-				.isNotNull()
-				.isGreaterThan(0)
-		);
+			.hasSize(3)
+			.allMatch(value -> (value >= 0) && (value < 100));
 	}
 }
