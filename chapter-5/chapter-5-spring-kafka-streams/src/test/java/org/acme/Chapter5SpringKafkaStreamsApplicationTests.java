@@ -15,7 +15,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-@AutoConfigureWebTestClient(timeout = "PT45S")
+@AutoConfigureWebTestClient(timeout = "PT3M")
 class Chapter5SpringKafkaStreamsApplicationTests extends DockerComposeBase {
 	@Autowired
 	WebTestClient webTestClient;
