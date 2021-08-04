@@ -15,7 +15,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-@AutoConfigureWebTestClient(timeout = "PT3M")
+@AutoConfigureWebTestClient(timeout = "PT5M")
 class Chapter5SpringKafkaStreamsApplicationTests extends DockerComposeBase {
 	@Autowired
 	WebTestClient webTestClient;
@@ -32,7 +32,7 @@ class Chapter5SpringKafkaStreamsApplicationTests extends DockerComposeBase {
 			.getResponseBody()
 			.take(3)
 			.collectList()
-			.block(Duration.ofMinutes(3));
+			.block(Duration.ofMinutes(5));
 
 		assertThat(emittedPrices)
 			.isNotNull()
