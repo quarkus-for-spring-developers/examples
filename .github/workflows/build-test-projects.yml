@@ -213,7 +213,7 @@ jobs:
         distribution: 'adopt'
     - name: mvn clean verify
       working-directory: chapter-5/chapter-5-spring-kafka-streams
-      run: ./mvnw -B clean verify
+      run: ./mvnw -B clean verify -X
       
   build-chapter-6-quarkus-rest-cloud-config:
     runs-on: ubuntu-latest
