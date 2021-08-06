@@ -1,6 +1,23 @@
 # Examples
 Example code for the Quarkus for Spring Developers eBook. Code is organized by chapter. Each project is self-contained, meaning there is no parent/child structure amongst projects.
 
+## Versions
+Whenever possible, versions of Quarkus and Spring used in these examples are kept up-to-date as much as possible.
+
+The table below describes the versions of the example snippets used in the book's chapter text:
+
+| Framework | Version |
+| --------- | ------- |
+| Quarkus   | `2.1.1.Final` |
+| Spring Boot | `2.5.3` |
+
+The table below describes the versions of the examples in this repo:
+
+| Framework | Version |
+| --------- | ------- |
+| Quarkus   | `2.1.1.Final` |
+| Spring Boot | `2.5.3` |
+
 ## Chapter List
 - Chapter 1 - Introducing Quarkus (No example code)
 - [Chapter 2 - Getting Started with Quarkus](chapter-2/README.md)
