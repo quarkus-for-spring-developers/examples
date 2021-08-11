@@ -8,14 +8,14 @@ The table below describes the versions of the example snippets used in the book'
 
 | Framework | Version |
 | --------- | ------- |
-| Quarkus   | `2.1.1.Final` |
+| Quarkus   | `2.1.2.Final` |
 | Spring Boot | `2.5.3` |
 
 The table below describes the versions of the examples in this repo:
 
 | Framework | Version |
 | --------- | ------- |
-| Quarkus   | `2.1.1.Final` |
+| Quarkus   | `2.1.2.Final` |
 | Spring Boot | `2.5.3` |
 
 ## Chapter List
