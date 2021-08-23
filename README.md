@@ -4,6 +4,7 @@ Example code for the Quarkus for Spring Developers eBook. Code is organized by c
 ## Versions
 Whenever possible, versions of Quarkus and Spring used in these examples are kept up-to-date as much as possible.
 
+### Book Chapter Text
 The table below describes the versions of the example snippets used in the book's chapter text:
 
 | Framework | Version |
@@ -11,6 +12,7 @@ The table below describes the versions of the example snippets used in the book'
 | Quarkus   | `2.1.3.Final` |
 | Spring Boot | `2.5.4` |
 
+### Examples Repo
 The table below describes the versions of the examples in this repo:
 
 | Framework | Version |
