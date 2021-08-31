@@ -1,5 +1,5 @@
 # Examples
-Example code for the Quarkus for Spring Developers eBook. Code is organized by chapter. Each project is self-contained, meaning there is no parent/child structure amongst projects.
+Example code for the [Quarkus for Spring Developers](https://red.ht/quarkus-spring-devs) eBook. Code is organized by chapter. Each project is self-contained, meaning there is no parent/child structure amongst projects.
 
 ## Versions
 Whenever possible, versions of Quarkus and Spring used in these examples are kept up-to-date as much as possible.
