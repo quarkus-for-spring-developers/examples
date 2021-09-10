@@ -10,9 +10,8 @@
   </parent>
 
   <groupId>com.example.events</groupId>
-  <artifactId>chapter-5-cloud-events</artifactId>
+  <artifactId>chapter-5-spring-cloud-events</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>chapter-5-spring-cloud-event</name>
   <description>A Spring Cloud Function, using Cloud Events</description>
 
   <properties>
