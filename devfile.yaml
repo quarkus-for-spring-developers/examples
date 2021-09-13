@@ -4,7 +4,7 @@ metadata:
 projects:
   - name: examples
     source:
-      location: 'git@github.com:quarkus-for-spring-developers/examples.git'
+      location: 'https://github.com/quarkus-for-spring-developers/examples.git'
       type: git
       branch: main
 components:
