@@ -3,7 +3,17 @@ Example code for the [Quarkus for Spring Developers](https://red.ht/quarkus-spri
 # Versions
 Whenever possible, versions of Quarkus and Spring used in these examples are kept up-to-date as much as possible. The frameworks may have evolved since the book's writing and perhaps there is a better/different way to do something than what is shown in the book's code excerpts. The code in this repository will be kept in sync with what is shown in the book so that those examples may be replicated successfully. As new editions of the book are published, examples may be changed to reflect new patterns.
 
-## Book Chapter Text
+Here is a summary of some of the new features which may affect the examples in the book. The examples in this repo won't be updated to take advantage of these capabilities until a new revision of the book is released.
+
+## Quarkus
+- [RESTEasy Reactive - to block or not to block](https://quarkus.io/blog/resteasy-reactive-smart-dispatch/)
+    - New features in RESTEasy Reactive allow Quarkus to automatically detect whether a method is blocking or non blocking
+    - Starting with Quarkus 2.2, this means that the `@Blocking` annotation used in many of the Quarkus examples is no longer needed. Quarkus will "figure it out" on its own.
+- Panache Reactive with Hibernate Reactive
+    - The Quarkus reactive examples in chapter 4 using Panache Reactive currently use a custom built class for implementing transaction rollback within tests.
+    - Quarkus now includes an `@TestReactiveTransaction` annotation that can automatically rollback transactions within tests, similar to how the `@TestTransaction` annotation works in the Hibernate ORM examples in chapter 4.
+
+# Book Chapter Text
 The table below describes the versions of the example snippets used in the book's chapter text:
 
 | Framework | Version |
@@ -11,7 +21,7 @@ The table below describes the versions of the example snippets used in the book'
 | Quarkus   | `2.1.4.Final` |
 | Spring Boot | `2.5.4` |
 
-## Examples Repo
+# Examples Repo
 The table below describes the versions of the examples in this repo:
 
 | Framework | Version |
