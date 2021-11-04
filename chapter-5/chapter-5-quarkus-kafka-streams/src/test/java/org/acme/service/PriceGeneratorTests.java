@@ -16,7 +16,7 @@ class PriceGeneratorTests {
 	public void generatesProperly() {
 		List<Integer> prices = this.priceGenerator.generate()
 			.select().first(2)
-			.subscribe().withSubscriber(AssertSubscriber.create(2))
+			.subscribe().withSubscriber(AssertSubscriber.create())
 			.assertSubscribed()
 			.awaitNextItem(Duration.ofSeconds(10)) // Needs to be a few seconds more than the timing of actual events
 			.awaitNextItem(Duration.ofSeconds(15))
