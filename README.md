@@ -12,6 +12,7 @@ Here is a summary of some of the new features which may affect the examples in t
 - Panache Reactive with Hibernate Reactive
     - The Quarkus reactive examples in chapter 4 using Panache Reactive currently use a custom built class for implementing transaction rollback within tests.
     - Quarkus now includes an `@TestReactiveTransaction` annotation that can automatically rollback transactions within tests, similar to how the `@TestTransaction` annotation works in the Hibernate ORM examples in chapter 4.
+- `quarkus.hibernate-orm.database.generation` will default to `drop-and-create` when Dev Services is in use.
 
 # Book Chapter Text
 The table below describes the versions of the example snippets used in the book's chapter text:
