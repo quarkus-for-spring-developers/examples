@@ -8,14 +8,10 @@ on:
 
 jobs:
   build-test:
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        os:
-          - 'ubuntu-latest'
-          - 'windows-latest'
-          - 'macos-latest'
         java:
           - '11'
           - '17'
@@ -40,7 +36,7 @@ jobs:
           - 'chapter-6/chapter-6-quarkus-rest-database'
           - 'chapter-6/chapter-6-quarkus-rest-debug'
           - 'chapter-6/chapter-6-quarkus-rest-monitoring'
-    name: "java${{ matrix.java }}-${{ matrix.project }}-${{ matrix.os }}"
+    name: "java${{ matrix.java }}-${{ matrix.project }}"
     steps:
       - uses: actions/checkout@v2
       
@@ -50,10 +46,6 @@ jobs:
           java-version: ${{ matrix.java }}
           distribution: temurin
           cache: maven
-
-      - name: Setup Docker (macos only)
-        uses: docker-practice/actions-setup-docker@master
-        if: matrix.os == 'macos-latest'
 
       - name: Build
         working-directory: ${{ matrix.project }}
