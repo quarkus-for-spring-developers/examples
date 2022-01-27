@@ -14,7 +14,7 @@
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>11</java.version>
-		<spring-cloud.version>2021.0.0-RC1</spring-cloud.version>
+		<spring-cloud.version>2021.0.0</spring-cloud.version>
 		<testcontainers.version>1.16.3</testcontainers.version>
 	</properties>
 	<dependencyManagement>
@@ -83,15 +83,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
-	<repositories>
-		<repository>
-			<id>spring-milestones</id>
-			<name>Spring Milestones</name>
-			<url>https://repo.spring.io/milestone</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-	</repositories>
 </project>
