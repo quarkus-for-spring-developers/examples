@@ -3,8 +3,12 @@ name: Build and test projects
 on:
   push:
     branches: [ main ]
+    paths-ignore:
+      - '.github/dependabot.yml'
   pull_request:
     branches: [ main ]
+    paths-ignore:
+      - '.github/dependabot.yml'
 
 jobs:
   build-test:
