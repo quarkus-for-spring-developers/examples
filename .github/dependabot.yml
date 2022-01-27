@@ -10,3 +10,234 @@ updates:
       separator: "_"
     ignore:
       - dependency-name: org.apache.maven.plugins:maven-compiler-plugin
+
+  - package-ecosystem: maven
+    directory: "chapter-3/chapter-3-quarkus-rest-json
+    schedule:
+      interval: "daily"
+    labels:
+      - "version-upgrade"
+    pull-request-branch-name:
+      separator: "_"
+    ignore:
+      - dependency-name: org.apache.maven.plugins:maven-compiler-plugin
+      
+  - package-ecosystem: maven
+    directory: "chapter-3/chapter-3-spring-rest-json
+    schedule:
+      interval: "daily"
+    labels:
+      - "version-upgrade"
+    pull-request-branch-name:
+      separator: "_"
+    ignore:
+      - dependency-name: org.apache.maven.plugins:maven-compiler-plugin
+
+  - package-ecosystem: maven
+    directory: "chapter-3/chapter-3-spring-webflux-rest-json
+    schedule:
+      interval: "daily"
+    labels:
+      - "version-upgrade"
+    pull-request-branch-name:
+      separator: "_"
+    ignore:
+      - dependency-name: org.apache.maven.plugins:maven-compiler-plugin
+
+  - package-ecosystem: maven
+    directory: "chapter-4/chapter-4-quarkus-panache-activerecord
+    schedule:
+      interval: "daily"
+    labels:
+      - "version-upgrade"
+    pull-request-branch-name:
+      separator: "_"
+    ignore:
+      - dependency-name: org.apache.maven.plugins:maven-compiler-plugin
+      
+  - package-ecosystem: maven
+    directory: "chapter-4/chapter-4-quarkus-panache-reactive-activerecord
+    schedule:
+      interval: "daily"
+    labels:
+      - "version-upgrade"
+    pull-request-branch-name:
+      separator: "_"
+    ignore:
+      - dependency-name: org.apache.maven.plugins:maven-compiler-plugin
+      
+  - package-ecosystem: maven
+    directory: "chapter-4/chapter-4-quarkus-panache-reactive-repository
+    schedule:
+      interval: "daily"
+    labels:
+      - "version-upgrade"
+    pull-request-branch-name:
+      separator: "_"
+    ignore:
+      - dependency-name: org.apache.maven.plugins:maven-compiler-plugin
+
+  - package-ecosystem: maven
+    directory: "chapter-4/chapter-4-quarkus-panache-repository
+    schedule:
+      interval: "daily"
+    labels:
+      - "version-upgrade"
+    pull-request-branch-name:
+      separator: "_"
+    ignore:
+      - dependency-name: org.apache.maven.plugins:maven-compiler-plugin
+
+  - package-ecosystem: maven
+    directory: "chapter-4/chapter-4-spring-data-jpa
+    schedule:
+      interval: "daily"
+    labels:
+      - "version-upgrade"
+    pull-request-branch-name:
+      separator: "_"
+    ignore:
+      - dependency-name: org.apache.maven.plugins:maven-compiler-plugin
+
+  - package-ecosystem: maven
+    directory: "chapter-4/chapter-4-spring-data-r2dbc
+    schedule:
+      interval: "daily"
+    labels:
+      - "version-upgrade"
+    pull-request-branch-name:
+      separator: "_"
+    ignore:
+      - dependency-name: org.apache.maven.plugins:maven-compiler-plugin
+
+  - package-ecosystem: maven
+    directory: "chapter-5/chapter-5-quarkus-cloud-events
+    schedule:
+      interval: "daily"
+    labels:
+      - "version-upgrade"
+    pull-request-branch-name:
+      separator: "_"
+    ignore:
+      - dependency-name: org.apache.maven.plugins:maven-compiler-plugin
+      
+  - package-ecosystem: maven
+    directory: "chapter-5/chapter-5-quarkus-kafka-streams
+    schedule:
+      interval: "daily"
+    labels:
+      - "version-upgrade"
+    pull-request-branch-name:
+      separator: "_"
+    ignore:
+      - dependency-name: org.apache.maven.plugins:maven-compiler-plugin
+      
+  - package-ecosystem: maven
+    directory: "chapter-5/chapter-5-quarkus-vertx-eventbus
+    schedule:
+      interval: "daily"
+    labels:
+      - "version-upgrade"
+    pull-request-branch-name:
+      separator: "_"
+    ignore:
+      - dependency-name: org.apache.maven.plugins:maven-compiler-plugin
+      
+  - package-ecosystem: maven
+    directory: "chapter-5/chapter-5-spring-cloud-events
+    schedule:
+      interval: "daily"
+    labels:
+      - "version-upgrade"
+    pull-request-branch-name:
+      separator: "_"
+    ignore:
+      - dependency-name: org.apache.maven.plugins:maven-compiler-plugin
+      
+  - package-ecosystem: maven
+    directory: "chapter-5/chapter-5-spring-eventbus
+    schedule:
+      interval: "daily"
+    labels:
+      - "version-upgrade"
+    pull-request-branch-name:
+      separator: "_"
+    ignore:
+      - dependency-name: org.apache.maven.plugins:maven-compiler-plugin
+      
+  - package-ecosystem: maven
+    directory: "chapter-5/chapter-5-spring-kafka-streams
+    schedule:
+      interval: "daily"
+    labels:
+      - "version-upgrade"
+    pull-request-branch-name:
+      separator: "_"
+    ignore:
+      - dependency-name: org.apache.maven.plugins:maven-compiler-plugin
+      
+  - package-ecosystem: maven
+    directory: "chapter-6/chapter-6-quarkus-rest-cloud-config
+    schedule:
+      interval: "daily"
+    labels:
+      - "version-upgrade"
+    pull-request-branch-name:
+      separator: "_"
+    ignore:
+      - dependency-name: org.apache.maven.plugins:maven-compiler-plugin
+
+  - package-ecosystem: maven
+    directory: "chapter-6/chapter-6-quarkus-rest-config
+    schedule:
+      interval: "daily"
+    labels:
+      - "version-upgrade"
+    pull-request-branch-name:
+      separator: "_"
+    ignore:
+      - dependency-name: org.apache.maven.plugins:maven-compiler-plugin
+      
+  - package-ecosystem: maven
+    directory: "chapter-6/chapter-6-quarkus-rest-database
+    schedule:
+      interval: "daily"
+    labels:
+      - "version-upgrade"
+    pull-request-branch-name:
+      separator: "_"
+    ignore:
+      - dependency-name: org.apache.maven.plugins:maven-compiler-plugin
+
+  - package-ecosystem: maven
+    directory: "chapter-6/chapter-6-quarkus-rest-debug
+    schedule:
+      interval: "daily"
+    labels:
+      - "version-upgrade"
+    pull-request-branch-name:
+      separator: "_"
+    ignore:
+      - dependency-name: org.apache.maven.plugins:maven-compiler-plugin
+
+  - package-ecosystem: maven
+    directory: "chapter-6/chapter-6-quarkus-rest-monitoring
+    schedule:
+      interval: "daily"
+    labels:
+      - "version-upgrade"
+    pull-request-branch-name:
+      separator: "_"
+    ignore:
+      - dependency-name: org.apache.maven.plugins:maven-compiler-plugin
+
+  - package-ecosystem: maven
+    directory: "chapter-6/chapter-6-quarkus-rest
+    schedule:
+      interval: "daily"
+    labels:
+      - "version-upgrade"
+    pull-request-branch-name:
+      separator: "_"
+    ignore:
+      - dependency-name: org.apache.maven.plugins:maven-compiler-plugin
