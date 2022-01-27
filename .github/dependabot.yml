@@ -8,3 +8,5 @@ updates:
       - "version-upgrade"
     pull-request-branch-name:
       separator: "_"
+    ignore:
+      - dependency-name: org.apache.maven.plugins:maven-compiler-plugin
