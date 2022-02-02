@@ -5,10 +5,12 @@ on:
     branches: [ main ]
     paths-ignore:
       - '.github/dependabot.yml'
+      - '*.md'
   pull_request:
     branches: [ main ]
     paths-ignore:
       - '.github/dependabot.yml'
+      - '*.md'
 
 jobs:
   build-test:
