@@ -15,7 +15,7 @@
 	<description>Chapter 3 Spring Rest Json</description>
 	<properties>
 		<java.version>11</java.version>
-		<springdoc.version>1.6.5</springdoc.version>
+		<springdoc.version>1.6.6</springdoc.version>
 	</properties>
 	<dependencies>
 		<dependency>
