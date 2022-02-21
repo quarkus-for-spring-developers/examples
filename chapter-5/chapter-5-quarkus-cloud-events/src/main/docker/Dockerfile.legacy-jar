@@ -3,22 +3,22 @@
 #
 # Before building the container image run:
 #
-# ./mvnw package
+# ./mvnw package -Dquarkus.package.type=legacy-jar
 #
 # Then, build the image with:
 #
-# docker build -f src/main/docker/Dockerfile.jvm -t quarkus/chapter-6-quarkus-rest-debug-jvm .
+# docker build -f src/main/docker/Dockerfile.legacy-jar -t quarkus/chapter-5-quarkus-cloud-events-legacy-jar .
 #
 # Then run the container using:
 #
-# docker run -i --rm -p 8080:8080 quarkus/chapter-6-quarkus-rest-debug-jvm
+# docker run -i --rm -p 8080:8080 quarkus/chapter-5-quarkus-cloud-events-legacy-jar
 #
 # If you want to include the debug port into your docker image
-# you will have to expose the debug port (default 5005) like this :  EXPOSE 8080 5005
+# you will have to expose the debug port (default 5005) like this :  EXPOSE 8080 5050
 #
 # Then run the container using :
 #
-# docker run -i --rm -p 8080:8080 -p 5005:5005 -e JAVA_ENABLE_DEBUG="true" quarkus/chapter-6-quarkus-rest-debug-jvm
+# docker run -i --rm -p 8080:8080 -p 5005:5005 -e JAVA_ENABLE_DEBUG="true" quarkus/chapter-5-quarkus-cloud-events-legacy-jar
 #
 # This image uses the `run-java.sh` script to run the application.
 # This scripts computes the command line to execute your Java application, and
@@ -80,11 +80,8 @@ FROM registry.access.redhat.com/ubi8/openjdk-11:1.11
 ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en'
 
 
-# We make four distinct layers so if there are application changes the library layers can be re-used
-COPY --chown=185 target/quarkus-app/lib/ /deployments/lib/
-COPY --chown=185 target/quarkus-app/*.jar /deployments/
-COPY --chown=185 target/quarkus-app/app/ /deployments/app/
-COPY --chown=185 target/quarkus-app/quarkus/ /deployments/quarkus/
+COPY target/lib/* /deployments/lib/
+COPY target/*-runner.jar /deployments/quarkus-run.jar
 
 EXPOSE 8080
 USER 185

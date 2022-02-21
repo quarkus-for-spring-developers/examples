@@ -7,18 +7,18 @@
 #
 # Then, build the image with:
 #
-# docker build -f src/main/docker/Dockerfile.jvm -t quarkus/chapter-6-quarkus-rest-debug-jvm .
+# docker build -f src/main/docker/Dockerfile.jvm -t quarkus/chapter-5-quarkus-cloud-events-jvm .
 #
 # Then run the container using:
 #
-# docker run -i --rm -p 8080:8080 quarkus/chapter-6-quarkus-rest-debug-jvm
+# docker run -i --rm -p 8080:8080 quarkus/chapter-5-quarkus-cloud-events-jvm
 #
 # If you want to include the debug port into your docker image
-# you will have to expose the debug port (default 5005) like this :  EXPOSE 8080 5005
+# you will have to expose the debug port (default 5005) like this :  EXPOSE 8080 5050
 #
 # Then run the container using :
 #
-# docker run -i --rm -p 8080:8080 -p 5005:5005 -e JAVA_ENABLE_DEBUG="true" quarkus/chapter-6-quarkus-rest-debug-jvm
+# docker run -i --rm -p 8080:8080 -p 5005:5005 -e JAVA_ENABLE_DEBUG="true" quarkus/chapter-5-quarkus-cloud-events-jvm
 #
 # This image uses the `run-java.sh` script to run the application.
 # This scripts computes the command line to execute your Java application, and
