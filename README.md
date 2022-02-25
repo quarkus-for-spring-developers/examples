@@ -28,7 +28,7 @@ The table below describes the versions of the examples in this repo:
 | Framework | Version |
 | --------- | ------- |
 | Quarkus   | `2.7.2.Final` |
-| Spring Boot | `2.6.3` |
+| Spring Boot | `2.6.4` |
 
 # Chapter List
 - Chapter 1 - Introducing Quarkus (No example code)
