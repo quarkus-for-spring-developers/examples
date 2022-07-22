@@ -30,7 +30,7 @@ The table below describes the versions of the examples in this repo:
 | Framework | Version       |
 | --------- |---------------|
 | Quarkus   | `2.10.3.Final` |
-| Spring Boot | `2.7.1`       |
+| Spring Boot | `2.7.2`       |
 
 # Chapter List
 - Chapter 1 - Introducing Quarkus (No example code)
