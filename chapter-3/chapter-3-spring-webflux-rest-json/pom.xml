@@ -15,7 +15,7 @@
 	<description>Chapter 3 Spring WebFlux Rest Json</description>
 	<properties>
 		<java.version>11</java.version>
-		<springdoc.version>1.6.9</springdoc.version>
+		<springdoc.version>1.6.10</springdoc.version>
 	</properties>
 	<dependencies>
 		<dependency>
