@@ -27,10 +27,10 @@ The table below describes the versions of the example snippets used in the book'
 # Examples Repo
 The table below describes the versions of the examples in this repo:
 
-| Framework | Version       |
-| --------- |---------------|
-| Quarkus   | `2.13.0.Final` |
-| Spring Boot | `2.7.4`       |
+| Framework | Version        |
+| --------- |----------------|
+| Quarkus   | `2.13.1.Final` |
+| Spring Boot | `2.7.4`        |
 
 # Chapter List
 - Chapter 1 - Introducing Quarkus (No example code)
