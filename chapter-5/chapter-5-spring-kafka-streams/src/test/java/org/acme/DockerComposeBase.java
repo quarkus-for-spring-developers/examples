@@ -1,13 +1,13 @@
 package org.acme;
 
 import java.io.File;
-import java.util.Optional;
-import java.util.concurrent.atomic.AtomicReference;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
 import org.testcontainers.containers.DockerComposeContainer;
 import org.testcontainers.containers.wait.strategy.Wait;
+import org.testcontainers.junit.jupiter.Container;
+
+import org.springframework.test.context.DynamicPropertyRegistry;
+import org.springframework.test.context.DynamicPropertySource;
 
 /**
  * This class isn't used anymore due to some issues with the broker being shared between
@@ -15,27 +15,18 @@ import org.testcontainers.containers.wait.strategy.Wait;
  * @see https://github.com/testcontainers/testcontainers-java/issues/5406
  */
 public abstract class DockerComposeBase {
-	static final AtomicReference<DockerComposeContainer<?>> COMPOSE_CONTAINER_REFERENCE = new AtomicReference<>();
-
-	@BeforeAll
-	public static void beforeAll() {
-		COMPOSE_CONTAINER_REFERENCE
-			.updateAndGet(DockerComposeBase::createContainer)
-			.start();
-	}
-
-	@AfterAll
-	public static void afterAll() {
-		COMPOSE_CONTAINER_REFERENCE
-			.getAndSet(null)
-			.stop();
-	}
-
-	private static DockerComposeContainer<?> createContainer(DockerComposeContainer<?> existing) {
-		Optional.ofNullable(existing)
-			.ifPresent(DockerComposeContainer::stop);
-
-		return new DockerComposeContainer<>(new File("docker-compose.yaml"))
+	@Container
+	private static final DockerComposeContainer<?> DOCKER_COMPOSE =
+		new DockerComposeContainer<>(new File("docker-compose.yaml"))
+			.withExposedService("zookeeper", 1, 2181, Wait.forListeningPort())
 			.withExposedService("kafka", 1, 9092, Wait.forListeningPort());
+
+	@DynamicPropertySource
+	static void registerDynamicProperties(DynamicPropertyRegistry registry) {
+		registry.add("spring.cloud.stream.kafka.binder.brokers", DockerComposeBase::getKafkaBrokers);
+	}
+
+	private static String getKafkaBrokers() {
+		return String.format("%s:%s", DOCKER_COMPOSE.getServiceHost("kafka", 9092), DOCKER_COMPOSE.getServicePort("kafka", 9092));
 	}
 }
