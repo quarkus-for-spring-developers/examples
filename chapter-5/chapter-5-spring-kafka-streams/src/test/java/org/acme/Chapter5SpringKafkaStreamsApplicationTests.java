@@ -2,14 +2,15 @@ package org.acme;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.io.File;
 import java.time.Duration;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
-import org.testcontainers.containers.KafkaContainer;
+import org.testcontainers.containers.DockerComposeContainer;
+import org.testcontainers.containers.wait.strategy.Wait;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
-import org.testcontainers.utility.DockerImageName;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
@@ -28,20 +29,19 @@ class Chapter5SpringKafkaStreamsApplicationTests {
 	WebTestClient webTestClient;
 
 	@Container
-	static final KafkaContainer KAFKA = new KafkaContainer(DockerImageName.parse("confluentinc/cp-kafka:6.2.1"));
-//	static final DockerComposeContainer<?> DOCKER_COMPOSE =
-//		new DockerComposeContainer<>(new File("docker-compose.yaml"))
-//			.withExposedService("zookeeper", 1, 2181, Wait.forListeningPort())
-//			.withExposedService("kafka", 1, 9092, Wait.forListeningPort());
+	static final DockerComposeContainer<?> DOCKER_COMPOSE =
+		new DockerComposeContainer<>(new File("docker-compose.yaml"))
+			.withExposedService("zookeeper", 1, 2181, Wait.forListeningPort())
+			.withExposedService("kafka", 1, 9092, Wait.forListeningPort());
 
 	@DynamicPropertySource
 	static void registerDynamicProperties(DynamicPropertyRegistry registry) {
-		registry.add("spring.cloud.stream.kafka.binder.brokers", () -> KAFKA.getBootstrapServers());
+		registry.add("spring.cloud.stream.kafka.binder.brokers", Chapter5SpringKafkaStreamsApplicationTests::getKafkaBrokers);
 	}
 
-//	private static String getKafkaBrokers() {
-//		return String.format("%s:%s", DOCKER_COMPOSE.getServiceHost("kafka", 9092), DOCKER_COMPOSE.getServicePort("kafka", 9092));
-//	}
+	private static String getKafkaBrokers() {
+		return String.format("%s:%s", DOCKER_COMPOSE.getServiceHost("kafka", 9092), DOCKER_COMPOSE.getServicePort("kafka", 9092));
+	}
 
 	@Test
 	void sseWorks() {
