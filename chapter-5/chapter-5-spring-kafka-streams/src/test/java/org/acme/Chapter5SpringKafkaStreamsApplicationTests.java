@@ -22,7 +22,7 @@ import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-@AutoConfigureWebTestClient(timeout = "PT4M")
+@AutoConfigureWebTestClient(timeout = "PT10M")
 @Testcontainers
 class Chapter5SpringKafkaStreamsApplicationTests {
 	@Autowired
@@ -55,7 +55,7 @@ class Chapter5SpringKafkaStreamsApplicationTests {
 			.getResponseBody()
 			.take(3)
 			.collectList()
-			.block(Duration.ofMinutes(4));
+			.block(Duration.ofMinutes(10));
 
 		assertThat(emittedPrices)
 			.isNotNull()
