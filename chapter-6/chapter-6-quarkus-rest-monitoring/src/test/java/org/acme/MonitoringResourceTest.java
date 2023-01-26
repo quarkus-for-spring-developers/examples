@@ -37,15 +37,15 @@ public class MonitoringResourceTest {
 
         when().get("/q/metrics").then().statusCode(200)
                 .body(containsString(
-                        "monitoring_prime_number_total{type=\"prime\",}"))
+                        "monitoring_prime_number_total{type=\"prime\"}"))
                 .body(containsString(
-                        "monitoring_prime_number_total{type=\"not-prime\",}"))
+                        "monitoring_prime_number_total{type=\"not-prime\"}"))
                 .body(containsString(
-                        "monitoring_prime_number_total{type=\"one\",}"))
+                        "monitoring_prime_number_total{type=\"one\"}"))
                 .body(containsString(
-                        "monitoring_prime_number_total{type=\"even\",}"))
+                        "monitoring_prime_number_total{type=\"even\"}"))
                 .body(containsString(
-                        "monitoring_prime_number_total{type=\"not-natural\",}"));
+                        "monitoring_prime_number_total{type=\"not-natural\"}"));
     }
 
     @Test
