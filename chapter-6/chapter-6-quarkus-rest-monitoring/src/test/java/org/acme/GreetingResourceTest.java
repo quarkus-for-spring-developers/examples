@@ -6,6 +6,7 @@ import static org.hamcrest.Matchers.*;
 import org.junit.jupiter.api.Test;
 
 import io.quarkus.test.junit.QuarkusTest;
+
 import io.restassured.http.ContentType;
 
 @QuarkusTest
@@ -23,6 +24,6 @@ class GreetingResourceTest {
 			.get("/q/metrics")
 			.then()
 				.statusCode(200)
-				.body(containsString("greeting_counter_total{name=\"hh\",}"));
+				.body(containsString("greeting_counter_total{name=\"hh\"}"));
 	}
 }
