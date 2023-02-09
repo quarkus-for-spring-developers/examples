@@ -33,7 +33,7 @@ The table below describes the versions of the examples in this repo:
 
 | Framework | Version       |
 | --------- |---------------|
-| Quarkus   | `2.15.3.Final` |
+| Quarkus   | `2.16.2.Final` |
 | Spring Boot | `2.7.8`       |
 
 # Chapter List
