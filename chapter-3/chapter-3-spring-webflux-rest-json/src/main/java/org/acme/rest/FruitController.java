@@ -1,6 +1,6 @@
 package org.acme.rest;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 import org.acme.domain.Fruit;
 import org.acme.service.FruitService;
