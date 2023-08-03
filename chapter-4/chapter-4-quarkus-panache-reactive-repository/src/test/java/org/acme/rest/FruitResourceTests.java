@@ -11,8 +11,8 @@ import org.acme.repository.FruitRepository;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import io.quarkus.test.InjectMock;
 import io.quarkus.test.junit.QuarkusTest;
-import io.quarkus.test.junit.mockito.InjectMock;
 import io.restassured.http.ContentType;
 import io.smallrye.mutiny.Uni;
 

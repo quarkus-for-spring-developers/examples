@@ -1,6 +1,6 @@
 package org.acme.repository;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
 import org.acme.domain.Fruit;
 

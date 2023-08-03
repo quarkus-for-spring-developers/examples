@@ -6,15 +6,7 @@ Whenever possible, versions of Quarkus and Spring used in these examples are kep
 Here is a summary of some of the new features which may affect the examples in the book. The examples in this repo won't be updated to take advantage of these capabilities until a new revision of the book is released.
 
 ## Quarkus
-- [RESTEasy Reactive - to block or not to block](https://quarkus.io/blog/resteasy-reactive-smart-dispatch/)
-    - New features in RESTEasy Reactive allow Quarkus to automatically detect whether a method is blocking or non blocking
-    - Starting with Quarkus 2.2, this means that the `@Blocking` annotation used in many of the Quarkus examples is no longer needed. Quarkus will "figure it out" on its own.
-- Panache Reactive with Hibernate Reactive
-    - The Quarkus reactive examples in chapter 4 using Panache Reactive currently use a custom built class for implementing transaction rollback within tests.
-    - Quarkus now includes an `@TestReactiveTransaction` annotation that can automatically rollback transactions within tests, similar to how the `@TestTransaction` annotation works in the Hibernate ORM examples in chapter 4.
-- `quarkus.hibernate-orm.database.generation` will default to `drop-and-create` when Dev Services is in use.
-- `@NativeImageTest` has been deprecated in favor of `@QuarkusIntegrationTest`
-- The `maven-failsafe-plugin` has been moved out of the `native` Maven profile and into the main profile.
+
 
 ## Spring
 - The implementation of [`chapter-5`s Spring Kafka test example](chapter-5/chapter-5-spring-kafka-streams/src/test/java/org/acme/DockerComposeBase.java) had to be modified to use [`KafkaContainer`](https://www.testcontainers.org/modules/kafka/) instead of [`DockerComposeContainer`](https://www.testcontainers.org/modules/docker_compose/) due to docker compose "flakiness" that was happening within the GitHub Actions CI/CD process. The Spring Kafka tests were continually failing within the CI/CD process.
@@ -23,18 +15,18 @@ Here is a summary of some of the new features which may affect the examples in t
 # Book Chapter Text
 The table below describes the versions of the example snippets used in the book's chapter text:
 
-| Framework | Version |
-| --------- | ------- |
-| Quarkus   | `2.1.4.Final` |
-| Spring Boot | `2.5.4` |
+| Framework   | Version       |
+|-------------|---------------|
+| Quarkus     | `3.2.3.Final` |
+| Spring Boot | `3.1.2`       |
 
 # Examples Repo
 The table below describes the versions of the examples in this repo:
 
-| Framework | Version       |
-| --------- |---------------|
-| Quarkus   | `2.16.9.Final` |
-| Spring Boot | `2.7.14`       |
+| Framework   | Version       |
+|-------------|---------------|
+| Quarkus     | `3.2.3.Final` |
+| Spring Boot | `3.1.2`       |
 
 # Chapter List
 - Chapter 1 - Introducing Quarkus (No example code)
