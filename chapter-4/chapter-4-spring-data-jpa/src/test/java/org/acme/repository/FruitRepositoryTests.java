@@ -4,15 +4,18 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Optional;
 
+import org.acme.ContainersConfig;
 import org.acme.domain.Fruit;
 import org.junit.jupiter.api.Test;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootTest
 @Transactional
+@Import(ContainersConfig.class)
 class FruitRepositoryTests {
 	@Autowired
 	FruitRepository fruitRepository;

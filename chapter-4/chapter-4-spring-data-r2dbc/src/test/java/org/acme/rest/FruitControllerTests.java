@@ -2,7 +2,7 @@ package org.acme.rest;
 
 import java.util.stream.Stream;
 
-import org.acme.TestContainerBase;
+import org.acme.ContainersConfig;
 import org.acme.domain.Fruit;
 import org.acme.repository.FruitRepository;
 import org.junit.jupiter.api.Test;
@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
@@ -20,7 +21,8 @@ import reactor.core.publisher.Mono;
 
 @SpringBootTest
 @AutoConfigureWebTestClient
-class FruitControllerTests extends TestContainerBase {
+@Import(ContainersConfig.class)
+class FruitControllerTests {
 	@Autowired
 	WebTestClient webTestClient;
 

@@ -3,9 +3,11 @@ package org.acme;
 import org.junit.jupiter.api.Test;
 
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Import;
 
 @SpringBootTest
-class Chapter4SpringDataR2dbcApplicationTests extends TestContainerBase {
+@Import(ContainersConfig.class)
+class Chapter4SpringDataR2dbcApplicationTests {
 	@Test
 	void contextLoads() {
 	}

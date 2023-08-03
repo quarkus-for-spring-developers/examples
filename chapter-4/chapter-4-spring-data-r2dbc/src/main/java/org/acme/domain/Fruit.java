@@ -3,7 +3,7 @@ package org.acme.domain;
 import java.util.Objects;
 import java.util.StringJoiner;
 
-import javax.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotBlank;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
