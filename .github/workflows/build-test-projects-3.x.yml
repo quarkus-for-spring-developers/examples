@@ -1,4 +1,4 @@
-name: Build and test projects
+name: Build and test projects (3.x upgrade)
 
 on:
   push:
