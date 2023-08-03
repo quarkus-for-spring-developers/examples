@@ -5,13 +5,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.time.Duration;
 
 import org.acme.ContainersConfig;
+import org.acme.TestTransaction;
 import org.acme.domain.Fruit;
 import org.junit.jupiter.api.Test;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
-import org.springframework.test.annotation.Rollback;
 
 @SpringBootTest
 @Import(ContainersConfig.class)
@@ -19,12 +19,16 @@ class FruitRepositoryTests {
 	@Autowired
 	FruitRepository fruitRepository;
 
+	@Autowired
+	TestTransaction testTransaction;
+
 	@Test
-	@Rollback
 	public void findByName() {
-		var fruit = this.fruitRepository
-			.save(new Fruit(null, "Grapefruit", "Summer fruit"))
-			.then(this.fruitRepository.findByName("Grapefruit"))
+		var fruit = this.testTransaction.withRollback(() ->
+				this.fruitRepository
+					.save(new Fruit(null, "Grapefruit", "Summer fruit"))
+					.then(this.fruitRepository.findByName("Grapefruit"))
+			)
 			.block(Duration.ofSeconds(10));
 
 		assertThat(fruit)
