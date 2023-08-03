@@ -5,6 +5,8 @@ updates:
     open-pull-requests-limit: 20
     schedule:
       interval: daily
+    ignore:
+      - dependency-name: org.apache.maven.plugins:maven-compiler-plugin
     labels:
       - "version-upgrade"
       
