@@ -2,7 +2,7 @@ package org.acme.repository;
 
 import java.util.Optional;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
 import org.acme.domain.Fruit;
 

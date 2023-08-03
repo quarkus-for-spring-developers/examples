@@ -1,8 +1,7 @@
 package org.acme.rest;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.Matchers.blankOrNullString;
+import static org.hamcrest.Matchers.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,6 +12,7 @@ import org.mockito.Mockito;
 
 import io.quarkus.panache.mock.PanacheMock;
 import io.quarkus.test.junit.QuarkusTest;
+
 import io.restassured.http.ContentType;
 
 @QuarkusTest

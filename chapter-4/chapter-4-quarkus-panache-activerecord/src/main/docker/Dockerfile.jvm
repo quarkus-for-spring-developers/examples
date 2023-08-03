@@ -7,18 +7,20 @@
 #
 # Then, build the image with:
 #
-# docker build -f src/main/docker/Dockerfile.jvm -t quarkus/chapter-4-quarkus-persistence-jvm .
+# docker build -f src/main/docker/Dockerfile.jvm -t quarkus/chapter-4-quarkus-panache-activerecord-jvm .
 #
 # Then run the container using:
 #
-# docker run -i --rm -p 8080:8080 quarkus/chapter-4-quarkus-persistence-jvm
+# docker run -i --rm -p 8080:8080 quarkus/chapter-4-quarkus-panache-activerecord-jvm
 #
 # If you want to include the debug port into your docker image
-# you will have to expose the debug port (default 5005) like this :  EXPOSE 8080 5050
+# you will have to expose the debug port (default 5005 being the default) like this :  EXPOSE 8080 5005.
+# Additionally you will have to set -e JAVA_DEBUG=true and -e JAVA_DEBUG_PORT=*:5005
+# when running the container
 #
 # Then run the container using :
 #
-# docker run -i --rm -p 8080:8080 -p 5005:5005 -e JAVA_ENABLE_DEBUG="true" quarkus/chapter-4-quarkus-persistence-jvm
+# docker run -i --rm -p 8080:8080 quarkus/chapter-4-quarkus-panache-activerecord-jvm
 #
 # This image uses the `run-java.sh` script to run the application.
 # This scripts computes the command line to execute your Java application, and
@@ -75,9 +77,9 @@
 #   accessed directly. (example: "foo.example.com,bar.example.com")
 #
 ###
-FROM registry.access.redhat.com/ubi8/openjdk-11:1.11
+FROM registry.access.redhat.com/ubi8/openjdk-17:1.16
 
-ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en'
+ENV LANGUAGE='en_US:en'
 
 
 # We make four distinct layers so if there are application changes the library layers can be re-used
@@ -88,6 +90,6 @@ COPY --chown=185 target/quarkus-app/quarkus/ /deployments/quarkus/
 
 EXPOSE 8080
 USER 185
-ENV AB_JOLOKIA_OFF=""
 ENV JAVA_OPTS="-Dquarkus.http.host=0.0.0.0 -Djava.util.logging.manager=org.jboss.logmanager.LogManager"
 ENV JAVA_APP_JAR="/deployments/quarkus-run.jar"
+

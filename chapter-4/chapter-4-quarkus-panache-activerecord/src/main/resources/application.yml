@@ -3,7 +3,7 @@ quarkus:
     username: fruits
     password: fruits
     devservices:
-      image-name: quay.io/edeandrea/postgres-13-fruits:latest
+      image-name: quay.io/edeandrea/fruits-postgres:latest
   hibernate-orm:
     database:
       generation: validate
