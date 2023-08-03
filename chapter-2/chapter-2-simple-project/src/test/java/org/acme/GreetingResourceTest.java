@@ -3,12 +3,12 @@ package org.acme;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.is;
 
+import io.quarkus.test.InjectMock;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import io.quarkus.test.junit.DisabledOnNativeImage;
+import io.quarkus.test.junit.DisabledOnIntegrationTest;
 import io.quarkus.test.junit.QuarkusTest;
-import io.quarkus.test.junit.mockito.InjectMock;
 
 @QuarkusTest
 public class GreetingResourceTest {
@@ -16,7 +16,7 @@ public class GreetingResourceTest {
 	GreetingService greetingService;
 
 	@Test
-	@DisabledOnNativeImage
+	@DisabledOnIntegrationTest
 	public void testHelloEndpoint() {
 		Mockito.when(this.greetingService.getGreeting()).thenReturn("Hello Quarkus");
 

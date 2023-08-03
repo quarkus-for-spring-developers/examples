@@ -1,0 +1,59 @@
+name: Build and test projects
+
+on:
+  push:
+    branches: [ 3.x-upgrade ]
+    paths-ignore:
+      - '.github/dependabot.yml'
+      - '*.md'
+  pull_request:
+    branches: [ 3.x-upgrade ]
+    paths-ignore:
+      - '.github/dependabot.yml'
+      - '*.md'
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        java:
+          - '17'
+        project:
+          - 'chapter-2/chapter-2-simple-project'
+          - 'chapter-3/chapter-3-quarkus-rest-json'
+          - 'chapter-3/chapter-3-spring-rest-json'
+          - 'chapter-3/chapter-3-spring-webflux-rest-json'
+          - 'chapter-4/chapter-4-quarkus-panache-activerecord'
+          - 'chapter-4/chapter-4-quarkus-panache-reactive-activerecord'
+          - 'chapter-4/chapter-4-quarkus-panache-reactive-repository'
+          - 'chapter-4/chapter-4-quarkus-panache-repository'
+          - 'chapter-4/chapter-4-spring-data-jpa'
+          - 'chapter-4/chapter-4-spring-data-r2dbc'
+          - 'chapter-5/chapter-5-quarkus-cloud-events'
+          - 'chapter-5/chapter-5-quarkus-kafka-streams'
+          - 'chapter-5/chapter-5-quarkus-vertx-eventbus'
+          - 'chapter-5/chapter-5-spring-cloud-events'
+          - 'chapter-5/chapter-5-spring-eventbus'
+          - 'chapter-5/chapter-5-spring-kafka-streams'
+          - 'chapter-6/chapter-6-quarkus-rest'
+          - 'chapter-6/chapter-6-quarkus-rest-cloud-config'
+          - 'chapter-6/chapter-6-quarkus-rest-config'
+          - 'chapter-6/chapter-6-quarkus-rest-database'
+          - 'chapter-6/chapter-6-quarkus-rest-debug'
+          - 'chapter-6/chapter-6-quarkus-rest-monitoring'
+    name: "java${{ matrix.java }}-${{ matrix.project }}"
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          java-version: ${{ matrix.java }}
+          distribution: temurin
+          cache: maven
+
+      - name: Build
+        working-directory: ${{ matrix.project }}
+        run: ./mvnw -B clean verify -Dquarkus.http.test-port=0 -Dmaven.compiler.release=${{ matrix.java }} -DskipITs=false

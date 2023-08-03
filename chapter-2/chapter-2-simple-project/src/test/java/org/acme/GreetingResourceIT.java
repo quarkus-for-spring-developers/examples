@@ -5,10 +5,10 @@ import static org.hamcrest.CoreMatchers.is;
 
 import org.junit.jupiter.api.Test;
 
-import io.quarkus.test.junit.NativeImageTest;
+import io.quarkus.test.junit.QuarkusIntegrationTest;
 
-@NativeImageTest
-public class NativeGreetingResourceIT extends GreetingResourceTest {
+@QuarkusIntegrationTest
+public class GreetingResourceIT extends GreetingResourceTest {
 	@Test
 	public void testHelloEndpointNative() {
 		given()
