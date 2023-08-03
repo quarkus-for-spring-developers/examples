@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import io.quarkus.test.InjectMock;
 import org.acme.domain.CustomRuntimeException;
 import org.acme.domain.Fruit;
 import org.acme.service.FruitService;
@@ -17,7 +18,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import io.quarkus.test.junit.QuarkusTest;
-import io.quarkus.test.junit.mockito.InjectMock;
 import io.restassured.http.ContentType;
 import io.smallrye.mutiny.Multi;
 import io.smallrye.mutiny.Uni;

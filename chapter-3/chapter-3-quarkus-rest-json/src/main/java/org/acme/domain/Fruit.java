@@ -1,6 +1,6 @@
 package org.acme.domain;
 
-import javax.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotBlank;
 
 public class Fruit {
 	private String name;
