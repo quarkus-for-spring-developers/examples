@@ -9,11 +9,11 @@ import org.springframework.messaging.MessageChannel;
 public class ChannelConfig {
 	@Bean
 	public MessageChannel greetingChannel() {
-		return MessageChannels.flux("greeting").get();
+		return MessageChannels.flux("greeting").getObject();
 	}
 
 	@Bean
 	public MessageChannel blockingGreetingChannel() {
-		return MessageChannels.direct("blocking-greeting").get();
+		return MessageChannels.direct("blocking-greeting").getObject();
 	}
 }

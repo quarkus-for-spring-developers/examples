@@ -2,7 +2,7 @@ package org.acme.rest;
 
 import java.time.Duration;
 
-import org.acme.DockerComposeBase;
+import org.acme.ContainersConfig;
 import org.acme.service.InMemoryChannel;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
@@ -18,7 +19,8 @@ import reactor.core.publisher.Flux;
 
 @SpringBootTest
 @AutoConfigureWebTestClient
-class PriceControllerTests extends DockerComposeBase {
+@Import(ContainersConfig.class)
+class PriceControllerTests {
 	@Autowired
 	WebTestClient webTestClient;
 

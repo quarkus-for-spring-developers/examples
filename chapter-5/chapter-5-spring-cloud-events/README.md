@@ -5,7 +5,7 @@ This sample project contains a single function based on Spring Cloud Function: `
 
 ## Local execution
 
-Make sure that `Java 11 SDK` is installed.
+Make sure that `Java 17 SDK` is installed.
 
 To start server locally run `./mvnw spring-boot:run`.
 The command starts http server and automatically watches for changes of source code.
