@@ -6,8 +6,8 @@ import java.net.URI;
 import java.time.Duration;
 import java.util.List;
 
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.core.MediaType;
+import jakarta.ws.rs.client.ClientBuilder;
+import jakarta.ws.rs.core.MediaType;
 
 import org.jboss.resteasy.reactive.client.impl.MultiInvoker;
 import org.junit.jupiter.api.Test;
