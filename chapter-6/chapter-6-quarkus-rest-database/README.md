@@ -14,7 +14,7 @@ When running `quarkus:dev` (dev mode), the database will be automatically bootst
 When running in `prod` mode (i.e. via `java -jar` or running the native image) you can use Docker to start the database:
 
 ```shell
-docker run --ulimit memlock=-1:-1 -it --rm=true --memory-swappiness=0 --name chapter6 -p 5432:5432 quay.io/edeandrea/postgres-13-fruits:latest
+docker run -it --rm=true --name chapter6 -p 5432:5432 quay.io/edeandrea/fruits-postgres:latest
 ```
 
 ## Running the application in dev mode

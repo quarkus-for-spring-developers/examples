@@ -47,7 +47,7 @@ You will see as response `Hello RESTEasy`.
 - Do some code changes within the code.
 - Check again the response using the URL of the endpoint ;-). This new request triggers the recompilation of the code as can be seen in the console output:
 ```bash
-2021-06-02 09:56:25,322 INFO  [io.qua.ver.htt.dep.dev.HttpRemoteDevClient] (Remote dev client thread) Sending dev/app/org/acme/GreeterResource.class
+09:56:25,322 INFO  [io.qua.ver.htt.dep.dev.HttpRemoteDevClient] (Remote dev client thread) Sending dev/app/org/acme/GreeterResource.class
 ```
 As soon as the code has been recompiled, it will be pushed to the remote application running as a linux container within a pod
 

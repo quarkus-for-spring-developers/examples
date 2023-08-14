@@ -17,7 +17,7 @@ The table below describes the versions of the example snippets used in the book'
 
 | Framework   | Version       |
 |-------------|---------------|
-| Quarkus     | `3.2.3.Final` |
+| Quarkus     | `3.2.4.Final` |
 | Spring Boot | `3.1.2`       |
 
 # Examples Repo
@@ -25,7 +25,7 @@ The table below describes the versions of the examples in this repo:
 
 | Framework   | Version       |
 |-------------|---------------|
-| Quarkus     | `3.2.3.Final` |
+| Quarkus     | `3.2.4.Final` |
 | Spring Boot | `3.1.2`       |
 
 # Chapter List

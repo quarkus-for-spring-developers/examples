@@ -6,13 +6,13 @@ import static org.hamcrest.Matchers.*;
 import java.util.List;
 import java.util.Optional;
 
+import io.quarkus.test.InjectMock;
 import org.acme.domain.Fruit;
 import org.acme.repository.FruitRepository;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import io.quarkus.test.junit.QuarkusTest;
-import io.quarkus.test.junit.mockito.InjectMock;
 import io.restassured.http.ContentType;
 
 @QuarkusTest

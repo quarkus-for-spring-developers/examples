@@ -27,7 +27,7 @@ spec:
         name: postgresql
     spec:
       containers:
-      - image: quay.io/edeandrea/postgres-13-fruits:latest
+      - image: quay.io/edeandrea/fruits-postgres:latest
         name: postgresql
         ports:
         - containerPort: 5432
