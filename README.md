@@ -9,8 +9,7 @@ Here is a summary of some of the new features which may affect the examples in t
 
 
 ## Spring
-- The implementation of [`chapter-5`s Spring Kafka test example](chapter-5/chapter-5-spring-kafka-streams/src/test/java/org/acme/DockerComposeBase.java) had to be modified to use [`KafkaContainer`](https://www.testcontainers.org/modules/kafka/) instead of [`DockerComposeContainer`](https://www.testcontainers.org/modules/docker_compose/) due to docker compose "flakiness" that was happening within the GitHub Actions CI/CD process. The Spring Kafka tests were continually failing within the CI/CD process.
-- Spring Boot 3/Spring 6/Spring Cloud 2022.0 has shipped but would have an impact on the examples in the book, plus would require Java 17, therefore the examples will not yet be updated to those versions.
+
 
 # Book Chapter Text
 The table below describes the versions of the example snippets used in the book's chapter text:
