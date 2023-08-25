@@ -1,11 +1,16 @@
+specVersion: 0.35.0
 name: chapter-5-spring-cloud-events
-namespace: ""
 runtime: springboot
+registry: ""
 image: ""
-imageDigest: ""
-trigger: events
-builder: quay.io/boson/faas-springboot-builder
-builderMap:
-  default: quay.io/boson/faas-springboot-builder
-env: {}
-annotations: {}
+created: 2023-08-23T18:11:20.876476-04:00
+invoke: cloudevent
+build:
+  buildEnvs:
+  - name: BP_NATIVE_IMAGE
+    value: "false"
+  - name: BP_JVM_VERSION
+    value: "17"
+  - name: BP_MAVEN_BUILD_ARGUMENTS
+    value: -Pnative -Dmaven.test.skip=true --no-transfer-progress package
+  pvcSize: 256Mi

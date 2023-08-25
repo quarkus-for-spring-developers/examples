@@ -1,13 +1,23 @@
+specVersion: 0.35.0
 name: chapter-5-quarkus-cloud-events
-namespace: ""
 runtime: quarkus
+registry: ""
 image: ""
-imageDigest: ""
-trigger: events
-builder: quay.io/boson/faas-quarkus-jvm-builder
-builderMap:
-  default: quay.io/boson/faas-quarkus-jvm-builder
-  jvm: quay.io/boson/faas-quarkus-jvm-builder
-  native: quay.io/boson/faas-quarkus-native-builder
-env: {}
-annotations: {}
+created: 2023-08-23T18:10:29.117736-04:00
+invoke: cloudevent
+build:
+  buildEnvs:
+  - name: BP_NATIVE_IMAGE
+    value: "false"
+  - name: BP_JVM_VERSION
+    value: "17"
+  - name: BP_MAVEN_BUILD_ARGUMENTS
+    value: package -DskipTests=true -Dmaven.javadoc.skip=true -Dquarkus.package.type=fast-jar
+  - name: BP_MAVEN_BUILT_ARTIFACT
+    value: func.yaml target/quarkus-app/lib/ target/quarkus-app/*.jar target/quarkus-app/app/
+      target/quarkus-app/quarkus/
+  - name: MAVEN_S2I_ARTIFACT_DIRS
+    value: target/quarkus-app
+  - name: S2I_SOURCE_DEPLOYMENTS_FILTER
+    value: lib quarkus-run.jar app quarkus
+  pvcSize: 256Mi
