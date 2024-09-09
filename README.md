@@ -16,16 +16,16 @@ The table below describes the versions of the example snippets used in the book'
 
 | Framework   | Version       |
 |-------------|---------------|
-| Quarkus     | `3.2.4.Final` |
-| Spring Boot | `3.1.2`       |
+| Quarkus     | `3.14.2` |
+| Spring Boot | `3.3.3`       |
 
 # Examples Repo
 The table below describes the versions of the examples in this repo:
 
 | Framework   | Version       |
 |-------------|---------------|
-| Quarkus     | `3.2.4.Final` |
-| Spring Boot | `3.1.2`       |
+| Quarkus     | `3.14.2` |
+| Spring Boot | `3.3.3`       |
 
 # Chapter List
 - Chapter 1 - Introducing Quarkus (No example code)
