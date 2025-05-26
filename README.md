@@ -22,10 +22,10 @@ The table below describes the versions of the example snippets used in the book'
 # Examples Repo
 The table below describes the versions of the examples in this repo:
 
-| Framework   | Version       |
-|-------------|---------------|
-| Quarkus     | `3.16.3` |
-| Spring Boot | `3.3.5`       |
+| Framework   | Version  |
+|-------------|----------|
+| Quarkus     | `3.22.3` |
+| Spring Boot | `3.5.0`  |
 
 # Chapter List
 - Chapter 1 - Introducing Quarkus (No example code)

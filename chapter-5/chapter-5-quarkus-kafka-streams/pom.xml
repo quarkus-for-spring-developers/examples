@@ -35,11 +35,11 @@
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-resteasy-reactive-jackson</artifactId>
+      <artifactId>quarkus-rest-jackson</artifactId>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-smallrye-reactive-messaging-kafka</artifactId>
+      <artifactId>quarkus-messaging-kafka</artifactId>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
@@ -54,7 +54,7 @@
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-jaxrs-client-reactive</artifactId>
+      <artifactId>quarkus-rest-client</artifactId>
       <scope>test</scope>
     </dependency>
   </dependencies>

@@ -1,19 +1,20 @@
 package org.acme;
 
-import org.testcontainers.containers.KafkaContainer;
+import org.testcontainers.junit.jupiter.Container;
+import org.testcontainers.junit.jupiter.Testcontainers;
+import org.testcontainers.kafka.ConfluentKafkaContainer;
 import org.testcontainers.utility.DockerImageName;
 
-import org.springframework.boot.test.context.TestConfiguration;
-import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.DynamicPropertyRegistry;
+import org.springframework.test.context.DynamicPropertySource;
 
-@TestConfiguration(proxyBeanMethods = false)
+@Testcontainers
 public class ContainersConfig {
-	@Bean
-	public KafkaContainer kafka(DynamicPropertyRegistry registry) {
-		var kafka = new KafkaContainer(DockerImageName.parse("confluentinc/cp-kafka:7.4.1"));
-		registry.add("spring.cloud.stream.kafka.binder.brokers", kafka::getBootstrapServers);
+	@Container
+	static ConfluentKafkaContainer KAFKA = new ConfluentKafkaContainer(DockerImageName.parse("confluentinc/cp-kafka:7.9.1"));
 
-		return kafka;
+	@DynamicPropertySource
+	public static void kafkaProperties(DynamicPropertyRegistry registry) {
+		registry.add("spring.cloud.stream.kafka.binder.brokers", KAFKA::getBootstrapServers);
 	}
 }
