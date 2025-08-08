@@ -6,7 +6,7 @@
   <artifactId>chapter-5-quarkus-vertx-eventbus</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <properties>
-    <assertj.version>3.27.3</assertj.version>
+    <assertj.version>3.27.4</assertj.version>
     <compiler-plugin.version>3.8.1</compiler-plugin.version>
     <maven.compiler.parameters>true</maven.compiler.parameters>
     <maven.compiler.source>11</maven.compiler.source>
