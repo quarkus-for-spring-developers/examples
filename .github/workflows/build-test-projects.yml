@@ -46,7 +46,7 @@ jobs:
           - 'chapter-6/chapter-6-quarkus-rest-monitoring'
     name: "java${{ matrix.java }}-${{ matrix.project }}"
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       
       - name: Set up Java
         uses: actions/setup-java@v4
