@@ -54,7 +54,7 @@ jobs:
         ports:
           - 8888:8888
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       
       - name: Set up Java
         uses: actions/setup-java@v5
